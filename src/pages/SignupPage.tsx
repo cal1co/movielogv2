@@ -1,12 +1,10 @@
-import { useState } from 'react';
-import { UserLogin } from '../types/UserTypes';
+// import './SignupPage.css'
+import React, { useState } from 'react';
+import { User } from '../types/UserTypes'
 
-// interface LoginFormProps {
-//   onLogin: (email: string, password: string) => void;
-// }
-
-function LoginPage() {
-  const [user, setUser] = useState<UserLogin>({
+function SignupPage() {
+  const [user, setUser] = useState<User>({
+    username: '',
     email: '',
     password: '',
   });
@@ -29,9 +27,19 @@ function LoginPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit} aria-label="form">
+    <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="email">Email or Username:</label>
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={user.username}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
@@ -51,9 +59,9 @@ function LoginPage() {
         />
       </div>
       {errorMessage && <p>{errorMessage}</p>}
-      <button type="submit">Log in</button>
+      <button type="submit">Sign up</button>
     </form>
   );
 };
 
-export default LoginPage;
+export default SignupPage
