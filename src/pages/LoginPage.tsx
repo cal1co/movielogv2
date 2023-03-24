@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { UserLogin } from '../types/UserTypes';
 
-// interface LoginFormProps {
-//   onLogin: (email: string, password: string) => void;
-// }
+interface LoginPageProps {
+  handleSubmit: (user: UserLogin) => Promise<void>;
+}
 
-function LoginPage() {
+
+function LoginPage({handleSubmit}: LoginPageProps) {
   const [user, setUser] = useState<UserLogin>({
     email: '',
     password: '',
@@ -21,15 +22,16 @@ function LoginPage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    handleSubmit(user);
     // Check if username is unique
     // If not, display error message
     // Otherwise, submit form data
   };
 
   return (
-    <form onSubmit={handleSubmit} aria-label="form">
+    <form onSubmit={handleFormSubmit} aria-label="form">
       <div>
         <label htmlFor="email">Email or Username:</label>
         <input
