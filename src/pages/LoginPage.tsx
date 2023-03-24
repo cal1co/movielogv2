@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { UserLogin } from '../types/UserTypes';
+import { LoginPageProps } from '../types/FormTypes'
 
-interface LoginPageProps {
-  handleSubmit: (user: UserLogin) => Promise<void>;
-}
 
 
 function LoginPage({handleSubmit}: LoginPageProps) {

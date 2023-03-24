@@ -1,8 +1,10 @@
 // import './SignupPage.css'
 import React, { useState } from 'react';
 import { User } from '../types/UserTypes'
+import { SignupPageProps } from '../types/FormTypes'
 
-function SignupPage() {
+
+function SignupPage({handleSubmit}: SignupPageProps) {
   const [user, setUser] = useState<User>({
     username: '',
     email: '',
@@ -19,15 +21,16 @@ function SignupPage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    handleSubmit(user)
     // Check if username is unique
     // If not, display error message
     // Otherwise, submit form data
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleFormSubmit}>
       <div>
         <label htmlFor="username">Username:</label>
         <input
