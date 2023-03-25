@@ -15,7 +15,7 @@ const Routes: React.FC = () => {
       <Route path="/signup" element={<SignupPage/>} />
       <Route path="/" element={<FeedPage/>} />
       <Route path="/users/:userId" element={<UserPage/>} />
-      <Route path="/search/film" element={<MovieResultsPage/>} />
+      <Route path="/search" element={<MovieResultsPage/>} />
       <Route path="/search/user" element={<UserResultsPage/>} />
       <Route path='*' element={<NotFoundPage />}/>
     </AppRoutes>
