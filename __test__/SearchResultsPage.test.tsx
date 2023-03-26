@@ -3,12 +3,12 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 import {test, vi} from 'vitest';
-import MovieResultsPage from '../src/pages/MovieResultsPage';
+import SearchResultsPage from '../src/pages/SearchResultsPage';
 import { MovieSearchResult } from '../src/types/MovieTypes';
 
 vi.mock('axios');
 
-describe('MovieResultsPage', () => {
+describe('SearchResultsPage', () => {
   // const mockMovie: MovieSearchResult = {
   //   page: 1,
   //   results: [

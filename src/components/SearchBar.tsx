@@ -1,45 +1,68 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-
+type SearchBarProps = {
+    onSearch: (term: string) => void;
+}
 
 const searchPath="/search"
-const SearchBar = () => {
-  const [query, setQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'films' | 'users'>('films');
-  const navigate = useNavigate();
+const SearchBar = (props: SearchBarProps) => {
+    const { search } = useLocation();
+    const queryParams = new URLSearchParams(search);
+    const q = queryParams.get('q') ?? ''
+    // const tab = queryParams.get('tab') ?? ''
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const searchUrl = `${searchPath}?q=${encodeURIComponent(query)}&tab=${encodeURIComponent(activeTab)}`;
-    navigate(searchUrl);
-  };
+    const [query, setQuery] = useState(q);
+    const [activeTab, setActiveTab] = useState<'films' | 'tv' | 'users'>('films');
+    const navigate = useNavigate();
 
-  return (
+    const handleSearch = (event: React.FormEvent<HTMLFormElement>):void => {
+        event.preventDefault();
+        const searchUrl = `${searchPath}?q=${encodeURIComponent(query)}&tab=${encodeURIComponent(activeTab)}`;
+        navigate(searchUrl);
+        props.onSearch(query)
+    };
+
+    const searchWithTabSelect = (tab:string):void => {
+        const searchUrl = `${searchPath}?q=${encodeURIComponent(query)}&tab=${encodeURIComponent(tab)}`;
+        navigate(searchUrl);
+    }
+
+    const handleFilmsTabClick = ():void => {
+        setActiveTab('films');
+        searchWithTabSelect('films');
+    };
+
+    const handleUsersTabClick = ():void => {
+        setActiveTab('users');
+        searchWithTabSelect('users');
+    };
+
+    return (
     <form onSubmit={handleSearch}>
-      <input
+        <input
         type="text"
         placeholder="Search..."
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-      />
-      <div className="tab-container">
+        />
+        <div className="tab-container">
         <div
-          className={`tab ${activeTab === 'films' ? 'active' : ''}`}
-          onClick={() => setActiveTab('films')}
+            className={`tab ${activeTab === 'films' ? 'active' : ''}`}
+            onClick={handleFilmsTabClick}
         >
-          Films
+            Films
         </div>
         <div
-          className={`tab ${activeTab === 'users' ? 'active' : ''}`}
-          onClick={() => setActiveTab('users')}
+            className={`tab ${activeTab === 'users' ? 'active' : ''}`}
+            onClick={handleUsersTabClick}
         >
-          Users
+            Users
         </div>
-      </div>
-      <button type="submit">Search</button>
+        </div>
+        <button type="submit">Search</button>
     </form>
-  );
+    );
 };
 
 export default SearchBar;

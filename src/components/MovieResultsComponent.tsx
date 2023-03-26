@@ -1,19 +1,23 @@
-// import './MovieResultsPage.css'
+// import './MovieResultsComponent.css'
 
 import React, { useEffect, useState, useRef } from 'react';
-import { useLocation } from "react-router-dom"
+
 import axios from 'axios'
 import { MovieSearchResult } from '../types/MovieTypes'
 import debounce from 'lodash/debounce'
+import SearchBar from './SearchBar';
 
 // http://localhost:5173/search/film?query=spiderman
 
-const MovieResultsPage: React.FC = () => {
-  const { search } = useLocation();
-  const queryParams = new URLSearchParams(search);
-  const query:string = queryParams.get('q') ?? '';
+type QueryProps = {
+  query: string
+}
+
+const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
+  
 
   const [movies, setMovies] = useState<MovieSearchResult>()
+  const [storedQuery, setStoredQuery] = useState<string | null>(null)
   const [page, setPage] = useState<number>(1)
   const [isLoading, setIsLoading] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
@@ -31,15 +35,24 @@ const MovieResultsPage: React.FC = () => {
   );
 
   useEffect(() => {
+    console.log(query)
+    // 
     setIsMounted(true);
   }, [])
 
   useEffect(() => {
+
     if (isMounted) {
-      if (page )
-      fetchFilms(page)
+      if (page) {
+        if (storedQuery && storedQuery !== query) {
+          setMovies(undefined)
+          setLastElement(null)
+          setPage(1)
+        } 
+        fetchFilms(page)
+      }
     }
-  },[query, page, isMounted])
+  },[query, isMounted, page])
 
   useEffect(() => {
     const currentElement = lastElement;
@@ -57,6 +70,7 @@ const MovieResultsPage: React.FC = () => {
 
   const fetchFilms = async (pageNum: number) => {
     setIsLoading(true);
+    setStoredQuery(query)
     await axios.get(`${import.meta.env.VITE_MOVIE_DB_URL}/${import.meta.env.VITE_MOVIE_DB_URL_SEARCH}`, {
       params: {
         api_key: import.meta.env.VITE_MOVIE_DB_KEY,
@@ -76,7 +90,7 @@ const MovieResultsPage: React.FC = () => {
           };
         }
       })
-      console.log(res.data)
+      // console.log(res.data)
     }) 
     .catch( err => {
       console.log(err)
@@ -105,15 +119,15 @@ const MovieResultsPage: React.FC = () => {
   };
 
   return (
-    <div className="MovieResultsPage">
-      THIS IS MovieResultsPage
-      <h2>Search Results for: {query}</h2>
-      {movies && printFilms(movies)}
+    <div className="MovieResultsComponent">
+
+      <h2>Results in Films for: {query}</h2>
+      {movies && <div>{printFilms(movies)}</div>}
       {movies && movies.total_pages <= movies.page && <div id="end">You've the reached the end</div>}
     </div>
   )
 }
 
 
-export default MovieResultsPage
+export default MovieResultsComponent
 
