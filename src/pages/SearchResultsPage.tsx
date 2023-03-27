@@ -10,8 +10,6 @@ import UserResultsComponent from '../components/UserResultsComponent';
 const SearchResultsPage: React.FC = () => {
 
     const [isMounted, setIsMounted] = useState(false);
-    // const [query, setQuery] = useState<string>()
-    // const [tab, setTab] = useState<string>()
     const [newSearch, setNewSearch] = useState<string>()
 
     const { search } = useLocation();
@@ -23,16 +21,13 @@ const SearchResultsPage: React.FC = () => {
         setIsMounted(true);
     }, [])
 
-    let resultComponent;
     const defineRenderedComponent = () => {
         if (query) {
             switch (tab) {
                 case 'films':
                     return <MovieResultsComponent query={query} />
-                    break;
                 case 'users':
                     return <UserResultsComponent query={query}/>
-                    break;
             };
         };
     }
@@ -40,14 +35,9 @@ const SearchResultsPage: React.FC = () => {
         defineRenderedComponent()
     }, [isMounted, newSearch, query])
 
-    const handleSearch = (term:string):void => {
-        console.log("FROM CHILD ", term)
-        setNewSearch(term)
-    }
-
     return (
       <div className="SearchResultsPage">
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar />
         {defineRenderedComponent()}
       </div>
     );

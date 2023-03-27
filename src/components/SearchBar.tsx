@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-type SearchBarProps = {
-    onSearch: (term: string) => void;
-}
-
 const searchPath="/search"
-const SearchBar = (props: SearchBarProps) => {
+const SearchBar = () => {
     const { search } = useLocation();
     const queryParams = new URLSearchParams(search);
     const q = queryParams.get('q') ?? ''
@@ -20,7 +16,6 @@ const SearchBar = (props: SearchBarProps) => {
         event.preventDefault();
         const searchUrl = `${searchPath}?q=${encodeURIComponent(query)}&tab=${encodeURIComponent(activeTab)}`;
         navigate(searchUrl);
-        props.onSearch(query)
     };
 
     const searchWithTabSelect = (tab:string):void => {

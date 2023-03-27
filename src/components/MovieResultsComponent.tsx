@@ -6,6 +6,7 @@ import axios from 'axios'
 import { MovieSearchResult } from '../types/MovieTypes'
 import debounce from 'lodash/debounce'
 import SearchBar from './SearchBar';
+import { useNavigate } from 'react-router-dom';
 
 // http://localhost:5173/search/film?query=spiderman
 
@@ -14,7 +15,6 @@ type QueryProps = {
 }
 
 const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
-  
 
   const [movies, setMovies] = useState<MovieSearchResult>()
   const [storedQuery, setStoredQuery] = useState<string | null>(null)
@@ -22,6 +22,8 @@ const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const [lastElement, setLastElement] = useState<HTMLDivElement | null>(null)
+
+  const navigate = useNavigate();
 
   const observer = useRef(
     new IntersectionObserver(
@@ -36,7 +38,6 @@ const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
 
   useEffect(() => {
     console.log(query)
-    // 
     setIsMounted(true);
   }, [])
 
@@ -98,7 +99,7 @@ const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
     })
     setIsLoading(false)
   }
-  
+
   const printFilms = (movieList: MovieSearchResult) => {
     return (
       <React.Fragment>
@@ -107,10 +108,10 @@ const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
             return null;
           }
         return(
-          <li key={movie.id}>
+          <div key={movie.id} onClick={() => navigate(`/entry?id=${movie.id}`)}>
             <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
             <div ref={movieList.page < movieList.total_pages ? setLastElement : undefined}>{movie.title}</div>
-          </li>
+          </div>
         )
         })}
         {isLoading && <div className={isLoading ? "loading" : ""}>Loading...</div>}

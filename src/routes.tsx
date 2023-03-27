@@ -6,6 +6,7 @@ import FeedPage from './pages/FeedPage';
 import UserPage from './pages/UserPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import UserResultsPage from './pages/UserResultsPage';
+import EntryDisplayPage from './pages/EntryDisplayPage';
 import NotFoundPage from './pages/NotFoundPage'
 
 const Routes: React.FC = () => {
@@ -17,6 +18,7 @@ const Routes: React.FC = () => {
       <Route path="/users/:userId" element={<UserPage/>} />
       <Route path="/search" element={<SearchResultsPage/>} />
       <Route path="/search/user" element={<UserResultsPage/>} />
+      <Route path="/entry" element={<EntryDisplayPage/>} />
       <Route path='*' element={<NotFoundPage />}/>
     </AppRoutes>
   );
