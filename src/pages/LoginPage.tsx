@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { UserLogin } from '../types/UserTypes';
 import { LoginPageProps } from '../types/FormTypes'
 
-
-
 function LoginPage({handleSubmit}: LoginPageProps) {
   const [user, setUser] = useState<UserLogin>({
     email: '',
