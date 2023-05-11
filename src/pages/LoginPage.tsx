@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { UserLogin } from '../types/UserTypes';
 import { LoginPageProps } from '../types/FormTypes'
+import axios from 'axios'
 
 function LoginPage({handleSubmit}: LoginPageProps) {
   const [user, setUser] = useState<UserLogin>({
-    email: '',
+    usernameOrEmail: '',
     password: '',
   });
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('' as string);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -18,23 +19,27 @@ function LoginPage({handleSubmit}: LoginPageProps) {
     });
   };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    handleSubmit(user);
-    // Check if username is unique
-    // If not, display error message
-    // Otherwise, submit form data
+    try {
+      const response = await axios.post('http://localhost:3000/api/auth/login', user);
+
+      localStorage.setItem('token', response.data.token);
+      window.location.href = '/';
+    } catch (error) {
+      setErrorMessage('' + error);
+    }
   };
 
   return (
     <form onSubmit={handleFormSubmit} aria-label="form">
       <div>
-        <label htmlFor="email">Email or Username:</label>
+        <label htmlFor="usernameOrEmail">Email or Username:</label>
         <input
-          type="email"
-          id="email"
-          name="email"
-          value={user.email}
+          type=""
+          id="usernameOrEmail"
+          name="usernameOrEmail"
+          value={user.usernameOrEmail}
           onChange={handleInputChange}
         />
       </div>

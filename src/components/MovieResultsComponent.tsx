@@ -32,7 +32,7 @@ const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
         if (first.isIntersecting) {
           setPage((num) => num + 1);
         }
-      }, 500) // Delay the function call by 500ms
+      }, 500) 
     )
   );
 
