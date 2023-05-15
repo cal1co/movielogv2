@@ -23,10 +23,10 @@ const Routes: React.FC = () => {
         throw new Error('Function not implemented.');
       } }/>} />
       <Route path="/" element={<FeedPage/>} />
-      <Route path="/users/:userId" element={<UserPage/>} />
+      <Route path="/:username" element={<UserPage/>} />
       <Route path="/search" element={<SearchResultsPage/>} />
       <Route path="/search/user" element={<UserResultsPage/>} />
-      <Route path="/entry" element={<EntryDisplayPage/>} />
+      <Route path="/m/entry" element={<EntryDisplayPage/>} />
       <Route path='*' element={<NotFoundPage />}/>
     </AppRoutes>
   );

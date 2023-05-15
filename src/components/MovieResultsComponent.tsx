@@ -108,7 +108,7 @@ const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
             return null;
           }
         return(
-          <div key={movie.id} onClick={() => navigate(`/entry?id=${movie.id}`)}>
+          <div key={movie.id} onClick={() => navigate(`/m/entry?id=${movie.id}`)}>
             <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
             <div ref={movieList.page < movieList.total_pages ? setLastElement : undefined}>{movie.title}</div>
           </div>

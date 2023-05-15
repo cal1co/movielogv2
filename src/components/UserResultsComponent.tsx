@@ -1,6 +1,6 @@
 // import './UserResultsComponent.css'
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
@@ -61,7 +61,7 @@ const UserResultsComponent: React.FC<QueryProps> = ({query}) => {
       <React.Fragment>
         {users.map((user, idx) => {
         return(
-          <div key={user.id} onClick={() => navigate(`/entry?id=${user.username}`)}>
+          <div key={user.id} onClick={() => navigate(`/${user.username}`)}>
             <div className="">{user.username}</div>
           </div>
         )
