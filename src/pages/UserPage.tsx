@@ -2,26 +2,19 @@
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import PostRender from '../components/PostRenderComponent'
+import { Post } from '../types/PostTypes'
+
 
 type User = {
   id: number,
   username: string
 }
 
-type Post = {
-  post_id: string,
-  user_id: number,
-  post_content: string,
-  created_at: string,
-  like_count: number,
-  comment_count: number
-}
-
 const token = localStorage.getItem('token');
 const headers = {
   'Authorization': `Bearer ${token}`,
   'Content-Type': 'application/json',
-  // 'Access-Control-Allow-Origin': '*'
 };
 
 function UserPage() {
@@ -81,14 +74,7 @@ function UserPage() {
       <React.Fragment>
         {posts.map((post, idx) => {
         return(
-          <div className="post-wrapper">
-            <br></br>
-            post:
-          <div className="">{post.post_content}</div>
-          <div className="">likes: {post.like_count || 0}</div>
-          <div className="">comments: {post.comment_count || 0}</div>
-          <div className="">{post.created_at}</div>
-          </div>
+          <PostRender post={post} key={post.post_id}/>
         )
         })}
       </React.Fragment>
