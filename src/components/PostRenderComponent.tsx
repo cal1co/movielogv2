@@ -14,7 +14,6 @@ const headers = {
     'Authorization': `Bearer ${token}`,
 };
 const PostRender: React.FC<QueryProps> = ({post}) => {
-
     const [postLiked, setPostLiked] = useState<boolean>(post.liked || false);
     const [postLikes, setPostLikes] = useState<number>(post.like_count);
     const [postComments, setPostComments] = useState<number>(post.comments_count)
@@ -29,12 +28,10 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
         setIsCommentModalOpen(false)
     }
     const handleComment = async (comment:string):Promise<void> => {
-        console.log("MAKE REQ: ", comment)
         await axios.post(`http://localhost:8080/post/${post.post_id}/comment`, {
             comment_content:comment
         }, {headers})
         .then(res => {
-            console.log(res.data)
             setPostComments(res.data)
         })
         .catch(err => {
@@ -46,7 +43,6 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
             headers
         })
         .then(res => {
-            console.log(res)
             setPostLikes(res.data)
             setPostLiked(true)
         })
@@ -59,7 +55,6 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
             headers
         })
         .then(res => {
-            console.log(res)
             setPostLikes(res.data)
             setPostLiked(false)
         })
@@ -67,10 +62,21 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
             console.log(err)
         })
     }
-    const redirectToPostPage = ():void => {
-        navigate(`/${post.user_id}/post/${post.post_id}`)
-    }
 
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>):void => {
+        const target = event.target as HTMLElement;
+        const isPostContent = target.classList.contains('post-content')
+        const isPostHeader = target.classList.contains('post-header')
+        const isPostActions = target.classList.contains('post-actions')
+        if (isPostContent || isPostHeader || isPostActions) {
+            redirectToPostPage()
+        } else {
+            // console.log("NOT CONTENT", target.classList)
+        }
+    }
+    const redirectToPostPage = ():void => {
+        navigate(`/${post.user_id}/post/${post.post_id}`, { state: {post} })
+    }
     const handleDate = (date:string):string => {
         const dateObj = new Date(date)
         const formattedDate = dateObj.toLocaleDateString();
@@ -80,7 +86,7 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
 
     return (
         <div className="post" 
-        // onClick={redirectToPostPage}
+        onClick={handleClick}
         >
             <div className="post-header">
                 <div className="user-profile">

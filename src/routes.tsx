@@ -27,7 +27,7 @@ const Routes: React.FC = () => {
       <Route path="/:username" element={<UserPage/>} />
       <Route path="/search" element={<SearchResultsPage/>} />
       <Route path="/search/user" element={<UserResultsPage/>} />
-      <Route path="/:username/post/:post_id" element={<PostRenderPage/>} />
+      <Route path="/:username/post/:postId" element={<PostRenderPage/>} />
       <Route path="/m/entry" element={<EntryDisplayPage/>} />
       <Route path='*' element={<NotFoundPage />}/>
     </AppRoutes>
