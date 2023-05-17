@@ -62,6 +62,7 @@ function UserPage() {
       headers
     })
     .then(res => {
+      console.log(res.data)
       setPosts(res.data)
     })
     .catch(err => {

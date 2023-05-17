@@ -10,6 +10,7 @@ import EntryDisplayPage from './pages/EntryDisplayPage';
 import NotFoundPage from './pages/NotFoundPage'
 import { UserLogin } from './types/UserTypes';
 import { User } from './types/UserTypes';
+import PostRenderPage from './pages/PostRenderPage'
 // import { LoginPageProps, SignupPageProps } from './types/FormTypes'
 
 
@@ -26,6 +27,7 @@ const Routes: React.FC = () => {
       <Route path="/:username" element={<UserPage/>} />
       <Route path="/search" element={<SearchResultsPage/>} />
       <Route path="/search/user" element={<UserResultsPage/>} />
+      <Route path="/:username/post/:post_id" element={<PostRenderPage/>} />
       <Route path="/m/entry" element={<EntryDisplayPage/>} />
       <Route path='*' element={<NotFoundPage />}/>
     </AppRoutes>

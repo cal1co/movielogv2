@@ -4,6 +4,6 @@ export type Post = {
     post_content: string,
     created_at: string,
     like_count: number,
-    comment_count: number,
+    comments_count: number,
     liked: boolean
 }
