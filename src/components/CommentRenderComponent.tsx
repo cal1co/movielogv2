@@ -7,7 +7,12 @@ type QueryProps = {
 
 const PostRender: React.FC<QueryProps> = ({comment}) => {
     return (
-        <div className="">{comment.comment_content}</div>
+        <div className="">
+            {comment.user_id}
+            {comment.like_count}
+            {comment.comments_count}
+            {comment.comment_content}
+        </div>
     )
 }
 
