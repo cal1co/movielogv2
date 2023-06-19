@@ -15,6 +15,8 @@ import PostRenderPage from './pages/PostRenderPage'
 
 
 const Routes: React.FC = () => {
+  const isLoggedIn = !!localStorage.getItem('token');
+
   return (
     <AppRoutes>
       <Route path="/login" element={<LoginPage handleSubmit={function (user: UserLogin): Promise<void> {
@@ -23,7 +25,13 @@ const Routes: React.FC = () => {
       <Route path="/signup" element={<SignupPage handleSubmit={function (user: User): Promise<void> {
         throw new Error('Function not implemented.');
       } }/>} />
-      <Route path="/" element={<FeedPage/>} />
+      <Route path="/" element={isLoggedIn 
+      ? 
+      <FeedPage/>
+      : 
+      <LoginPage handleSubmit={function (user: UserLogin): Promise<void> {
+        throw new Error('Function not implemented.');
+      } }/>} />
       <Route path="/:username" element={<UserPage/>} />
       <Route path="/search" element={<SearchResultsPage/>} />
       <Route path="/search/user" element={<UserResultsPage/>} />

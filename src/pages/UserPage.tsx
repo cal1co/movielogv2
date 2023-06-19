@@ -23,7 +23,7 @@ function UserPage() {
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const [user, setUser] = useState<User | null>(null)
   const [posts, setPosts] = useState<Post[] | null>(null)
-
+  
   useEffect(() => {
     setIsMounted(true);
   }, [])
@@ -42,7 +42,7 @@ function UserPage() {
   }, [user])
 
   const getUser = async (username:string) => {
-    await axios.get(`http://localhost:3000/api/auth/getuser/${username}`)
+    await axios.get(`http://localhost:3000/api/auth/getuser/${username}`, {headers})
     .then(res => {
       const tempUser: User = {
         id: parseInt(res.data.id),
