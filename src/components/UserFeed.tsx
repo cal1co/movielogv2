@@ -12,6 +12,7 @@ function UserFeed() {
   };
 
   const [isMounted, setIsMounted] = useState<boolean>(false)
+  const [feed, setFeed] = useState<Post[] | null>(null)
 
   useEffect(() => {
     setIsMounted(true);
@@ -23,25 +24,57 @@ function UserFeed() {
         console.log("token null. handle this error")
         return
       } 
-      getFeed(token, 1)
+      getFeed(1)
+      establishFeedConnection()
     }
   }, [isMounted])
 
 
-  const getFeed = (userId:string, page: number) => {
-    console.log(userId, page, headers)
+  const getFeed = (page: number) => {
     axios.get(`http://localhost:8081/v1/feed/${page}`, {headers})
     .then(res => {
       console.log(res.data)
+      setFeed(res.data)
     })
     .catch(err => {
       console.log(err)
     })
   }
+  const establishFeedConnection = () => {
+    const socket = new WebSocket(`ws://localhost:8081/connect/` + token);
+    socket.onopen = () => {
+      console.log('conn open')
+    }
+    socket.onclose = () => {
+      console.log('conn closed')
+    }
+    socket.onmessage = (event) => {
+      console.log('message recieved', event.data)
+    }
+
+    return () => {
+      socket.close();
+    }
+  }
+
+
+  const renderFeed = (feed: Post[]) => {
+    return (
+      <React.Fragment>
+        {feed.map((post, idx) => {
+        return(
+          <PostRender post={post} key={post.post_id}/>
+        )
+        })}
+      </React.Fragment>
+    );
+  }
   return (
     <div className="UserFeed">
       User Feed:
-      
+      <div className="feed">
+      {feed && renderFeed(feed)}
+      </div>
     </div>
   )
     
