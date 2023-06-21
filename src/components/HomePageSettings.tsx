@@ -1,4 +1,4 @@
-// import './FeedPage.css'
+import './HomePageSettings.css'
 
 function HomePageSettings() {
 
