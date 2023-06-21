@@ -1,0 +1,25 @@
+.FeedPage {
+    display:flex;
+    flex-direction: row;
+}
+
+.settings {
+    width: 250px;
+}
+@media (max-width: 768px) {
+    .settings {
+        display:none;
+    }
+    .FeedPage {
+        flex-direction: column;
+    align-items: center;
+    }
+}
+  
+.feed {
+    flex: 1;
+    max-width: 640px;
+    /* display:flex; */
+    /* justify-content:center; */
+    /* align-items:center; */
+}

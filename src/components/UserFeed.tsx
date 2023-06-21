@@ -1,4 +1,4 @@
-// import './UserFeed.css'
+import './UserFeed.css'
 import React, { useEffect, useState } from 'react';
 import PostRender from '../components/PostRenderComponent';
 import { Post } from '../types/PostTypes';
@@ -61,17 +61,22 @@ function UserFeed() {
   const renderFeed = (feed: Post[]) => {
     return (
       <React.Fragment>
-        {feed.map((post, idx) => {
-        return(
-          <PostRender post={post} key={post.post_id}/>
-        )
-        })}
+        <div className="posts-container">
+
+          {feed.map((post, idx) => {
+            return(
+              <PostRender post={post} key={post.post_id}/>
+              )
+            })}
+        </div>
       </React.Fragment>
     );
   }
   return (
     <div className="UserFeed">
-      User Feed:
+      <div className="feedname">
+        User Feed:
+        </div>
       <div className="feed">
       {feed && renderFeed(feed)}
       </div>

@@ -1,3 +1,4 @@
+import './SearchBar.css'
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -34,7 +35,7 @@ const SearchBar = () => {
     };
 
     return (
-    <form onSubmit={handleSearch}>
+    <form onSubmit={handleSearch} className="search-form">
         <input
         type="text"
         placeholder="Search..."

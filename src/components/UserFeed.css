@@ -1,0 +1,9 @@
+.UserFeed {
+    width:640px;
+}
+.posts-container {
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content:center;
+}
