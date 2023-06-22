@@ -1,3 +1,46 @@
 .HomePageSettings {
     position:fixed;
+    max-width:250px;
+    height:100%;
+}
+.settings-wrapper {
+    /* margin-top:50px; */
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    flex-grow:1;
+    height:100%;
+}
+.settings-wrapper div:last-child {
+    margin-top: auto;
+  }
+
+.settings-wrapper div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    height:48px;
+}
+.icon{
+    width:25px;
+    margin:5px;
+    fill:white;
+    padding:5px;
+}
+@media (max-width: 825px) {
+    .icon-description {
+        display:none !important;
+        outline:1px solid red;
+    }
+    /* .HomePageSettiongs * {
+        margin-left: 0;
+    } */
+}
+.yuzu {
+    padding-bottom:50px; 
+}
+.more {
+    margin-bottom:20px;
 }

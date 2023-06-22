@@ -75,7 +75,6 @@ function UserFeed() {
   return (
     <div className="UserFeed">
       <div className="feedname">
-        User Feed:
         </div>
       <div className="feed">
       {feed && renderFeed(feed)}
