@@ -13,7 +13,10 @@
 }
 .settings-wrapper div:last-child {
     margin-top: auto;
-  }
+}
+.setting-option:hover {
+    cursor:pointer;
+}
 
 .settings-wrapper div {
     overflow: hidden;
@@ -34,9 +37,6 @@
         display:none !important;
         outline:1px solid red;
     }
-    /* .HomePageSettiongs * {
-        margin-left: 0;
-    } */
 }
 .yuzu {
     padding-bottom:50px; 
@@ -44,3 +44,26 @@
 .more {
     margin-bottom:20px;
 }
+.sidebar-open {
+    right: 0; 
+  }
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 45px;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    opacity:0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out, z-index 0.5ms ease-in-out;
+
+}
+
+.sidebar-open {
+    pointer-events:all;
+
+    opacity:1;
+}
+  
