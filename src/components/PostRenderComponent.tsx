@@ -91,7 +91,7 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
             <div className="post-header">
                 <div className="user-profile">
                 <img src="user-profile-image.jpg" alt="U" className="profile-image"/>
-                <span className="username">@{post.user_id}</span>
+                <span className="username">@{post.username}</span>
                 </div>
                 <div className="post-info">
                 <span className="created-date">{handleDate(post.created_at)}</span>

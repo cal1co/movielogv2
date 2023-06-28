@@ -4,7 +4,7 @@ function UserResultsPage() {
 
   return (
     <div className="UserResultsPage">
-      THIS IS UserResultsPage
+      {/* THIS IS UserResultsPage */}
     </div>
   )
 }

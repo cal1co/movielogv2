@@ -73,7 +73,7 @@ const UserResultsComponent: React.FC<QueryProps> = ({query}) => {
 
   return (
     <div className="UserResultsComponent">
-        Search for users related to {query}
+        Search for users related to {query}:
         <div className="">{userResults && printUsers(userResults)}</div>
     </div>
   )

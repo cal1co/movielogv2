@@ -6,11 +6,8 @@ function SearchSidebar() {
 
     return (
         <div className="search-sidebar">
-            search stuff goes here
-
-
-        <SearchBar></SearchBar>
-
+            <SearchBar></SearchBar>
+            
         </div>
     )
 

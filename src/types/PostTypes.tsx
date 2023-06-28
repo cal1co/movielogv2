@@ -6,6 +6,7 @@ export type Post = {
     like_count: number,
     comments_count: number,
     liked: boolean
+    username:string
 }
 
 export type Comment = {
