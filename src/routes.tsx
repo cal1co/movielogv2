@@ -10,7 +10,8 @@ import EntryDisplayPage from './pages/EntryDisplayPage';
 import NotFoundPage from './pages/NotFoundPage'
 import { UserLogin } from './types/UserTypes';
 import { User } from './types/UserTypes';
-import PostRenderPage from './pages/PostRenderPage'
+import PostRenderPage from './pages/PostRenderPage';
+import S3TestPage from './pages/S3TestPage';
 // import { LoginPageProps, SignupPageProps } from './types/FormTypes'
 
 
@@ -38,6 +39,7 @@ const Routes: React.FC = () => {
       <Route path="/:username/post/:postId" element={<PostRenderPage/>} />
       <Route path="/m/entry" element={<EntryDisplayPage/>} />
       <Route path='*' element={<NotFoundPage />}/>
+      <Route path="/test" element={<S3TestPage />}/>
     </AppRoutes>
   );
 };
