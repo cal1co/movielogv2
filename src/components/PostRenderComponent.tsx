@@ -5,6 +5,9 @@ import './PostRenderComponent.css'
 import axios from 'axios'
 import CommentModal from './CommentModal'
 import { useNavigate } from 'react-router-dom'
+import Like from '../../icons/heart-regular.svg'
+import Unlike from '../../icons/heart-solid.svg'
+import Comment from '../../icons/comment-regular.svg'
 
 type QueryProps = {
     post: Post
@@ -103,20 +106,27 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
             <div className="post-actions">
                 <div className="action-info">
                     <div className="action-count">
-                    <span className="count">{postLikes || 0}</span>
                     </div>
                     {
                     postLiked ?
-                    <button className="like-button" onClick={handleUnlike}>Unlike</button>
+                    <div className="like-button" onClick={handleUnlike}>
+                        <img src={Unlike} alt="" />
+                    </div>
                     :
-                    <button className="like-button" onClick={handleLike}>Like</button>
+                    <div className="like-button" onClick={handleLike}>
+                        <img src={Like} alt="like" /> 
+                    </div>
                     }
+                    <div className="count">{postLikes || 0}</div>
+
                 </div>
                 <div className="action-info">
                     <div className="action-count">
-                    <span className="count">{postComments || 0}</span>
                     </div>
-                    <button className="comment-button" onClick={handleOpenCommentModal}>Comment</button>
+                    <div className="comment-button" onClick={handleOpenCommentModal}>
+                        <img src={Comment} alt="" />
+                    </div>
+                    <div className="count">{postComments || 0}</div>
                 </div>
                 <button className="share-button">Share</button>
                 <button className="settings-button">&#x2026;</button>

@@ -26,7 +26,7 @@ function HomePageSettings() {
         <div className="yuzu" onClick={() => navigate("/")}>
           <div className="setting-option">
             <img src={yuzu} alt="yuzu icon lemon" className="yuzu-icon icon" />
-            <div className="icon-description yuzu-logo">Yuzu</div>
+            <div className="icon-description yuzu-logo">YUZU</div>
           </div>
         </div>
 
