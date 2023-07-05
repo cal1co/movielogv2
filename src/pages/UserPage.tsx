@@ -58,7 +58,7 @@ function UserPage() {
   }
 
   const getUserPosts = async (uid: number) => {
-    await axios.get(`http://localhost:8080/feed/user/${uid}`, {
+    await axios.get(`http://localhost:8081/feed/user/${uid}`, {
       headers
     })
     .then(res => {

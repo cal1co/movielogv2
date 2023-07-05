@@ -37,7 +37,7 @@ function PostRenderPage() {
 
   const getPostData = async ():Promise<void> => {
     if (!postContent) {
-      await axios.get(`http://localhost:8080/posts/${postId}`, {headers})
+      await axios.get(`http://localhost:8082/posts/${postId}`, {headers})
       .then(res => {
         console.log(res.data)
         setPostContent(res.data)
@@ -49,7 +49,7 @@ function PostRenderPage() {
   }
 
   const fetchPostComments = () => {
-    axios.get(`http://localhost:8080/post/${postId}/comments`, {headers})
+    axios.get(`http://localhost:8082/post/${postId}/comments`, {headers})
     .then(res => {
       console.log(res.data)
       setComments(res.data)

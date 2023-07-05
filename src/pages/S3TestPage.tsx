@@ -34,43 +34,42 @@ const S3TestPage = () => {
 
 
   useEffect(() => {
-    // getImage()
+    getImage()
   }, []);
 
   const getImage = async () => {
     await axios
-      .get("http://localhost:3000/api/auth/s3test")
+      .get("http://localhost:3000/api/auth/s3image/profile_default.jpg")
       .then((res) => {
         setImageUrl(res.data);
-        console.log(res.data)
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const uploadFile = async () => {
-    console.log("uploading", blob)
-    if (!file || !blob) {
-        console.error("error: no file uploaded")
-        return
-    }
-    const formData = new FormData();
-    formData.append("content", file, "test-upload.jpg");
-    console.log(formData.get("content"))
-    await axios
-    .post("http://localhost:3000/api/auth/s3test", formData, {
-        headers: {
-            "content-type": "multipart/form-data",
-        }
-    })
-    .then((res) => {
-        console.log(res.data)
-    })
-    .catch((err) => {
-        console.log(err)
-    })
-  }
+  // const uploadFile = async () => {
+  //   console.log("uploading", blob)
+  //   if (!file || !blob) {
+  //       console.error("error: no file uploaded")
+  //       return
+  //   }
+  //   const formData = new FormData();
+  //   formData.append("content", file, "test-upload.jpg");
+  //   console.log(formData.get("content"))
+  //   await axios
+  //   .post("http://localhost:3000/api/auth/s3test", formData, {
+  //       headers: {
+  //           "content-type": "multipart/form-data",
+  //       }
+  //   })
+  //   .then((res) => {
+  //       console.log(res.data)
+  //   })
+  //   .catch((err) => {
+  //       console.log(err)
+  //   })
+  // }
 
   return (
     <div className="">
@@ -81,7 +80,7 @@ const S3TestPage = () => {
       >
         drag and drop
       </div>
-      <button onClick={uploadFile}>upload</button>
+      {/* <button onClick={uploadFile}>upload</button> */}
       {imageUrl && <img src={imageUrl} />}
     </div>
   );

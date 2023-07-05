@@ -4,7 +4,11 @@ import PostRender from '../components/PostRenderComponent';
 import { Post } from '../types/PostTypes';
 import axios from 'axios';
 
-
+type ProfileImageFetch = {
+  user_id: number
+  profile_image: string
+  profile_image_data: string
+}
 function UserFeed() {
   const token = localStorage.getItem("token")
   const headers = {
@@ -13,6 +17,7 @@ function UserFeed() {
 
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const [feed, setFeed] = useState<Post[] | null>(null)
+  const [feedImages, setFeedImages] = useState<string | null>(null)
 
   useEffect(() => {
     setIsMounted(true);
@@ -34,7 +39,29 @@ function UserFeed() {
     axios.get(`http://localhost:8081/v1/feed/${page}`, {headers})
     .then(res => {
       console.log(res.data)
+      getProfileImages(res.data)
       setFeed(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+  const getProfileImages = (users:Post[]) => {
+    const usersMap: {[key:number]: string} = {}
+    const fetchReq:ProfileImageFetch[] = []
+    for (let i = 0; i < users.length; i++) {
+      if (!usersMap[users[i].user_id]) {
+        const user_data:ProfileImageFetch ={
+          user_id: users[i].user_id,
+          profile_image_data: users[i].profile_image_data,
+          profile_image: ""
+        }
+        fetchReq.push(user_data)
+      }
+    }
+    axios.post(`http://localhost:3000/api/auth/s3image/feed/`, {fetchReq})
+    .then(res => {
+      setFeedImages(res.data)
     })
     .catch(err => {
       console.log(err)
@@ -64,6 +91,9 @@ function UserFeed() {
         <div className="posts-container">
 
           {feed.map((post, idx) => {
+            if (feedImages && feedImages[post.user_id]){
+              post.profile_image = feedImages[post.user_id]
+            }
             return(
               <PostRender post={post} key={post.post_id}/>
               )

@@ -31,7 +31,7 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
         setIsCommentModalOpen(false)
     }
     const handleComment = async (comment:string):Promise<void> => {
-        await axios.post(`http://localhost:8080/post/${post.post_id}/comment`, {
+        await axios.post(`http://localhost:8082/post/${post.post_id}/comment`, {
             comment_content:comment
         }, {headers})
         .then(res => {
@@ -42,7 +42,7 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
         })
     }
     const handleLike = async ():Promise<void> => {
-        await axios.post(`http://localhost:8080/post/like/${post.post_id}`, {}, {
+        await axios.post(`http://localhost:8082/post/like/${post.post_id}`, {}, {
             headers
         })
         .then(res => {
@@ -54,7 +54,7 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
         })
     }
     const handleUnlike = async () => {
-        await axios.post(`http://localhost:8080/post/unlike/${post.post_id}`, {}, {
+        await axios.post(`http://localhost:8082/post/unlike/${post.post_id}`, {}, {
             headers
         })
         .then(res => {
@@ -93,7 +93,7 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
         >
             <div className="post-header">
                 <div className="user-profile">
-                <img src="user-profile-image.jpg" alt="U" className="profile-image"/>
+                <img src={post.profile_image} alt="U" className="profile-image"/>
                 <span className="username">@{post.username}</span>
                 </div>
                 <div className="post-info">
