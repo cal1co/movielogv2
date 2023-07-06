@@ -113,8 +113,12 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
                 <span className="created-date">{postAge(post.created_at)}</span>
                 </div>
             </div>
+            <div className="content-wrapper">
+
             <div className="post-content">
                 {post.post_content}
+            </div>
+            <div className="post-content-shadow"/>
             </div>
             <div className="post-actions">
                 <div className="action-info">
