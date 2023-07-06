@@ -86,6 +86,19 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
         const formattedTime = dateObj.toLocaleTimeString();
         return `${formattedDate} ${formattedTime}`
     }
+    const postAge = (date:string):string => {
+        const dateObj = new Date(date)
+        const currentDateTime = new Date();
+        const timeDiff = currentDateTime.getTime() - dateObj.getTime();
+        const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60)); // Convert milliseconds to hours
+
+        if (hoursDiff >= 24) {
+            const daysDiff = Math.floor(hoursDiff / 24);
+            return `${daysDiff}d`;
+        }
+
+        return `${hoursDiff}h`;
+    }
 
     return (
         <div className="post" 
@@ -97,7 +110,7 @@ const PostRender: React.FC<QueryProps> = ({post}) => {
                 <span className="username">@{post.username}</span>
                 </div>
                 <div className="post-info">
-                <span className="created-date">{handleDate(post.created_at)}</span>
+                <span className="created-date">{postAge(post.created_at)}</span>
                 </div>
             </div>
             <div className="post-content">

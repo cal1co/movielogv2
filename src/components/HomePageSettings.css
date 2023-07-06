@@ -13,6 +13,7 @@
     flex-grow:1;
     height:100%;
     /* width:auto; */
+    border-right:2px solid black;
     min-width:50px;
 }
 .settings-wrapper div:last-child {
@@ -49,11 +50,9 @@
     }
 }
 .yuzu {
-    /* padding-bottom:50px;  */
     min-height:175px;
     display:flex;
     justify-content:center;
-    border-right:2px solid black;
 }
 .yuzu > .setting-option {
     max-width:100px;

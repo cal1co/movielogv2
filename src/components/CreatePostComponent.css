@@ -1,6 +1,4 @@
 .CreatePost {
-    height:173px;
-    border:2px solid black;
-    border-left:none;
-    border-right:none;
+    height:175px;
+    border-bottom:2px solid black;
 }
