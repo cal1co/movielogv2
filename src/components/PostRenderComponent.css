@@ -19,12 +19,13 @@
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    background-color: #007bff;
+    background-color: #D9D9D9;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 5px;
-    overflow: hidden; /* Clip the alt text */
+    overflow: hidden; 
+    /* border:2px solid black; */
   }
   
   .initials {
@@ -49,13 +50,17 @@
     height:40px;
     position:relative;
     left:67px;
-    width:500px;
+    width:670px;
     margin:10px;
   }
   
   .action-info {
     display: flex;
     align-items: center;
+    width:inherit;
+  }
+  .action-info div:last-child{
+    margin-left:auto;
   }
   
   .action-count {
@@ -86,7 +91,7 @@
   .post-content-shadow, .post-content {
     min-height:55px;;
     /* left:67px; */
-    width:635px;
+    width:600px;
     border:2px solid black;
     padding:10px;
   }
@@ -99,31 +104,48 @@
   }
   .content-wrapper{
     height:80px;
-    width:635px;
+    width:600px;
     left:67px;
     position:relative;
+    top:-10px;
   }
   
-  /* Additional styling for buttons */
   .like-button,
   .comment-button,
   .share-button,
-  .settings-button {
+  .settings-button, .save-button{
     background-color:#ffffff00;
-    /* color: #fff; */
     width:25px;
     height:25px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
     padding:5px;
+    display:flex;
+    justify-content:center;
+  }
+  .save-button > img {
+    height:25px;
+    display:flex;
+    position:relative;
   }
   
   .like-button:hover,
   .comment-button:hover,
   .share-button:hover,
-  .settings-button:hover {
+  .settings-button:hover, .save-button:hover {
     outline:2px solid rgba(0, 0, 0, 0.455);
     border-radius:100px;
   }
-  
+  .elipsis {
+    width:25px;
+    margin-left:20px;
+  }
+
+  .post-info {
+    position:relative;
+    top:-10px;
+    width:fit-content;
+    display:flex;
+    margin-right:20px;
+  }
