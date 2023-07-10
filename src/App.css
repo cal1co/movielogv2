@@ -1,3 +1,26 @@
 body {
     margin:0;
 }
+.settings {
+    min-width: 256px;
+    display:flex;
+}
+
+@media (max-width:825px) {
+    .settings {
+        min-width:50px;
+        display:flex; 
+        justify-content:center; 
+    }
+}
+  
+.App {
+    display:flex;
+    flex-direction: row;
+}
+
+.feed-side {
+    flex: 1;
+    max-width: 768px;
+    border-right: var(--border);
+}

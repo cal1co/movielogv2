@@ -7,9 +7,6 @@ function FeedPage() {
 
   return (
     <div className="FeedPage">
-      <div className="settings">
-        <HomePageSettings/>
-      </div>
       <div className="feed-side">
         <CreatePostComponent/>
         <UserFeed/>

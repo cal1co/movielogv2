@@ -93,8 +93,17 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
       // console.log("NOT CONTENT", target.classList)
     }
   };
+
+  function isTextSelected(): boolean {
+    const selection = window.getSelection();
+    return selection !== null && selection.toString().length > 0;
+  }
+
+
   const redirectToPostPage = (): void => {
-    navigate(`/${post.user_id}/post/${post.post_id}`, { state: { post } });
+    if (!isTextSelected()) {
+      navigate(`/${post.user_id}/post/${post.post_id}`, { state: { post } });
+    }
   };
   const handleDate = (date: string): string => {
     const dateObj = new Date(date);

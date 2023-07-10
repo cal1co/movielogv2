@@ -33,7 +33,7 @@
     width:inherit;
 }
 .settings-wrapper > div {
-    border-bottom: 2px solid black;
+    border-bottom: var(--border);
 }
 .icon{
     width:25px;

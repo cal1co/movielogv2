@@ -1,4 +1,5 @@
 // import './UserPage.css'
+import './UserPage.css'
 import { useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -58,7 +59,7 @@ function UserPage() {
   }
 
   const getUserPosts = async (uid: number) => {
-    await axios.get(`http://localhost:8081/feed/user/${uid}`, {
+    await axios.get(`http://localhost:8082/posts/user/${uid}`, {
       headers
     })
     .then(res => {
@@ -83,7 +84,9 @@ function UserPage() {
   }
   return (
     <div className="UserPage">
-      {user && <div>{user.username}'s profile</div>}
+      <div className="profile">
+        {user && <div>{user.username}'s profile</div>}
+      </div>
 
       <div className="posts">
         {posts && renderPosts(posts)}

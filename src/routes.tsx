@@ -19,6 +19,7 @@ const Routes: React.FC = () => {
   const isLoggedIn = !!localStorage.getItem('token');
 
   return (
+    
     <AppRoutes>
       <Route path="/login" element={<LoginPage handleSubmit={function (user: UserLogin): Promise<void> {
         throw new Error('Function not implemented.');

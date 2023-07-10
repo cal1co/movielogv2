@@ -1,0 +1,5 @@
+.UserPage { border-right: var(--border); }
+.profile {
+    border-bottom: var(--border);
+    height:300px;
+}
