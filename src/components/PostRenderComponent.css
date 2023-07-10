@@ -11,7 +11,7 @@
   
   .user-profile {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     padding:10px;
   }
   
@@ -34,10 +34,7 @@
     text-transform: uppercase;
   }
   
-  .username {
-    font-weight: bold;
-    font-size:12px;
-  }
+ 
   
   .created-date {
     font-size: 12px;
@@ -149,3 +146,14 @@
     display:flex;
     margin-right:20px;
   }
+.name{
+  height:52px;
+}
+.display-name{
+  font-weight:900;
+}
+.username {
+  position:relative;
+  top:-5px;
+  font-size:12px;
+}

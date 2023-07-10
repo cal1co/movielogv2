@@ -121,10 +121,13 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
       <div className="post-header">
         <div className="user-profile">
           <img src={post.profile_image} alt="U" className="profile-image" />
-          <span className="username">@{post.username}</span>
+          <div className="name">
+            <div className="display-name" onClick={() => navigate(`/${post.username}`)}>{post.display_name}</div>
+            <div className="username">@{post.username}</div>
+          </div>
         </div>
         <div className="post-info">
-          <span className="created-date">{postAge(post.created_at)}</span>
+          <div className="created-date">{postAge(post.created_at)}</div>
           <img
             src={elipsis}
             alt="three dots elipsis post settings button"
