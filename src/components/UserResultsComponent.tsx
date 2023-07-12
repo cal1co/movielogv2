@@ -44,7 +44,7 @@ const UserResultsComponent: React.FC<QueryProps> = ({query}) => {
   const fetchUsers = async (query: string) => {
     setIsLoading(true);
     setStoredQuery(query)
-    await axios.get(`http://localhost:3000/api/auth/search/${query}`, {
+    await axios.get(`http://localhost:3000/api/auth/search/user/${query}`, {
       headers
     })
     .then( res => {

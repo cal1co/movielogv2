@@ -83,7 +83,6 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
   };
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>): void => {
-    console.log('click')
     const target = event.target as HTMLElement;
     const isPostContent = target.classList.contains("post-content");
     const isPostHeader = target.classList.contains("post-header");

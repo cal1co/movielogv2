@@ -1,3 +1,10 @@
 .search-form {
     width:640px;
 }
+
+.tab {
+    width:fit-content;
+}
+.active {
+    outline:2px solid black;
+}

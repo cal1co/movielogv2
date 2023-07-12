@@ -2,25 +2,23 @@ import "./SearchBar.css";
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import UserResultsComponent from './UserResultsComponent'
+import PostSearchResultsComponent from './PostSearchResultsComponent'
 
 const searchPath = "/search";
 const SearchBar = () => {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
   const q = queryParams.get("q") ?? "";
-  // const tab = queryParams.get('tab') ?? ''
 
   const [query, setQuery] = useState(q);
   const [searched, setSearched] = useState<boolean>(false)
-  const [activeTab, setActiveTab] = useState<"films" | "tv" | "users">("films");
-  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<"posts" | "users">("users");
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const searchUrl = `${searchPath}?q=${encodeURIComponent(
       query
     )}&tab=${encodeURIComponent(activeTab)}`;
-    // navigate(searchUrl);
     setSearched(true)
     if (activeTab === "users") {
       // <UserResultsComponent query={query}/>
@@ -34,14 +32,14 @@ const SearchBar = () => {
     // navigate(searchUrl);
   };
 
-  const handleFilmsTabClick = (): void => {
-    setActiveTab("films");
-    searchWithTabSelect("films");
+  const handlePostsTabClick = (): void => {
+    setActiveTab("posts");
+    // searchWithTabSelect("films");
   };
 
   const handleUsersTabClick = (): void => {
     setActiveTab("users");
-    searchWithTabSelect("users");
+    // searchWithTabSelect("users");
   };
 
   return (
@@ -55,10 +53,10 @@ const SearchBar = () => {
         />
         <div className="tab-container">
           <div
-            className={`tab ${activeTab === "films" ? "active" : ""}`}
-            onClick={handleFilmsTabClick}
+            className={`tab ${activeTab === "posts" ? "active" : ""}`}
+            onClick={handlePostsTabClick}
           >
-            Films
+            Posts
           </div>
           <div
             className={`tab ${activeTab === "users" ? "active" : ""}`}
@@ -71,7 +69,16 @@ const SearchBar = () => {
       </form>
 
 
-      {searched && <UserResultsComponent query={query}/>}
+      {searched 
+      && 
+      (activeTab === 'users' 
+      && 
+      <UserResultsComponent query={query}/>)
+      || 
+      (activeTab === 'posts'
+      && 
+      <PostSearchResultsComponent query={query}/>)
+      }
     </div>
   );
 };

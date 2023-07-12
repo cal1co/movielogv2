@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom"
-import MovieResultsComponent from '../components/MovieResultsComponent';
+import PostSearchResultsComponent from '../components/PostSearchResultsComponent';
 import SearchBar from '../components/SearchBar';
 import UserResultsComponent from '../components/UserResultsComponent';
 
@@ -24,8 +24,10 @@ const SearchResultsPage: React.FC = () => {
     const defineRenderedComponent = () => {
         if (query) {
             switch (tab) {
-                case 'films':
-                    return <MovieResultsComponent query={query} />
+                // case 'films':
+                //     return <MovieResultsComponent query={query} />
+                case 'posts':
+                    return <PostSearchResultsComponent query={query} />
                 case 'users':
                     return <UserResultsComponent query={query}/>
             };
@@ -38,7 +40,7 @@ const SearchResultsPage: React.FC = () => {
     return (
       <div className="SearchResultsPage">
         <SearchBar />
-        {defineRenderedComponent()}
+        {/* {defineRenderedComponent()} */}
       </div>
     );
   };
