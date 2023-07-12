@@ -1,6 +1,8 @@
 .post {
+  position:relative;
   border-bottom: var(--border);
   width: 768px; 
+  z-index:0;
 }
 
 .post-header {

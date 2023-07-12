@@ -104,8 +104,8 @@ function UserFeed() {
   }
   return (
     <div className="UserFeed">
-      <div className="feedname">
-        </div>
+      {/* <div className="feedname">
+        </div> */}
       <div className="feed">
       {feed && renderFeed(feed)}
       </div>

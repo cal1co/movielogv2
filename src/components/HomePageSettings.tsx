@@ -90,10 +90,8 @@ function HomePageSettings() {
           </div>
         </div>
       </div>
-          <div className={`overlay ${sidebarOpen ? 'sidebar-open' : ''}`}>
-            {sidebarOpen && 
+          <div className={`search-wrapper ${sidebarOpen ? 'open' : 'hidden'}`} >
               <SearchSidebar/>
-            }
           </div>
     </div>
   );

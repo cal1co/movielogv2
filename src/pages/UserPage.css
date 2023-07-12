@@ -2,4 +2,8 @@
 .profile {
     border-bottom: var(--border);
     height:300px;
+    width:768px;
+}
+.profile-img {
+    height:128px;
 }

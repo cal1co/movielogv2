@@ -5,8 +5,8 @@ body {
     min-width: 256px;
     display:flex;
 }
-
-@media (max-width:825px) {
+/* --halfsize */
+@media (max-width:1024px) {
     .settings {
         min-width:50px;
         display:flex; 

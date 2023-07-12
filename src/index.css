@@ -14,6 +14,7 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     --border: 2px solid black;
+    --halfsize:1024px;
 }
 .loading {
     position: relative;
