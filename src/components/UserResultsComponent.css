@@ -1,0 +1,32 @@
+.rendered-user-search-result {
+    display:flex;
+    width:100%;
+    margin-bottom:10px;
+}
+.rendered-user-search-result:hover {
+    background:#fbf8f8;
+    cursor:pointer;
+}
+.profile-image-search {
+    width:50px;
+    border-radius:50px;
+}
+.username-details {
+    margin-left:10px;
+    display:flex;
+    flex-direction:column;
+    /* align-items:center; */
+}
+.display-name-search {
+    position:relative;
+    min-height:24px;
+    font-size:12px;
+    top:-4px;
+    color:#5c5c5c;
+}
+.username-search {
+    font-size: 16px;
+}
+.display-name-search, .username-search {
+    height:fit-content;
+}

@@ -1,8 +1,22 @@
 .search-sidebar {
-  position: relative;
+  position: fixed;
   width: 256px;
   height: 100%;
   background-color: white;
-  }
+  outline: var(--border)
+  /* margin:20px; */
+}
+.search-sidebar > div {
+  margin:20px;
+}
+
+.search-title-wrapper {
+  height:70px;
+}
+.search-title {
+  /* margin:10px; */
+  font-size:20px;
+  /* font-family: "Hiragino Sans", "ヒラギノ角ゴ", sans-serif */
+}
   
   

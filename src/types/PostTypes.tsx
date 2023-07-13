@@ -12,6 +12,13 @@ export type Post = {
     profile_image_data:string
 }
 
+export type SearchPost = {
+    post_content: string,
+    user_id: number,
+    created_at: string,
+    id: string
+}
+
 export type Comment = {
     comment_id: string,
     user_id: number,

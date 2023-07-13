@@ -37,7 +37,6 @@ const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
   );
 
   useEffect(() => {
-    console.log(query)
     setIsMounted(true);
   }, [])
 
@@ -91,7 +90,6 @@ const MovieResultsComponent: React.FC<QueryProps> = ({query}) => {
           };
         }
       })
-      // console.log(res.data)
     }) 
     .catch( err => {
       console.log(err)

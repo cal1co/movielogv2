@@ -99,16 +99,13 @@
     z-index:2;
 }
   
+
 .search-wrapper {
     width: 256px;
     height: 100%;
-}
-
-.search-wrapper {
     position:relative;
     left: -2px;
-    transition: left 0.3s ease-in-out;
-    outline:var(--border);
+    transition: left 0.3s ease-in-out; 
 }
 
 .search-wrapper.hidden{

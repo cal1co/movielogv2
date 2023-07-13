@@ -38,7 +38,6 @@ function UserFeed() {
   const getFeed = (page: number) => {
     axios.get(`http://localhost:8081/v1/feed/${page}`, {headers})
     .then(res => {
-      console.log(res.data)
       getProfileImages(res.data)
       setFeed(res.data)
     })

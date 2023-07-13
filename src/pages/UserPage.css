@@ -7,3 +7,39 @@
 .profile-img {
     height:128px;
 }
+.profile-page-wrapper {
+    padding-inline:64px;
+    padding-top:32px;
+}
+.data-panel {
+    flex-direction:column;
+    margin-left:64px;
+}
+.follow-data, .misc-actions, .data-panel, .profile-page-wrapper {
+    display:flex;
+}
+.follow-button, .user-settings {
+    margin-left:30px;
+}
+.follow-button:hover, .user-settings {
+    cursor:pointer;
+}
+.head-username {
+    font-size:20px;
+}
+.misc-actions {
+    margin-bottom:10px;
+}
+.following-count {
+    margin-left:20px;
+}
+
+.follow-button {
+    outline:var(--border);
+    border-radius:5px;
+    padding-inline:5px;
+}
+
+.follow-button:hover{
+    background:#D9D9D9;
+}

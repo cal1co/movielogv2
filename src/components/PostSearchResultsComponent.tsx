@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Post } from '../types/PostTypes'
+import { SearchPost } from '../types/PostTypes'
 type QueryProps = {
     query: string
 }
@@ -9,7 +9,7 @@ const PostSearchResultsComponent: React.FC<QueryProps> = ({query}) => {
     
     const [page, setPage] = useState<number>(1)
     const [isLoading, setIsLoading] = useState(false)
-    const [postResults, setPostResults] = useState<Post[] | null>(null)
+    const [postResults, setPostResults] = useState<SearchPost[] | null>(null)
 
     useEffect(() => {
         fetchUsers(query)
@@ -26,7 +26,8 @@ const PostSearchResultsComponent: React.FC<QueryProps> = ({query}) => {
         headers
     })
     .then( res => {
-        setPostResults(res.data.response)
+      console.log(res.data)
+      setPostResults(res.data.response)
     }) 
     .catch( err => {
         // console.log(err)
@@ -35,12 +36,12 @@ const PostSearchResultsComponent: React.FC<QueryProps> = ({query}) => {
     }
 
 
-    const printPosts = (posts: Post[]) => {
+    const printPosts = (posts: SearchPost[]) => {
         return (
           <React.Fragment>
             {posts.map((post, idx) => {
             return(
-              <div key={post.post_id}>
+              <div key={post.id}>
                 <div className="">{post.post_content}</div>
               </div>
             )
@@ -52,8 +53,7 @@ const PostSearchResultsComponent: React.FC<QueryProps> = ({query}) => {
 
     return (
         <div className="">
-        Search for posts related to {query}:
-        <div className="">{postResults && printPosts(postResults)}</div>
+          <div className="">{postResults && printPosts(postResults)}</div>
         </div>
     )
 }

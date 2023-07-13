@@ -10,64 +10,42 @@ const SearchBar = () => {
   const queryParams = new URLSearchParams(search);
   const q = queryParams.get("q") ?? "";
 
-  const [query, setQuery] = useState(q);
+  const [query, setQuery] = useState<string>(q);
   const [searched, setSearched] = useState<boolean>(false)
   const [activeTab, setActiveTab] = useState<"posts" | "users">("users");
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const searchUrl = `${searchPath}?q=${encodeURIComponent(
-      query
-    )}&tab=${encodeURIComponent(activeTab)}`;
     setSearched(true)
-    if (activeTab === "users") {
-      // <UserResultsComponent query={query}/>
-    }
-  };
-
-  const searchWithTabSelect = (tab: string): void => {
-    const searchUrl = `${searchPath}?q=${encodeURIComponent(
-      query
-    )}&tab=${encodeURIComponent(tab)}`;
-    // navigate(searchUrl);
-  };
-
-  const handlePostsTabClick = (): void => {
-    setActiveTab("posts");
-    // searchWithTabSelect("films");
-  };
-
-  const handleUsersTabClick = (): void => {
-    setActiveTab("users");
-    // searchWithTabSelect("users");
   };
 
   return (
-    <div className="searchbar">
+    <div className="search-bar">
       <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
+          className="search-form-input"
         />
         <div className="tab-container">
           <div
             className={`tab ${activeTab === "posts" ? "active" : ""}`}
-            onClick={handlePostsTabClick}
+            onClick={() => setActiveTab("posts")}
           >
             Posts
           </div>
           <div
             className={`tab ${activeTab === "users" ? "active" : ""}`}
-            onClick={handleUsersTabClick}
+            onClick={() => setActiveTab("users")}
           >
             Users
           </div>
         </div>
-        <button type="submit">Search</button>
+        {/* <button type="submit">Search</button> */}
       </form>
-
+      <hr/>
 
       {searched 
       && 
@@ -75,6 +53,9 @@ const SearchBar = () => {
       && 
       <UserResultsComponent query={query}/>)
       || 
+      
+      searched 
+      &&
       (activeTab === 'posts'
       && 
       <PostSearchResultsComponent query={query}/>)

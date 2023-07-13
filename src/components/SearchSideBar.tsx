@@ -6,8 +6,12 @@ function SearchSidebar() {
 
     return (
         <div className="search-sidebar">
+            <div className="search-title-wrapper">
+                <div className="search-title">
+                    Search
+                </div>
+            </div>
             <SearchBar></SearchBar>
-            
         </div>
     )
 
