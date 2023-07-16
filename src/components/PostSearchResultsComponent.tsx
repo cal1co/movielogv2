@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { SearchPost } from '../types/PostTypes'
+
 type QueryProps = {
     query: string
 }

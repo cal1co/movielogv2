@@ -1,0 +1,14 @@
+.account-settings {
+    display:flex;
+    height:100vh;
+}
+
+.settings-options{
+    padding:15px;
+    min-width:320px;
+    border-right:var(--border);
+}
+
+.page-title {
+    margin-bottom:40px;
+}

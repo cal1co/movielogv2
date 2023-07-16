@@ -12,7 +12,7 @@ import { UserLogin } from './types/UserTypes';
 import { User } from './types/UserTypes';
 import PostRenderPage from './pages/PostRenderPage';
 import S3TestPage from './pages/S3TestPage';
-// import { LoginPageProps, SignupPageProps } from './types/FormTypes'
+import SettingPage from './pages/SettingPage';
 
 
 const Routes: React.FC = () => {
@@ -41,6 +41,7 @@ const Routes: React.FC = () => {
       <Route path="/m/entry" element={<EntryDisplayPage/>} />
       <Route path='*' element={<NotFoundPage />}/>
       <Route path="/test" element={<S3TestPage />}/>
+      <Route path="/accounts/settings" element={<SettingPage/>}/>
     </AppRoutes>
   );
 };

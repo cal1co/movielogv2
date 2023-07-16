@@ -5,6 +5,7 @@ import axios from "axios";
 import PostRender from "../components/PostRenderComponent";
 import { Post } from "../types/PostTypes";
 import { UserData } from "../types/UserTypes";
+import gear from '../../icons/gear-solid.svg'
 
 const token = localStorage.getItem("token");
 const headers = {
@@ -22,7 +23,7 @@ function UserPage() {
   useEffect(() => {
     if (username) {
       getUser(username);
-      document.title = username;
+      document.title = '@' + username;
     }
   }, [username]);
 
@@ -37,7 +38,7 @@ function UserPage() {
         setPosts(res.data.posts);
         setIsUser(res.data.same_user);
         setIsFollowing(res.data.following);
-        document.title = res.data.user.display_name;
+        document.title = res.data.user.display_name + ` (@${username})`;
         console.log(res.data);
       })
       .catch((err) => {
@@ -119,6 +120,9 @@ function UserPage() {
                         )}
                       </div>
                     )}
+                    <div className="settings-button">
+                          <img src={gear} alt="" />
+                    </div>
                   </div>
                 </div>
                 <div className="follow-data">
