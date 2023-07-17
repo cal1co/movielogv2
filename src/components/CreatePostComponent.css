@@ -1,4 +1,48 @@
 .CreatePost {
-    height:175px;
+    min-height:119px;
+    max-height:300px;
     border-bottom:var(--border);
+}
+.compose-post {
+    height:50px;
+    border:none;
+    border-bottom: var(--border);
+    padding: 10px;
+    border-radius:0px;
+    resize: none;
+    outline:none;
+    font-size:16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight:500;
+}
+.counter {
+    font-weight:600;
+    font-size:12px;
+    text-align:right;
+    width:80%;
+    height:40px;
+}
+.write-and-submit-wrapper, .counter {
+    width:80%;
+    position:relative;
+    left:50%;
+    transform:translateX(-50%);
+}
+.compose-wrapper {
+    padding-block:11px;
+}
+.write-and-submit-wrapper {
+    display:flex;
+    align-items:center;
+}
+.submit-post {
+    justify-content:center;
+    text-align:center;
+    width:75px;
+    border:var(--border);
+    border-radius:10px;
+    cursor:pointer;
+}
+.submit-post:hover {
+    opacity:50%;
 }

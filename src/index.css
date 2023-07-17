@@ -1,8 +1,8 @@
-/* @import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Poppins:ital,wght@0,500;1,400;1,500;1,700&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Poppins:ital,wght@0,500;1,400;1,500;1,700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap'); */
 
 :root {
-    /* font-family: 'Poppins', sans-serif; */
+    
     font-family: 'Hiragino Kaku Gothic ProN', "ヒラギノ角ゴ ProN W3", Meiryo, 'MS PGothic', Sans-serif;
     font-weight: 600;
     font-size: 16px;
@@ -15,6 +15,7 @@
     -webkit-text-size-adjust: 100%;
     --border: 2px solid black;
     --halfsize:1024px;
+    --font: 'Hiragino Kaku Gothic ProN', "ヒラギノ角ゴ ProN W3", Meiryo, 'MS PGothic', Sans-serif;
 }
 input {
     font-family: 'Hiragino Kaku Gothic ProN', "ヒラギノ角ゴ ProN W3", Meiryo, 'MS PGothic', Sans-serif;

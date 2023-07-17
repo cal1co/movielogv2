@@ -24,3 +24,8 @@ body {
     max-width: 768px;
     border-right: var(--border);
 }
+.location-title {
+    border-bottom:var(--border);
+    border-right: var(--border);
+    padding:15px;
+}
