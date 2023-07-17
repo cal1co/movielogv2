@@ -12,3 +12,9 @@
 .page-title {
     margin-bottom:40px;
 }
+
+@media (max-width:700px) {
+    .settings-options {
+        display:none;
+    }
+}

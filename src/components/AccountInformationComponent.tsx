@@ -1,7 +1,7 @@
 const AccountInformationComponent = () => {
     return ( 
         <div className="account-info-box">
-            (email, phone, account creation, country, bday, verification)
+            couldn't resolve request, please come back at another time 
         </div>
     )
 };

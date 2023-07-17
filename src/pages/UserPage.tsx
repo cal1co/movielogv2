@@ -5,7 +5,7 @@ import axios from "axios";
 import PostRender from "../components/PostRenderComponent";
 import { Post } from "../types/PostTypes";
 import { UserData } from "../types/UserTypes";
-import gear from '../../icons/gear-solid.svg'
+import gear from "../../icons/gear-solid.svg";
 
 const token = localStorage.getItem("token");
 const headers = {
@@ -23,7 +23,7 @@ function UserPage() {
   useEffect(() => {
     if (username) {
       getUser(username);
-      document.title = '@' + username;
+      document.title = "@" + username;
     }
   }, [username]);
 
@@ -53,8 +53,10 @@ function UserPage() {
         console.log(res.data);
         setIsFollowing(true);
         if (user) {
-          user.follow_data.follower_count = Number(user.follow_data.follower_count);
-          user.follow_data.follower_count += 1
+          user.follow_data.follower_count = Number(
+            user.follow_data.follower_count
+          );
+          user.follow_data.follower_count += 1;
         }
       })
       .catch((err) => {
@@ -68,7 +70,9 @@ function UserPage() {
         console.log(res.data);
         setIsFollowing(false);
         if (user) {
-          user.follow_data.follower_count = Number(user.follow_data.follower_count);
+          user.follow_data.follower_count = Number(
+            user.follow_data.follower_count
+          );
           user.follow_data.follower_count -= 1;
         }
       })
@@ -106,23 +110,31 @@ function UserPage() {
                   <div className="head-username">{user.username}</div>
                   <div className="utils">
                     {isUser ? (
-                      <div className="user-settings">settings</div>
+                      <div className="user-settings">
+                        settings
+                        <div className="settings-button">
+                          <img src={gear} alt="" />
+                        </div>
+                      </div>
                     ) : (
                       <div className="follow-button">
                         {isFollowing ? (
-                          <div className="unfollow-user" onClick={() => unfollow(user.id)}>
+                          <div
+                            className="unfollow-user"
+                            onClick={() => unfollow(user.id)}
+                          >
                             unfollow
                           </div>
                         ) : (
-                          <div className="follow-user" onClick={() => follow(user.id)}>
+                          <div
+                            className="follow-user"
+                            onClick={() => follow(user.id)}
+                          >
                             follow
                           </div>
                         )}
                       </div>
                     )}
-                    <div className="settings-button">
-                          <img src={gear} alt="" />
-                    </div>
                   </div>
                 </div>
                 <div className="follow-data">
