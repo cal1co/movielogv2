@@ -4,12 +4,12 @@ import "./PostRenderComponent.css";
 import axios from "axios";
 import CommentModal from "./CommentModal";
 import { useNavigate } from "react-router-dom";
-import Like from "../../icons/heart-regular.svg";
-import Unlike from "../../icons/heart-solid.svg";
-import Comment from "../../icons/comment-regular.svg";
-import elipsis from "../../icons/ellipsis-solid.svg";
-import share from "../../icons/paper-plane-regular.svg";
-import save from "../../icons/bookmark-regular.svg";
+import { ReactComponent as Like } from "../../icons/heart-regular.svg";
+import { ReactComponent as Unlike } from "../../icons/heart-solid.svg";
+import { ReactComponent as Comment} from "../../icons/comment-regular.svg";
+import { ReactComponent as Ellipsis } from "../../icons/ellipsis-regular.svg";
+import { ReactComponent as Share } from "../../icons/paper-plane-regular.svg";
+import { ReactComponent as Save } from "../../icons/bookmark-regular.svg";
 
 type QueryProps = {
   post: Post;
@@ -137,11 +137,12 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
         </div>
         <div className="post-info">
           <div className="created-date">{postAge(post.created_at)}</div>
-          <img
-            src={elipsis}
-            alt="three dots elipsis post settings button"
-            className="elipsis"
-          />
+          <Ellipsis className="ellipsis"/>
+          {/* <img
+            src={ellipsis}
+            alt="three dots ellipsis post settings button"
+            className="ellipsis"
+          /> */}
         </div>
       </div>
       <div className="content-wrapper">
@@ -152,26 +153,26 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
         <div className="action-info">
           <div className="action-count"></div>
           {postLiked ? (
-            <div className="like-button post-action-button" onClick={handleUnlike}>
-              <img src={Unlike} alt="" />
+            <div className="like-button post-action-button liked" onClick={handleUnlike}>
+              <Unlike/>
             </div>
           ) : (
-            <div className="like-button post-action-button" onClick={handleLike}>
-              <img src={Like} alt="like" />
+            <div className="like-button post-action-button unliked" onClick={handleLike}>
+              <Like />
             </div>
           )}
-          <div className="count">{postLikes || 0}</div>
+          <div className={postLiked ? "count like-count liked-count" : "count like-count unliked-count"}>{postLikes || 0}</div>
           <div className="action-count"></div>
           <div className="comment-button post-action-button" onClick={handleOpenCommentModal}>
-            <img src={Comment} alt="" />
+            <Comment/>
           </div>
           <div className="count">{postComments || 0}</div>
           <div className="share-button post-action-button">
-            <img src={share} alt="" />
+            <Share/>
           </div>
 
           <div className="save-button post-action-button">
-            <img src={save} alt="save button bookmark" />
+            <Save />
           </div>
         </div>
       </div>

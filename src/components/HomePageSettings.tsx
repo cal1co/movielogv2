@@ -31,6 +31,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
 
   useEffect(() => {
     setSelected(currLocation);
+    console.log(currLocation);
   }, [currLocation]);
 
   const toggleSidebar = () => {
@@ -48,6 +49,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
   const handleSelect = (location:string):void => {
     navigate(location)
     setSidebarOpen(false)
+    setSelected(currLocation)
   }
 
   return (

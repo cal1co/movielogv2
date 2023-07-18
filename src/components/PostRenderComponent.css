@@ -94,6 +94,9 @@
   border:var(--border);
   padding:10px;
 }
+.post-content:hover {
+  cursor:pointer;
+}
 .post-content-shadow {
   position:relative;
   z-index:-1;
@@ -101,9 +104,7 @@
   top:-70px;
   left:10px;
 }
-.post:hover{
-  cursor:pointer;
-}
+
 
 
 .content-wrapper{
@@ -138,12 +139,8 @@
 .comment-button:hover,
 .share-button:hover,
 .settings-button:hover, .save-button:hover {
-  outline:2px solid rgba(0, 0, 0, 0.455);
-  border-radius:100px;
-}
-.elipsis {
-  width:25px;
-  margin-left:20px;
+  /* outline:2px solid rgba(0, 0, 0, 0.455);
+  border-radius:100px; */
 }
 
 .post-info {
@@ -168,4 +165,59 @@
   cursor:pointer;
   text-decoration:underline;
   text-decoration-thickness:2px;
+}
+.ellipsis {
+  width:25px;
+  height:25px;
+  margin-left:20px;
+  padding:3px;
+  /* transition: background-color 0.2s ease, fill 1s, ease; */
+  /* border-radius:30px; */
+}
+.ellipsis:hover {
+  cursor:pointer;
+  background:rgba(0, 186, 124, 0.1);
+  fill:rgba(0, 186, 124, 1);
+  /* opacity:50%; */
+}
+.post-action-button, .ellipsis {
+  display:flex;
+  
+  justify-content:center;
+  align-items:center;
+  border-radius:30px;
+  transition: background-color 0.2s ease-in-out, fill 0.2s ease;
+}
+.post-action-button > svg {
+  height:25px;
+  width:25px;
+}
+.save-button:hover {
+  background:rgba(10,158,199,0.1);
+  fill:rgba(10,158,199,1);
+}
+.unliked:hover{
+  background: rgba(249, 24, 128, 0.1);
+  fill:rgba(249, 24, 128, 1);
+}
+.liked:hover {
+  background: rgba(249, 24, 128, 0.1);
+}
+.liked {
+  fill:rgba(249, 24, 128, 1);
+}
+.unliked:hover ~ .like-count, .liked-count, .unliked:hover{
+  color:rgba(249, 24, 128, 1);
+}
+
+.post-action-button:active > svg{
+  height:23px;
+  width:23px;
+}
+.count {
+  cursor:default;
+}
+.comment-button:hover, .share-button:hover {
+  background: rgba(86, 81, 83, 0.1);
+  fill:rgba(86, 81, 83, 1);
 }
