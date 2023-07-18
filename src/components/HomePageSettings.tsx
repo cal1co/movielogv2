@@ -1,67 +1,136 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./HomePageSettings.css";
 import yuzu from "../../icons/lemon-regular.svg";
-import home from "../../icons/house-chimney-window-solid.svg";
-import search from "../../icons/magnifying-glass-solid.svg";
-import notifications from "../../icons/bell-regular.svg";
-import bookmark from "../../icons/book-bookmark-solid.svg";
+import home from "../../icons/house-chimney-window-regular.svg";
+import homeSelected from "../../icons/house-chimney-window-solid.svg";
+import search from "../../icons/magnifying-glass-regular.svg";
+import searchSelected from "../../icons/magnifying-glass-solid.svg";
+import notifications from "../../icons/mailbox-regular.svg";
+import notificationsSelected from "../../icons/mailbox-solid.svg";
+import bookmark from "../../icons/book-bookmark-regular.svg";
+import bookmarkSelected from "../../icons/book-bookmark-solid.svg";
 import dms from "../../icons/comment-regular.svg";
 import user from "../../icons/user-regular.svg";
-import hamburger from "../../icons/bars-solid.svg";
+import hamburger from "../../icons/bars-regular.svg";
+import hamburgerSelected from "../../icons/bars-regular-solid.svg";
 import { useNavigate } from "react-router-dom";
 
-import SearchSidebar from './SearchSideBar'
+import SearchSidebar from "./SearchSideBar";
 
-function HomePageSettings() {
+interface ChildComponentProps {
+  currLocation: string;
+}
+
+const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
   const navigate = useNavigate();
 
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string>("");
+  const [selectedBeforeSearch, setSelectedBeforeSearch] = useState<string>("");
+  const [searchOpen, setSearchOpen] = useState<boolean>(false)
+
+  useEffect(() => {
+    setSelected(currLocation);
+  }, [currLocation]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+    if (selected !== "Search") {
+      setSelectedBeforeSearch(selected);
+      setSelected("Search");
+      setSearchOpen(true)
+    } else {
+      setSearchOpen(false)
+      setSelected(selectedBeforeSearch);
+    }
+  };
+
+  const handleSelect = (location:string):void => {
+    navigate(location)
+    setSidebarOpen(false)
   }
+
   return (
     <div className="HomePageSettings">
       <div className="settings-wrapper">
-        <div className="yuzu" onClick={() => navigate("/")}>
+        <div className="yuzu" onClick={() => handleSelect("/")}>
           <div className="setting-option">
             <img src={yuzu} alt="yuzu icon lemon" className="yuzu-icon icon" />
             <div className="icon-description yuzu-logo">YUZU</div>
           </div>
         </div>
 
-        <div className="home" onClick={() => navigate("/")}>
+        <div className="home" onClick={() => handleSelect("/")}>
           <div className="setting-option">
-            <img src={home} alt="home icon house" className="home-icon icon" />
+            {selected === "Home" ? (
+              <img
+                src={homeSelected}
+                alt="home icon house"
+                className="home-icon icon"
+              />
+            ) : (
+              <img
+                src={home}
+                alt="home icon house"
+                className="home-icon icon"
+              />
+            )}
             <div className="icon-description">home</div>
           </div>
         </div>
-        <div className="search" onClick={toggleSidebar}> 
+        <div className="search" onClick={toggleSidebar}>
           <div className="setting-option">
-            <img
-              src={search}
-              alt="search icon magnifying glass"
-              className="search-icon icon"
-            />
+            {selected === "Search" && sidebarOpen ? (
+              <img
+                src={searchSelected}
+                alt="search icon magnifying glass"
+                className="search-icon icon"
+              />
+            ) : (
+              <img
+                src={search}
+                alt="search icon magnifying glass"
+                className="search-icon icon"
+              />
+            )}
             <div className="icon-description">search</div>
           </div>
         </div>
-        <div className="notifications" onClick={() => navigate('/notifications')}>
+        <div
+          className="notifications"
+          onClick={() => handleSelect("/notifications")}
+        >
           <div className="setting-option">
-            <img
-              src={notifications}
-              alt="notification icon bell"
-              className="notifications-icon icon"
-            />
+            {selected === "Notifications" ? (
+              <img
+                src={notificationsSelected}
+                alt="notification icon bell"
+                className="notifications-icon icon"
+              />
+            ) : (
+              <img
+                src={notifications}
+                alt="notification icon bell"
+                className="notifications-icon icon"
+              />
+            )}
             <div className="icon-description">notifications</div>
           </div>
         </div>
         <div className="bookmarks setting-option">
-          <img
-            src={bookmark}
-            alt="bookmarks icon book"
-            className="bookmarks-icon icon"
-          />
+          {selected === "Bookmarks" ? (
+            <img
+              src={bookmarkSelected}
+              alt="bookmarks icon book"
+              className="bookmarks-icon icon"
+            />
+          ) : (
+            <img
+              src={bookmark}
+              alt="bookmarks icon book"
+              className="bookmarks-icon icon"
+            />
+          )}
           <div className="icon-description">bookmarks</div>
         </div>
         <div className="direct-messages setting-option">
@@ -90,11 +159,11 @@ function HomePageSettings() {
           </div>
         </div>
       </div>
-          <div className={`search-wrapper ${sidebarOpen ? 'open' : 'hidden'}`} >
-              <SearchSidebar/>
-          </div>
+      <div className={`search-wrapper ${sidebarOpen ? "open" : "hidden"}`}>
+        <SearchSidebar />
+      </div>
     </div>
   );
-}
+};
 
 export default HomePageSettings;

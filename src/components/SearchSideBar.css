@@ -3,7 +3,8 @@
   width: 256px;
   height: 100%;
   background-color: white;
-  outline: var(--border)
+  outline: var(--border);
+  z-index:2;
   /* margin:20px; */
 }
 .search-sidebar > div {

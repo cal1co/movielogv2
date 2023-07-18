@@ -14,7 +14,7 @@
     flex-grow:1;
     height:100%;
     border-right:2px solid black;
-    z-index:2;
+    z-index:3;
     background:white;
 }
 .settings-wrapper div:last-child {
@@ -38,6 +38,7 @@
 }
 .icon{
     width:25px;
+    height:25px;
     margin:5px;
     padding:5px;
 }
@@ -67,6 +68,9 @@
 }
 .setting-option {
     width:fit-content;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 .yuzu-logo {
     max-width:fit-content;

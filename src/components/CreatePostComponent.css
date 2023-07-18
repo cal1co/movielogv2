@@ -2,6 +2,8 @@
     min-height:119px;
     max-height:300px;
     border-bottom:var(--border);
+    display:flex;
+    align-items:center;
 }
 .compose-post {
     height:50px;
@@ -29,7 +31,7 @@
     transform:translateX(-50%);
 }
 .compose-wrapper {
-    padding-block:11px;
+    width:100%;
 }
 .write-and-submit-wrapper {
     display:flex;

@@ -100,7 +100,6 @@ function UserPage() {
       <div className="profile">
         {user && (
           <div className="user-display">
-            <div className="username">{user.username}'s profile</div>
             <div className="profile-page-wrapper">
               <div className="profile-img">
                 <img src={user.profile_image} alt="" className="profile-img" />

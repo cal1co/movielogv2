@@ -2,7 +2,7 @@ import "./App.css";
 import Routes from "./routes";
 import HomePageSettings from "./components/HomePageSettings";
 import { useLocation } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const [currLocation, setCurrLocation] = useState<string>("home");
@@ -22,6 +22,8 @@ function App() {
         return 'User Results';
       case '/test':
         return 'S3 Test';
+      case '/notifications':
+        return 'Notifications';
       case '/accounts/settings':
         return 'Settings';
         default:
@@ -33,13 +35,19 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    const title = getPageTitle();
+    setCurrLocation(title);
+  }, [location]);
+
+
   return (
     <div className="App">
       <div className="settings">
-        <HomePageSettings />
+        <HomePageSettings currLocation={currLocation}/>
       </div>
       <div className="content-side">
-        <div className="location-title">{getPageTitle()}</div>
+        <div className="location-title">{currLocation}</div>
         <Routes />
       </div>
     </div>

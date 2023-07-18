@@ -25,7 +25,12 @@ body {
     border-right: var(--border);
 }
 .location-title {
-    border-bottom:var(--border);
-    border-right: var(--border);
+    /* position:sticky; */
+    top:0;
+    border:var(--border);
+    border-top:none;
     padding:15px;
+    background:white;
+    opacity:90%;
+    z-index:1;
 }
