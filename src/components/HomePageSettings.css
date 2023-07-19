@@ -22,6 +22,7 @@
 }
 .setting-option:hover {
     cursor:pointer;
+    background:rgb(240, 240, 240);
 }
 
 .settings-wrapper div {
@@ -33,7 +34,7 @@
     height:56px;
     width:inherit;
 }
-.settings-wrapper > div {
+.setting-option {
     border-bottom: var(--border);
 }
 .icon{
@@ -117,3 +118,12 @@
     transition: left 0.3s ease-in-out;
 }
 
+.options-button-hamburger{
+    outline:none;
+}
+.yuzu > div {
+    border:none;
+}
+.yuzu {
+    border-bottom:var(--border)
+}

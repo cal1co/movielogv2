@@ -13,7 +13,7 @@ import dms from "../../icons/comment-regular.svg";
 import user from "../../icons/user-regular.svg";
 import hamburger from "../../icons/bars-regular.svg";
 import hamburgerSelected from "../../icons/bars-regular-solid.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import SearchSidebar from "./SearchSideBar";
 
@@ -28,6 +28,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
   const [selected, setSelected] = useState<string>("");
   const [selectedBeforeSearch, setSelectedBeforeSearch] = useState<string>("");
   const [searchOpen, setSearchOpen] = useState<boolean>(false)
+  const location = useLocation();
 
   useEffect(() => {
     setSelected(currLocation);
@@ -46,10 +47,13 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
     }
   };
 
-  const handleSelect = (location:string):void => {
-    navigate(location)
+  const handleSelect = (targetLocation:string):void => {
     setSidebarOpen(false)
-    setSelected(currLocation)
+    if (targetLocation === location.pathname) {
+      setSelected(currLocation)
+      return
+    } 
+    navigate(targetLocation)
   }
 
   return (
@@ -62,7 +66,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
           </div>
         </div>
 
-        <div className="home" onClick={() => handleSelect("/")}>
+        <div className="home setting-option" onClick={() => handleSelect("/")}>
           <div className="setting-option">
             {selected === "Home" ? (
               <img
@@ -80,7 +84,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
             <div className="icon-description">home</div>
           </div>
         </div>
-        <div className="search" onClick={toggleSidebar}>
+        <div className="search setting-option" onClick={toggleSidebar}>
           <div className="setting-option">
             {selected === "Search" && sidebarOpen ? (
               <img
@@ -99,7 +103,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
           </div>
         </div>
         <div
-          className="notifications"
+          className="notifications setting-option"
           onClick={() => handleSelect("/notifications")}
         >
           <div className="setting-option">
@@ -151,7 +155,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
         </div>
 
         <div className="more">
-          <div className="setting-option">
+          <div className="setting-option options-button-hamburger">
             <img
               src={hamburger}
               alt="more icon three stacked lines"

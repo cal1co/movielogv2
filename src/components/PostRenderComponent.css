@@ -134,15 +134,6 @@
   display:flex;
   position:relative;
 }
-
-.like-button:hover,
-.comment-button:hover,
-.share-button:hover,
-.settings-button:hover, .save-button:hover {
-  /* outline:2px solid rgba(0, 0, 0, 0.455);
-  border-radius:100px; */
-}
-
 .post-info {
   position:relative;
   top:-10px;
