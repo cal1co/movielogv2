@@ -1,4 +1,4 @@
-## YuzuNet
+## Yuzu
 
 ***Yuzu*** is a social media platform that focuses on creating communities around all kinds of things. Users can post, like, comment, share photos, and video. They can also create open and closed groups to build their own communities. The platform has integration with movie and book APIs for users to review and share posts about their favourite stories, authors, directors, actors, and more.
 
@@ -13,20 +13,25 @@ The platform is built using several technologies:
 * Search: Elasticsearch
 * Message Queue: Kafka
 
-## Frontend
+## [Frontend](https://github.com/cal1co/yuzu)
 
 - The frontend is built using TypeScript and React. It allows users to sign up, log in, and interact with the platform by creating posts, commenting, liking, sharing, and searching for other users and posts. The interface is responsive and user-friendly.
 
-## Post Service
+## [Post Service](https://github.com/cal1co/yuzu-posthandler)
 
 - The post service is written in Go. It is responsible for handling all post-related operations, including creating, updating, and deleting posts, as well as handling likes, comments, and sharing. It interacts with the Cassandra database to store and retrieve post data, and uses Redis as a cache to speed up post ranking and data retrieval.
 
-## Feed Service
+## [Feed Service](https://github.com/cal1co/yuzu-feed)
 
 - The feed service is written in Go. It is responsible for creating, reading, updating, and deleting feeds for users. It interacts with Cassandra and Kafka to fetch posts and sorted and stored with Redis. 
 - When a user follows another user, their posts are added to their feed. Posts are removed on unfollow
 - When a user connects to the home page, a websocket connection is created which connects to the Kafka queue. When posts are added to a users feed, a notification is shown
 - Active users get fanout on post, inactive users get fanout on read. This reduces loads for the servers by prioritising users that use the application more often 
+
+## [User Service](https://github.com/cal1co/yuzu-login)
+
+- The user service is written in Node. It is responsible for user profile related operations. It interacts with PostgreSQL to store user information and S3 to store user profile images.
+
 
 ## Data Storage
 
