@@ -30,7 +30,7 @@ body {
     border:var(--border);
     border-top:none;
     padding:15px;
-    background:white;
+    background:var(--background-colour);
     opacity:90%;
     z-index:1;
 }

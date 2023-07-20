@@ -42,6 +42,7 @@ const Routes: React.FC = () => {
       <Route path='*' element={<NotFoundPage />}/>
       <Route path="/test" element={<S3TestPage />}/>
       <Route path="/accounts/settings" element={<SettingPage/>}/>
+      <Route path="/s3test" element={<S3TestPage/>}/>
     </AppRoutes>
   );
 };

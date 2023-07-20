@@ -6,5 +6,5 @@
 .feed-side {
     flex: 1;
     max-width: 768px;
-    border-right: 2px solid black;
+    border-right: var(--border);
 }

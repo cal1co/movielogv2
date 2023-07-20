@@ -58,7 +58,6 @@ const ProfileEditComponent = () => {
   };
 
   const handleImageUpload = async (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("uploading image")
     const selectedFile = event.target.files?.[0];
     if (selectedFile !== undefined) {
         setFile(selectedFile)

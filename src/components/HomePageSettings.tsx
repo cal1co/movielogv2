@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./HomePageSettings.css";
-import yuzu from "../../icons/lemon-regular.svg";
-import home from "../../icons/house-chimney-window-regular.svg";
-import homeSelected from "../../icons/house-chimney-window-solid.svg";
-import search from "../../icons/magnifying-glass-regular.svg";
-import searchSelected from "../../icons/magnifying-glass-solid.svg";
-import notifications from "../../icons/mailbox-regular.svg";
-import notificationsSelected from "../../icons/mailbox-solid.svg";
-import bookmark from "../../icons/book-bookmark-regular.svg";
-import bookmarkSelected from "../../icons/book-bookmark-solid.svg";
-import dms from "../../icons/comment-regular.svg";
-import user from "../../icons/user-regular.svg";
-import hamburger from "../../icons/bars-regular.svg";
-import hamburgerSelected from "../../icons/bars-regular-solid.svg";
+import {ReactComponent as Yuzu} from "../../icons/lemon-regular.svg";
+import {ReactComponent as Home} from "../../icons/house-chimney-window-regular.svg";
+import {ReactComponent as HomeSelected} from "../../icons/house-chimney-window-solid.svg";
+import {ReactComponent as Search} from "../../icons/magnifying-glass-regular.svg";
+import {ReactComponent as SearchSelected} from "../../icons/magnifying-glass-solid.svg";
+import {ReactComponent as Notifications} from "../../icons/mailbox-regular.svg";
+import {ReactComponent as NotificationsSelected} from "../../icons/mailbox-solid.svg";
+import {ReactComponent as Bookmark} from "../../icons/book-bookmark-regular.svg";
+import {ReactComponent as BookmarkSelected} from "../../icons/book-bookmark-solid.svg";
+import {ReactComponent as Dms} from "../../icons/comment-regular.svg";
+import {ReactComponent as User} from "../../icons/user-regular.svg";
+import {ReactComponent as Hamburger} from "../../icons/bars-regular.svg";
+import {ReactComponent as HamburgerSelected} from "../../icons/bars-regular-solid.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import SearchSidebar from "./SearchSideBar";
@@ -32,7 +32,6 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
 
   useEffect(() => {
     setSelected(currLocation);
-    console.log(currLocation);
   }, [currLocation]);
 
   const toggleSidebar = () => {
@@ -61,7 +60,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
       <div className="settings-wrapper">
         <div className="yuzu" onClick={() => handleSelect("/")}>
           <div className="setting-option">
-            <img src={yuzu} alt="yuzu icon lemon" className="yuzu-icon icon" />
+            <Yuzu className="yuzu-icon icon"/>
             <div className="icon-description yuzu-logo">YUZU</div>
           </div>
         </div>
@@ -69,17 +68,10 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
         <div className="home setting-option" onClick={() => handleSelect("/")}>
           <div className="setting-option">
             {selected === "Home" ? (
-              <img
-                src={homeSelected}
-                alt="home icon house"
-                className="home-icon icon"
-              />
+              <HomeSelected className="home-icon icon"/>
+              
             ) : (
-              <img
-                src={home}
-                alt="home icon house"
-                className="home-icon icon"
-              />
+              <Home className="home-icon icon"/>
             )}
             <div className="icon-description">home</div>
           </div>
@@ -87,17 +79,9 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
         <div className="search setting-option" onClick={toggleSidebar}>
           <div className="setting-option">
             {selected === "Search" && sidebarOpen ? (
-              <img
-                src={searchSelected}
-                alt="search icon magnifying glass"
-                className="search-icon icon"
-              />
+              <SearchSelected className="search-icon icon"/>
             ) : (
-              <img
-                src={search}
-                alt="search icon magnifying glass"
-                className="search-icon icon"
-              />
+              <Search className="search-icon icon"/>
             )}
             <div className="icon-description">search</div>
           </div>
@@ -108,59 +92,36 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
         >
           <div className="setting-option">
             {selected === "Notifications" ? (
-              <img
-                src={notificationsSelected}
-                alt="notification icon bell"
-                className="notifications-icon icon"
-              />
+              <NotificationsSelected className="notifications-icon icon"/>
             ) : (
-              <img
-                src={notifications}
-                alt="notification icon bell"
-                className="notifications-icon icon"
-              />
+              <Notifications className="notifications-icon icon"/>
             )}
             <div className="icon-description">notifications</div>
           </div>
         </div>
         <div className="bookmarks setting-option">
           {selected === "Bookmarks" ? (
-            <img
-              src={bookmarkSelected}
-              alt="bookmarks icon book"
-              className="bookmarks-icon icon"
-            />
+            <BookmarkSelected className="bookmarks-icon icon"/>
+
           ) : (
-            <img
-              src={bookmark}
-              alt="bookmarks icon book"
-              className="bookmarks-icon icon"
-            />
+            <Bookmark className="bookmarks-icon icon"/>
           )}
           <div className="icon-description">bookmarks</div>
         </div>
         <div className="direct-messages setting-option">
-          <img
-            src={dms}
-            alt="direct message message bubbles"
-            className="dms-icon icon"
-          />
+          <Dms className="dms-icon icon"/>
           <div className="icon-description">direct messages</div>
         </div>
         <div className="profile">
           <div className="setting-option">
-            <img src={user} alt="user icon person" className="user-icon icon" />
+            <User className="user-icon icon"/>
             <div className="icon-description">profile</div>
           </div>
         </div>
 
         <div className="more">
           <div className="setting-option options-button-hamburger">
-            <img
-              src={hamburger}
-              alt="more icon three stacked lines"
-              className="more-icon icon"
-            />
+            <Hamburger className="more-icon icon"/>
             <div className="icon-description">more</div>
           </div>
         </div>

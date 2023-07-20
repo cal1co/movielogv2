@@ -3,20 +3,49 @@
 
 :root {
     
-    font-family: 'Hiragino Kaku Gothic ProN', "ヒラギノ角ゴ ProN W3", Meiryo, 'MS PGothic', Sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    height:auto;
-    /* color-scheme: light dark; */
+    /* --background-colour:#f7f8fc; */
+    --background-colour-light:white;
+    --background-colour-dark:black;
+    --icon-fill-colour-light:black;
+    --icon-fill-colour-dark:white;
+    --colour-light: black;
+    --colour-dark: white;
+    /* color-scheme: dark; */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
-    --border: 2px solid black;
+    --border: 2px solid rgb(66, 66, 66);
     --halfsize:1024px;
     --font: 'Hiragino Kaku Gothic ProN', "ヒラギノ角ゴ ProN W3", Meiryo, 'MS PGothic', Sans-serif;
+    /* background:var(--background-colour); */
+    font-size: 16px;
+    line-height: 24px;
+    height:auto;
+    font-family: 'Hiragino Kaku Gothic ProN', "ヒラギノ角ゴ ProN W3", Meiryo, 'MS PGothic', Sans-serif;
+    font-weight: 600;
 }
+body.light{
+    --background-colour:var(--background-colour-light);
+    background: var(--background-colour-light);
+    --icon-fill: var(--icon-fill-colour-light);
+    color: var(--colour-light);
+    --shadow-colour:#D9D9D9;
+    --post-border:2px solid black;
+    --post-background-colour:white;
+
+}
+body.dark{
+    --background-colour:var(--background-colour-dark);
+    background: var(--background-colour-dark);
+    --icon-fill: var(--icon-fill-colour-dark);
+    color: rgb(231, 233, 234);
+    --shadow-colour:rgba(255, 255, 255, 0.2);
+    --post-border:2px solid rgb(190, 186, 186);
+    --post-background-colour:rgb(0, 0, 0);
+}
+
+
 input {
     font-family: 'Hiragino Kaku Gothic ProN', "ヒラギノ角ゴ ProN W3", Meiryo, 'MS PGothic', Sans-serif;
     font-weight: 600;

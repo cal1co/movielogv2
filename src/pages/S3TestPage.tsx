@@ -7,27 +7,34 @@ const S3TestPage = () => {
   const [blob, setBlobData] = useState<Blob | null>(null)
   const [query, setQuery] = useState<string>("");
   const [queryTwo, setQueryTwo] = useState<string>("");
+  const [profileMedia, setProfileMedia] = useState("")
 
   const handleDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
 
-    const droppedFile = event.dataTransfer.files[0];
-    setFile(droppedFile);
+    const selectedFile = event.dataTransfer.files[0];
+    setFile(selectedFile);
 
-    const reader = new FileReader();
-    reader.onload = async (event:ProgressEvent<FileReader>) => {
+    if (selectedFile) {
+      setFile(selectedFile);
+  
+      const reader = new FileReader();
+      reader.onload = async (event: ProgressEvent<FileReader>) => {
         if (event.target) {
-            
-            if (event.target.result !== null) {
-                const arrayBuffer = event.target.result;
-                const blobData = new Blob([arrayBuffer], { type: droppedFile.type });
-                setBlobData(blobData)
-            }
+          const base64Data = reader.result as string;
+          setProfileMedia(base64Data);
+          console.log(base64Data);
+          const arrayBuffer = event.target.result as ArrayBuffer;
+          const blobData = new Blob([arrayBuffer], { type: selectedFile.type });
+          setBlobData(blobData);
         }
-        const base64Data = event.target?.result?.toString()?.split(',')[1];
-        setImageUrl("data:image/jpeg;base64," + base64Data)
+      };
+      reader.onerror = (error) => {
+        console.error('File reading error:', error);
+      };
+      reader.readAsDataURL(selectedFile);
     }
-    reader.readAsDataURL(droppedFile);
+    // setDisabled(false);
   };
 
   const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
@@ -52,10 +59,10 @@ const S3TestPage = () => {
         return
     }
     const formData = new FormData();
-    formData.append("content", file, "28");
+    formData.append("content", file, "video-test-1");
     console.log(formData.get("content"))
     await axios
-    .post("http://localhost:3000/api/auth/user/s3image/upload", formData, {
+    .post("http://localhost:3000/api/auth/s3video", formData, {
         headers: {
             "content-type": "multipart/form-data",
         }

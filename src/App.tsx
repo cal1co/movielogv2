@@ -42,7 +42,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="App dark">
       <div className="settings">
         <HomePageSettings currLocation={currLocation}/>
       </div>
