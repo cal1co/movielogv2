@@ -22,10 +22,10 @@
     font-weight:600;
     font-size:12px;
     text-align:right;
-    width:80%;
+    width:100%;
     height:40px;
 }
-.write-and-submit-wrapper, .counter {
+.write-and-submit-wrapper {
     width:80%;
     position:relative;
     left:50%;
@@ -48,4 +48,17 @@
 }
 .submit-post:hover {
     opacity:50%;
+}
+
+.utils {
+    border:1px solid red;
+    display:flex;
+    width:80%;
+    position:relative;
+    left:50%;
+    transform:translateX(-50%);
+}
+.post-compose-icon {
+    width:20px;
+    height:20px;
 }

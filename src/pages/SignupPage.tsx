@@ -1,70 +1,109 @@
 // import './SignupPage.css'
-import React, { useState } from 'react';
-import { User } from '../types/UserTypes'
-import { SignupPageProps } from '../types/FormTypes'
+import React, { useState } from "react";
+import { User } from "../types/UserTypes";
+import { SignupPageProps } from "../types/FormTypes";
+import axios from "axios";
+import "./LoginPage.css";
+import { ReactComponent as PasswordEye } from "../../icons/eye-regular.svg";
+import { ReactComponent as PasswordEyeSlashed } from "../../icons/eye-slash-regular.svg";
 
-
-function SignupPage({handleSubmit}: SignupPageProps) {
+function SignupPage({ handleSubmit }: SignupPageProps) {
   const [user, setUser] = useState<User>({
-    username: '',
-    email: '',
-    password: '',
+    username: "",
+    email: "",
+    password: "",
   });
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [passFieldType, setPassFieldType] = useState<"password" | "text">("password")
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  const togglePassVisibility = () => {
+    if (passFieldType === "password") {
+      setPassFieldType("text");
+    } else {
+      setPassFieldType("password");
+    }
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleFormSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-    handleSubmit(user)
-    // Check if username is unique
-    // If not, display error message
-    // Otherwise, submit form data
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/register",
+        user
+      );
+
+      localStorage.setItem("token", response.data.token);
+      window.location.href = "/";
+    } catch (error) {
+      setErrorMessage("" + error);
+    }
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={user.username}
-          onChange={handleInputChange}
-        />
+    <div className="login-signup">
+      <div className="signup-form">
+        <div className="form-content">
+          <form onSubmit={handleFormSubmit}>
+            <div>
+              <input
+                // type="text"
+                placeholder="username"
+                id="username"
+                className="login-input top-input"
+                name="username"
+                maxLength={15}
+                minLength={3}
+                value={user.username}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <input
+                className="login-input"
+                placeholder="email"
+                type="email"
+                id="email"
+                name="email"
+                value={user.email}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="password-input">
+              <input
+                className="login-input bottom-input show-password"
+                placeholder="password"
+                type={passFieldType}
+                id="password passwordField"
+                name="password"
+                value={user.password}
+                onChange={handleInputChange}
+              />
+              <div className="eye-icon" onClick={togglePassVisibility}>
+                {passFieldType === "password" ?
+                <PasswordEye />
+                :
+                <PasswordEyeSlashed/>
+                }
+              </div>
+            </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <button type="submit" className="login-signup-submit">
+              Sign up
+            </button>
+          </form>
+        </div>
       </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={user.email}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={user.password}
-          onChange={handleInputChange}
-        />
-      </div>
-      {errorMessage && <p>{errorMessage}</p>}
-      <button type="submit">Sign up</button>
-    </form>
+    </div>
   );
-};
+}
 
-export default SignupPage
+export default SignupPage;

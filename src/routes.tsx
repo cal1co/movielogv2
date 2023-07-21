@@ -13,6 +13,8 @@ import { User } from './types/UserTypes';
 import PostRenderPage from './pages/PostRenderPage';
 import S3TestPage from './pages/S3TestPage';
 import SettingPage from './pages/SettingPage';
+import HomePageSettings from "./components/HomePageSettings";
+
 
 
 const Routes: React.FC = () => {

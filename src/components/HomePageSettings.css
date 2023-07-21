@@ -22,7 +22,8 @@
 }
 .setting-option:hover {
     cursor:pointer;
-    background:rgb(240, 240, 240);
+    background:rgba(240, 240, 240, 0.2);
+    border-radius:10px;
 }
 
 .settings-wrapper div {
@@ -34,13 +35,12 @@
     height:56px;
     width:inherit;
 }
-.setting-option {
-    border-bottom: var(--border);
-}
+
 .icon{
     width:25px;
     height:25px;
     margin:5px;
+    /* margin-right:8px; */
     padding:5px;
     fill:var(--icon-fill);
 }
@@ -48,10 +48,9 @@
 @media (max-width: 1024px) {
     .icon-description {
         display:none !important;
-        outline:1px solid red;
     }
     .HomePageSettings, .settings-wrapper{
-        width:50px;
+        width:56px;
     }
 }
 .yuzu {
@@ -65,8 +64,11 @@
 
     /* display:flex; */
 }
+
 .icon-description {
-    width:fit-content
+    width:fit-content;
+    max-height:25px;
+    margin-top:0px !important;
 }
 .setting-option {
     width:fit-content;
@@ -79,7 +81,7 @@
     font-family: 'Hiragino Kaku Gothic Std', "ヒラギノ角ゴ ProN W3", Meiryo, 'MS PGothic', Sans-serif;
 }
 .more {
-    margin-bottom:20px;
+    margin-bottom:10px;
     border: none;
     border-bottom:none;
 }
@@ -127,4 +129,19 @@
 }
 .yuzu {
     border-bottom:var(--border)
+}
+.setting-option {
+    max-height:90%;
+    max-width:90%;
+    margin-top:0px !important; 
+}
+.icon-wrapper {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-bottom:none;
+    /* border-bottom: var(--border); */
+}
+.yuzu:hover >.setting-option {
+    background:none !important;
 }

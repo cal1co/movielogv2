@@ -1,7 +1,8 @@
 import "./CreatePostComponent.css";
 
 import React, { useState, useRef, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
+import { ReactComponent as Image } from "../../icons/image-regular.svg";
 
 const createPostComponent = () => {
   const [text, setText] = useState<string>("");
@@ -22,14 +23,15 @@ const createPostComponent = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    await axios.post("http://localhost:8082/post", {post_content: text}, {headers})
-    .then(res => {
-        console.log(res.data)
-    })
-    .catch(err => {
-        console.log(err)
-    })
-  }
+    await axios
+      .post("http://localhost:8082/post", { post_content: text }, { headers })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="CreatePost">
@@ -43,9 +45,22 @@ const createPostComponent = () => {
             onChange={handleChange}
             placeholder="wazzup?"
           />
-          <div className="submit-post" onClick={handlePost}>Post</div>
+          <div className="submit-post" onClick={handlePost}>
+            Post
+          </div>
         </div>
-        {focused && <div className="counter">{text.length} / 256</div>}
+        {focused && 
+        <div className="utils">
+          <Image className="post-compose-icon"/>
+        <div className="counter">
+
+
+
+
+          {text.length} / 256
+        
+        </div>
+        </div>}
       </div>
     </div>
   );

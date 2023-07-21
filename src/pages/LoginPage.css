@@ -1,0 +1,91 @@
+.login-signup {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    width:100vw;
+    background-image:url('../../backgrounds/login.svg')
+}
+
+
+.login-signup-label {
+    font-size:12px;
+    margin:0;
+    font-weight:900;
+}
+.login-form, .signup-form { 
+    display:flex;
+    /* justify-content:center; */
+    align-items:center;
+    flex-direction:column;
+    border-radius: 5px;
+    height:600px;
+    width:500px;
+    background:#ffffff;
+}
+.sign-in-message {
+    font-size:20px;
+    text-align:center;
+    font-family: "Hiragino Sans", "ヒラギノ角ゴ", sans-serif;
+    font-weight:700;
+    margin-bottom:10px;
+}
+.sign-in-tag {
+    font-size:12px;
+    text-align:center;
+    color:rgb(117, 117, 117);
+
+}
+.sign-in-message-content {
+    margin-top:30px;
+}
+.form-content {
+    width:80%;
+}
+.login-signup-form {
+    display:flex;
+    flex-direction:column;
+    margin-top:50px;
+}
+.login-input {
+    background-color:#f7f7f7;
+    height:40px;
+    width:calc(100% - 22px);
+    font-size:16px;
+    border:1px solid #e5e5e5;
+    /* padding:4px; */
+    padding:10px;
+}
+.login-input:focus {
+    border:1px solid #bcbcbc;
+}
+.login-signup-submit {
+    color:white;
+}
+.login-signup-submit {
+    background-color:#21bcbe;
+    width:100%;
+}
+.top-input {
+    border-radius: 5px 5px 0px 0px;
+}
+.bottom-input {
+    border-radius:0px 0px 5px 5px;
+}
+.password-input {
+    display:flex;
+    width:400px;
+}
+.eye-icon{
+    /* display:contents; */
+    position:absolute;
+    margin:18px;
+    margin-left:calc(400px - 35px);
+    height:25px;
+    width:25px;
+    cursor:pointer;
+}
+.eye-icon >svg {
+    height:25px;
+    width:25px;
+}
