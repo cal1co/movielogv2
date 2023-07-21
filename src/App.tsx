@@ -1,13 +1,22 @@
 import "./App.css";
 import Routes from "./routes";
 import HomePageSettings from "./components/HomePageSettings";
-import { useLocation } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { AppContext } from './AppContext';
+import axios from 'axios';
+
 
 function App() {
+
   const [currLocation, setCurrLocation] = useState<string>("home");
   const [shouldShowSideBar, setShouldShowSideBar] = useState<boolean>(false);
+  const [verifySuccess, setVerifySuccess] = useState<boolean>(false);
+  
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const { globalState, setGlobalState } = useContext(AppContext);
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -44,10 +53,44 @@ function App() {
     }
   };
 
+  const checkToken = () => {
+    const token = localStorage.getItem("token");
+    const tokenVal = globalState.token;
+    console.log("token: ", tokenVal)
+    if (!token) {
+      // navigate("/login")
+      return
+    }
+    fetchUser(token)
+  }
+  const updateTokenValue = (token:string, image:string) => {
+    setGlobalState((prevState) => ({
+      ...prevState,
+      token: token,
+      profile_picture: image
+    }));
+  }
+
+  const fetchUser = async (token:string) => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    }
+    await axios
+    .get("http://localhost:3000/api/auth/userdata", { headers })
+    .then(res => {
+      updateTokenValue(token, res.data.profile_image)
+      setVerifySuccess(true)
+    })
+    .catch(err => {
+      console.log(err.data)
+    })
+  }
+
   useEffect(() => {
     const title = getPageTitle();
     setCurrLocation(title);
     handleShouldShowSideBarOrNot(title);
+    checkToken()
   }, [location]);
 
   return (
