@@ -2,7 +2,6 @@ import { Post } from "../types/PostTypes";
 import { useState } from "react";
 import "./PostRenderComponent.css";
 import axios from "axios";
-import CommentModal from "./CommentModal";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as Like } from "../../icons/heart-regular.svg";
 import { ReactComponent as Unlike } from "../../icons/heart-solid.svg";
@@ -10,6 +9,8 @@ import { ReactComponent as Comment} from "../../icons/comment-regular.svg";
 import { ReactComponent as Ellipsis } from "../../icons/ellipsis-regular.svg";
 import { ReactComponent as Share } from "../../icons/paper-plane-regular.svg";
 import { ReactComponent as Save } from "../../icons/bookmark-regular.svg";
+import React, { useContext } from 'react';
+import { CommentModalContext } from '../CommentModalContext';
 
 type QueryProps = {
   post: Post;
@@ -19,15 +20,21 @@ const headers = {
   Authorization: `Bearer ${token}`,
 };
 const PostRender: React.FC<QueryProps> = ({ post }) => {
+  
   const [postLiked, setPostLiked] = useState<boolean>(post.liked || false);
   const [postLikes, setPostLikes] = useState<number>(post.like_count);
   const [postComments, setPostComments] = useState<number>(post.comments_count);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState<boolean>(false);
+  
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { openModal, parentPost, updatePost } = useContext(CommentModalContext);
+
   const handleOpenCommentModal = (): void => {
-    setIsCommentModalOpen(true);
+    // setIsCommentModalOpen(true);
+    openModal(post.post_id);
+    updatePost(post)
   };
   const handleCloseCommentModal = (): void => {
     setIsCommentModalOpen(false);
@@ -181,11 +188,7 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
           </div>
         </div>
       </div>
-      <CommentModal
-        isOpen={isCommentModalOpen}
-        onClose={handleCloseCommentModal}
-        onSubmit={handleComment}
-      />
+      
     </div>
   );
 };

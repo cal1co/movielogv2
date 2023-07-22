@@ -3,8 +3,7 @@ import { UserData } from './types/UserTypes'
 
 interface GlobalState {
     token: string;
-    profile_picture: string
-    // user: UserData
+    profile_picture: string;
 }
 export const AppContext = createContext<{
     globalState: GlobalState;

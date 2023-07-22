@@ -4,11 +4,14 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import "./index.css";
 import { AppProvider } from "./AppContext";
+import { CommentModalProvider } from './CommentModalContext';
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <BrowserRouter>
     <AppProvider>
-      <App />
+      <CommentModalProvider>
+        <App />
+      </CommentModalProvider>
     </AppProvider>
   </BrowserRouter>
 );

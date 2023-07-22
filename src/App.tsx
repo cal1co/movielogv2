@@ -5,6 +5,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from './AppContext';
 import axios from 'axios';
+import { Post } from './types/PostTypes'
+import { CommentModalContext } from './CommentModalContext';
+import CommentModal from "./components/CommentModal";
+
 
 
 function App() {
@@ -17,6 +21,7 @@ function App() {
   const navigate = useNavigate();
 
   const { globalState, setGlobalState } = useContext(AppContext);
+  const { parentPost, isOpen, closeModal } = useContext(CommentModalContext);
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -98,7 +103,33 @@ function App() {
     setCurrLocation(title);
     handleShouldShowSideBarOrNot(title);
     checkToken()
-  }, [location]);
+  }, [location, isOpen]);
+
+
+
+
+  const handleComment = async (post: Post, comment: string): Promise<void> => {
+    const headers = {
+      Authorization: `Bearer ${globalState.token}`,
+    }
+    await axios
+      .post(
+        `http://localhost:8082/post/${post.post_id}/comment`,
+        {
+          comment_content: comment,
+        },
+        { headers }
+      )
+      .then((res) => {
+        // setPostComments(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const handleCloseCommentModal = (): void => {
+    closeModal();
+  };
 
   return (
     <div className="App">
@@ -115,6 +146,17 @@ function App() {
         ) : (
           ""
         )}
+        {
+          parentPost ? 
+          <CommentModal
+          isOpen={isOpen}
+          onClose={handleCloseCommentModal}
+          onSubmit={handleComment}
+          post={parentPost}
+          /> 
+          :
+          ""
+        }
         <Routes />
       </div>
     </div>

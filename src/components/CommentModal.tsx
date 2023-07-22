@@ -1,14 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
 import "./CommentModal.css";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { CommentModalContext } from "../CommentModalContext";
+import { Post } from '../types/PostTypes'
 
 type QueryProps = {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (comment: string) => void;
+  onSubmit: (post: Post, comment: string) => void;
+  post: Post
 };
 
-const CommentModal: React.FC<QueryProps> = ({ isOpen, onClose, onSubmit }) => {
+const CommentModal: React.FC<QueryProps> = ({ isOpen, onClose, onSubmit, post }) => {
+//   const { isOpen, closeModal } = useContext(CommentModalContext);
+
   const [comment, setComment] = useState("");
+
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -19,6 +25,7 @@ const CommentModal: React.FC<QueryProps> = ({ isOpen, onClose, onSubmit }) => {
   };
 
   useEffect(() => {
+    console.log(isOpen)
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
@@ -35,7 +42,7 @@ const CommentModal: React.FC<QueryProps> = ({ isOpen, onClose, onSubmit }) => {
   };
 
   const handleSubmit = () => {
-    onSubmit(comment);
+    onSubmit(post, comment);
     setComment("");
     onClose();
   };
