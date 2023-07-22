@@ -8,13 +8,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index:5;
 }
 
 .modal {
-    /* background-color: white; */
+    z-index:2;
     border:2px solid white;
     padding: 20px;
     border-radius: 5px;
+    background:white;
 }
 
 textarea {

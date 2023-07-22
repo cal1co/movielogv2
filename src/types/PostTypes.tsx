@@ -19,7 +19,7 @@ export type SearchPost = {
     id: string
 }
 
-export type Comment = {
+export type CommentPost = {
     comment_id: string,
     user_id: number,
     parent_post_id: string,
@@ -28,4 +28,8 @@ export type Comment = {
     like_count: number; 
     comments_count: number,
     liked: boolean
+    username:string,
+    display_name:string,
+    profile_image:string
+    profile_image_data:string
 }

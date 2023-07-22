@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./PostRenderComponent.css";
 import axios from "axios";
 import CommentModal from "./CommentModal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ReactComponent as Like } from "../../icons/heart-regular.svg";
 import { ReactComponent as Unlike } from "../../icons/heart-solid.svg";
 import { ReactComponent as Comment} from "../../icons/comment-regular.svg";
@@ -24,6 +24,7 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
   const [postComments, setPostComments] = useState<number>(post.comments_count);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleOpenCommentModal = (): void => {
     setIsCommentModalOpen(true);
@@ -101,6 +102,10 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
 
 
   const redirectToPostPage = (): void => {
+    const alreadyViewing = location.pathname === `/${post.user_id}/post/${post.post_id}`
+
+    if (alreadyViewing) return 
+    
     if (!isTextSelected()) {
       navigate(`/${post.user_id}/post/${post.post_id}`, { state: { post } });
     }

@@ -1,0 +1,9 @@
+.PostRenderPage {
+    border-right: var(--border);
+}
+
+.comments-section-title {
+    border-bottom:var(--border);
+    padding:15px;
+    background:var(--background-colour);
+}

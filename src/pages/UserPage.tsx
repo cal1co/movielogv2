@@ -50,7 +50,7 @@ function UserPage() {
     await axios
       .post(`http://localhost:3000/api/auth/follow/${uid}`, {}, { headers })
       .then((res) => {
-        console.log(res.data);
+        addPostsToFeed(uid)
         setIsFollowing(true);
         if (user) {
           user.follow_data.follower_count = Number(
@@ -67,7 +67,7 @@ function UserPage() {
     await axios
       .post(`http://localhost:3000/api/auth/unfollow/${uid}`, {}, { headers })
       .then((res) => {
-        console.log(res.data);
+        removePostsFromFeed(uid)
         setIsFollowing(false);
         if (user) {
           user.follow_data.follower_count = Number(
@@ -80,7 +80,26 @@ function UserPage() {
         console.log(err);
       });
   };
-
+  const addPostsToFeed = async (uid: number) => {
+    await axios
+    .get(`http://localhost:8081/v1/feed/post/user/follow/${uid}`, { headers })
+    .then((res) => {
+      console.log("post feed add", res.data)
+    })
+    .catch((err) => {
+      console.log(err.data);
+    });
+  }
+  const removePostsFromFeed = async (uid: number) => {
+    await axios
+    .get(`http://localhost:8081/v1/feed/post/user/unfollow/${uid}`, { headers })
+    .then((res) => {
+      console.log("post feed remove", res.data)
+    })
+    .catch((err) => {
+      console.log(err.data);
+    });
+  }
   const renderPosts = (posts: Post[]) => {
     return (
       <React.Fragment>

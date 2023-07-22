@@ -39,6 +39,14 @@ function App() {
       default:
         if (location.pathname.startsWith("/")) {
           const username = location.pathname.slice(1);
+          
+          // Check if the path matches the pattern "/:id/post/:postid"
+          const postPathRegex = /^\/(\d+)\/post\/([^/]+)$/;
+          const match = postPathRegex.exec(location.pathname);
+          if (match) {
+            return `Post`;
+          }
+  
           return `${username}'s profile`;
         }
         return "";
@@ -56,7 +64,6 @@ function App() {
   const checkToken = () => {
     const token = localStorage.getItem("token");
     const tokenVal = globalState.token;
-    console.log("token: ", tokenVal)
     if (!token) {
       // navigate("/login")
       return
