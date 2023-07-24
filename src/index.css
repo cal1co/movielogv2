@@ -30,9 +30,11 @@ body.light{
     background: var(--background-colour-light);
     --icon-fill: var(--icon-fill-colour-light);
     color: var(--colour-light);
+    --text-colour: var(--colour-light);
     --shadow-colour:#D9D9D9;
     --post-border:2px solid black;
     --post-background-colour:white;
+    --button-hover: 2px solid black;
 
 }
 body.dark{
@@ -40,9 +42,11 @@ body.dark{
     background: var(--background-colour-dark);
     --icon-fill: var(--icon-fill-colour-dark);
     color: rgb(231, 233, 234);
+    --text-colour: var(--colour-dark);
     --shadow-colour:rgba(255, 255, 255, 0.2);
     --post-border:2px solid rgb(190, 186, 186);
     --post-background-colour:rgb(0, 0, 0);
+    --button-hover: 2px solid white;
 }
 
 

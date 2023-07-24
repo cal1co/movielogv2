@@ -106,8 +106,6 @@ function App() {
   }, [location, isOpen]);
 
 
-
-
   const handleComment = async (post: CombinedPostType, comment: string): Promise<void> => {
     const headers = {
       Authorization: `Bearer ${globalState.token}`,

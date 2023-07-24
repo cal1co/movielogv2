@@ -11,6 +11,8 @@ import { ReactComponent as Share } from "../../icons/paper-plane-regular.svg";
 import { ReactComponent as Save } from "../../icons/bookmark-regular.svg";
 import React, { useContext } from 'react';
 import { CommentModalContext } from '../CommentModalContext';
+import postAgeHandler from '../utils/postAgeHandler'
+
 
 type QueryProps = {
   post: Post;
@@ -157,19 +159,7 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
     const formattedTime = dateObj.toLocaleTimeString();
     return `${formattedDate} ${formattedTime}`;
   };
-  const postAge = (date: string): string => {
-    const dateObj = new Date(date);
-    const currentDateTime = new Date();
-    const timeDiff = currentDateTime.getTime() - dateObj.getTime();
-    const hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60)); // Convert milliseconds to hours
-
-    if (hoursDiff >= 24) {
-      const daysDiff = Math.floor(hoursDiff / 24);
-      return `${daysDiff}d`;
-    }
-
-    return `${hoursDiff}h`;
-  };
+  
 
   return (
     <div className="post" onClick={handleClick}>
@@ -182,13 +172,8 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
           </div>
         </div>
         <div className="post-info">
-          <div className="created-date">{postAge(post.created_at)}</div>
+          <div className="created-date">{postAgeHandler(post.created_at)}</div>
           <Ellipsis className="ellipsis"/>
-          {/* <img
-            src={ellipsis}
-            alt="three dots ellipsis post settings button"
-            className="ellipsis"
-          /> */}
         </div>
       </div>
       <div className="content-wrapper" style={{height: `${parentHeight}px`}}>

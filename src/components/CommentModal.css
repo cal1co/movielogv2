@@ -11,34 +11,107 @@
     z-index:9999;
 }
 
-.modal {
-    z-index:9999;
-    border:2px solid white;
+.comment-modal {
+    /* z-index:0; */
+    width:528px;
+    /* height:128px; */
+    border:var(--border);
     padding: 20px;
     border-radius: 5px;
-    background:white;
+    background:var(--background-colour);
 }
-
-textarea {
+.comment-modal-utils {
+    display:flex;
+    /* align-items:center; */
+    justify-content:end;
+    height:auto;
+}
+.comment-modal-compose {
     width: 100%;
-    padding: 10px;
+    padding:0;
     resize: none;
     box-sizing: border-box;
     overflow-y: auto;
+    background:var(--background-colour);
+    color: var(--text-colour);
+    border:none;
+    font-family: var(--font);
+}
+
+.comment-modal-compose:focus {
+    outline:none;
 }
 
 .character-count {
     font-size:12px;
     color:gray;
-    margin-top:5px;
 }
 
-.modal-buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+.post-reference-pfp {
+    height:50px;
+    width:50px;
+    border-radius:30px;
+}
+.comment-modal-buffer {
+    display:flex;
+    height:50px;
+    margin-block:15px;
+    justify-content:center;
+}
+
+.comment-modal-buffer-line-wrapper { 
+    width:50px;
+    display:flex;
+    justify-content:center;
+}
+.comment-modal-buffer-line {
+    display:flex;
+    height:50px;
+    width:0px;
+    border:var(--border);
+}
+.reply-info { 
+    width:100%;
+}
+.post-reference, .post-reference-user-top-line, .modal-post-username {
+    display:flex;
 }
 
 .modal-buttons button {
+    margin:0;
     margin-left: 10px;
+}
+
+.post-reference-content, .comment-modal-compose {
+    margin-left:20px;
+}
+ 
+.reference-name-user,  .modal-post-createdate {
+    font-size:14px;
+    margin-left:10px;
+}
+
+.post-reference-user-top-line {
+    width:400px;
+}
+
+.modal-post-content {
+    font-size: 14px;
+}
+
+
+
+.comment-user-section {
+    display:flex;
+}
+
+.submit-comment-button {
+    background-color:var(--background-colour);
+    border:var(--border);
+    color:var(--text-colour)
+    /* color:var(--background-colour) */
+}
+.submit-comment-button:hover {
+    border:var(--button-hover);
+    opacity:40%;
 }

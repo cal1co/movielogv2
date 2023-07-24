@@ -1,17 +1,24 @@
 import "./CommentModal.css";
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { CommentModalContext } from "../CommentModalContext";
-import { Post, CombinedPostType } from '../types/PostTypes'
+import { Post, CombinedPostType } from "../types/PostTypes";
+import postAgeHandler from "../utils/postAgeHandler";
+import { AppContext } from "../AppContext";
 
 type QueryProps = {
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (post: CombinedPostType, comment: string) => void;
-  post: CombinedPostType
+  post: CombinedPostType;
 };
 
-const CommentModal: React.FC<QueryProps> = ({ isOpen, onClose, onSubmit, post }) => {
-//   const { isOpen, closeModal } = useContext(CommentModalContext);
+const CommentModal: React.FC<QueryProps> = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  post,
+}) => {
+  const { globalState } = useContext(AppContext);
 
   const [comment, setComment] = useState("");
 
@@ -25,7 +32,8 @@ const CommentModal: React.FC<QueryProps> = ({ isOpen, onClose, onSubmit, post })
   };
 
   useEffect(() => {
-    console.log(isOpen)
+    setComment("");
+    console.log(isOpen);
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
@@ -53,18 +61,58 @@ const CommentModal: React.FC<QueryProps> = ({ isOpen, onClose, onSubmit, post })
 
   return (
     <div className="modal-overlay">
-      <div className="modal" ref={modalRef}>
-        <h2>Compose Comment</h2>
-        <textarea
-          value={comment}
-          onChange={handleChange}
-          placeholder="Write your comment..."
-          rows={3}
-        />
-        <div className="character-count">{comment.length}/200</div>
-        <div className="modal-buttons">
-          <button onClick={handleSubmit}>Submit</button>
-          <button onClick={onClose}>Cancel</button>
+      <div className="comment-modal" ref={modalRef}>
+        <div className="post-reference">
+          <img
+            src={post.profile_image}
+            className="post-reference-pfp"
+            alt="modal reply original poster user image"
+          />
+          <div className="post-reference-content">
+            <div className="post-reference-user-top-line">
+              <div className="modal-post-username">
+                <div className="reference-name-display">
+                  {post.display_name}
+                </div>
+                <div className="reference-name-user">@{post.username}</div>
+              </div>
+              <div className="modal-post-createdate">
+                - {postAgeHandler(post.created_at)}
+              </div>
+            </div>
+            <div className="modal-post-content">{post.content}</div>
+          </div>
+        </div>
+
+        <div className="comment-modal-buffer">
+          <div className="comment-modal-buffer-line-wrapper">
+            <div className="comment-modal-buffer-line"></div>
+          </div>
+          <div className="reply-info"></div>
+        </div>
+
+        <div className="comment-user-section">
+          <img
+            src={globalState.profile_picture}
+            className="post-reference-pfp"
+            alt="user profile image"
+          />
+          <textarea
+            value={comment}
+            onChange={handleChange}
+            placeholder="Reply"
+            rows={3}
+            className="comment-modal-compose"
+          />
+        </div>
+        <div className="comment-modal-utils">
+          <div className="character-count">{comment.length}/256</div>
+          <div className="modal-buttons">
+            <button className="submit-comment-button" onClick={handleSubmit}>
+              Reply
+            </button>
+            {/* <button onClick={onClose}>Cancel</button> */}
+          </div>
         </div>
       </div>
     </div>
