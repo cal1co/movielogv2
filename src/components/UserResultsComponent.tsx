@@ -46,6 +46,7 @@ const UserResultsComponent: React.FC<QueryProps> = ({ query }) => {
       })
       .catch((err) => {
         console.log(err);
+        setUserResults(null)
       });
     setIsLoading(false);
   };

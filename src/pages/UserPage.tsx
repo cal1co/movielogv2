@@ -1,11 +1,11 @@
 import "./UserPage.css";
-import { useLocation, useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState  } from "react";
 import axios from "axios";
 import PostRender from "../components/PostRenderComponent";
 import { Post } from "../types/PostTypes";
 import { UserData } from "../types/UserTypes";
-import gear from "../../icons/gear-solid.svg";
+import { ReactComponent as Gear } from "../../icons/gear-regular.svg";
 
 const token = localStorage.getItem("token");
 const headers = {
@@ -19,6 +19,7 @@ function UserPage() {
   const [isUser, setIsUser] = useState<boolean>(true);
   const [isFollowing, setIsFollowing] = useState<boolean | null>(null);
   const { username } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (username) {
@@ -33,7 +34,7 @@ function UserPage() {
       .then((res) => {
         const tempUser: UserData = res.data.user;
         tempUser.username = username;
-
+        console.log("USER", res.data.user);
         setUser(tempUser);
         setPosts(res.data.posts);
         setIsUser(res.data.same_user);
@@ -50,7 +51,7 @@ function UserPage() {
     await axios
       .post(`http://localhost:3000/api/auth/follow/${uid}`, {}, { headers })
       .then((res) => {
-        addPostsToFeed(uid)
+        addPostsToFeed(uid);
         setIsFollowing(true);
         if (user) {
           user.follow_data.follower_count = Number(
@@ -67,7 +68,7 @@ function UserPage() {
     await axios
       .post(`http://localhost:3000/api/auth/unfollow/${uid}`, {}, { headers })
       .then((res) => {
-        removePostsFromFeed(uid)
+        removePostsFromFeed(uid);
         setIsFollowing(false);
         if (user) {
           user.follow_data.follower_count = Number(
@@ -82,24 +83,26 @@ function UserPage() {
   };
   const addPostsToFeed = async (uid: number) => {
     await axios
-    .get(`http://localhost:8081/v1/feed/post/user/follow/${uid}`, { headers })
-    .then((res) => {
-      console.log("post feed add", res.data)
-    })
-    .catch((err) => {
-      console.log(err.data);
-    });
-  }
+      .get(`http://localhost:8081/v1/feed/post/user/follow/${uid}`, { headers })
+      .then((res) => {
+        console.log("post feed add", res.data);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  };
   const removePostsFromFeed = async (uid: number) => {
     await axios
-    .get(`http://localhost:8081/v1/feed/post/user/unfollow/${uid}`, { headers })
-    .then((res) => {
-      console.log("post feed remove", res.data)
-    })
-    .catch((err) => {
-      console.log(err.data);
-    });
-  }
+      .get(`http://localhost:8081/v1/feed/post/user/unfollow/${uid}`, {
+        headers,
+      })
+      .then((res) => {
+        console.log("post feed remove", res.data);
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  };
   const renderPosts = (posts: Post[]) => {
     return (
       <React.Fragment>
@@ -126,14 +129,9 @@ function UserPage() {
               <div className="data-panel">
                 <div className="misc-actions">
                   <div className="head-username">{user.username}</div>
-                  <div className="utils">
+                  <div className="user-utils">
                     {isUser ? (
-                      <div className="user-settings">
-                        settings
-                        <div className="settings-button">
-                          <img src={gear} alt="" />
-                        </div>
-                      </div>
+                      <Gear className="user-settings-button" onClick={() => navigate('/accounts/settings')}/>
                     ) : (
                       <div className="follow-button">
                         {isFollowing ? (
@@ -162,6 +160,12 @@ function UserPage() {
                   <div className="following-count">
                     {user.follow_data.following_count} following
                   </div>
+                </div>
+                <div className="user-more-info">
+                  <div className="user-more-info-display-name">
+                    {user.display_name}
+                  </div>
+                  <div className="user-more-info-bio">{user.bio}</div>
                 </div>
               </div>
             </div>

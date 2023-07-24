@@ -33,3 +33,19 @@ export type CommentPost = {
     profile_image:string
     profile_image_data:string
 }
+
+export type CombinedPostType = { 
+    id: string
+    content: string,
+    user_id: number,
+    parent_post_id: string,
+    created_at: string,
+    like_count: number; 
+    comments_count: number,
+    liked: boolean
+    username:string,
+    display_name:string,
+    profile_image:string
+    profile_image_data:string
+    is_comment: boolean
+}

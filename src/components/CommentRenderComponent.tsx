@@ -1,4 +1,4 @@
-import { Post, CommentPost } from "../types/PostTypes";
+import { Post, CommentPost, CombinedPostType } from "../types/PostTypes";
 import { useState } from "react";
 import "./PostRenderComponent.css";
 import axios from "axios";
@@ -10,6 +10,9 @@ import { ReactComponent as Comment} from "../../icons/comment-regular.svg";
 import { ReactComponent as Ellipsis } from "../../icons/ellipsis-regular.svg";
 import { ReactComponent as Share } from "../../icons/paper-plane-regular.svg";
 import { ReactComponent as Save } from "../../icons/bookmark-regular.svg";
+import React, { useContext } from 'react';
+import { CommentModalContext } from '../CommentModalContext';
+
 
 type QueryProps = {
   comment: CommentPost;
@@ -19,15 +22,36 @@ const headers = {
   Authorization: `Bearer ${token}`,
 };
 const PostRender: React.FC<QueryProps> = ({ comment }) => {
+  
   const [postLiked, setPostLiked] = useState<boolean>(comment.liked || false);
   const [postLikes, setPostLikes] = useState<number>(comment.like_count);
   const [postComments, setPostComments] = useState<number>(comment.comments_count);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState<boolean>(false);
+  
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { openModal, parentPost, updatePost } = useContext(CommentModalContext);
+
+
   const handleOpenCommentModal = (): void => {
-    setIsCommentModalOpen(true);
+    const combinedPost:CombinedPostType = {
+      id: comment.comment_id,
+      content: comment.comment_content,
+      user_id: comment.user_id,
+      parent_post_id: comment.parent_post_id,
+      created_at: comment.created_at,
+      like_count: comment.like_count,
+      comments_count: comment.comments_count,
+      liked: comment.liked,
+      username:comment.username,
+      display_name:comment.display_name,
+      profile_image:comment.profile_image,
+      profile_image_data:comment.profile_image_data,
+      is_comment:true
+    }
+    openModal(combinedPost.id);
+    updatePost(combinedPost)
   };
   const handleCloseCommentModal = (): void => {
     setIsCommentModalOpen(false);
@@ -181,11 +205,6 @@ const PostRender: React.FC<QueryProps> = ({ comment }) => {
           </div>
         </div>
       </div>
-      <CommentModal
-        isOpen={isCommentModalOpen}
-        onClose={handleCloseCommentModal}
-        onSubmit={handleComment}
-      />
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import { Post } from "../types/PostTypes";
-import { useState } from "react";
+import { Post, CombinedPostType } from "../types/PostTypes";
+import { useState, useRef, useLayoutEffect } from "react";
 import "./PostRenderComponent.css";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -21,6 +21,11 @@ const headers = {
 };
 const PostRender: React.FC<QueryProps> = ({ post }) => {
   
+
+  const child1Ref = useRef<HTMLDivElement>(null);
+  const child2Ref = useRef<HTMLDivElement>(null);
+  const [parentHeight, setParentHeight] = useState(0);
+
   const [postLiked, setPostLiked] = useState<boolean>(post.liked || false);
   const [postLikes, setPostLikes] = useState<number>(post.like_count);
   const [postComments, setPostComments] = useState<number>(post.comments_count);
@@ -31,10 +36,39 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
 
   const { openModal, parentPost, updatePost } = useContext(CommentModalContext);
 
+  useLayoutEffect(() => {
+    const child1Height = child1Ref.current ? child1Ref.current.getBoundingClientRect().height : 0;
+    const overlapHeight = 10; // Adjust based on the overlap height
+
+    // Set the height of child2 to match the height of child1
+    if (child2Ref.current) {
+      console.log(child1Height)
+      child2Ref.current.style.height = `${child1Height - 20 - 4}px`;
+    }
+
+    const newParentHeight = child1Height + overlapHeight;
+    setParentHeight(newParentHeight);
+  }, []);
+
+
   const handleOpenCommentModal = (): void => {
-    // setIsCommentModalOpen(true);
-    openModal(post.post_id);
-    updatePost(post)
+    const combinedPost:CombinedPostType = {
+      id: post.post_id,
+      content: post.post_content,
+      user_id: post.user_id,
+      parent_post_id: "",
+      created_at: post.created_at,
+      like_count: post.like_count,
+      comments_count: post.comments_count,
+      liked: post.liked,
+      username:post.username,
+      display_name:post.display_name,
+      profile_image:post.profile_image,
+      profile_image_data:post.profile_image_data,
+      is_comment:false
+    }
+    openModal(combinedPost.id);
+    updatePost(combinedPost)
   };
   const handleCloseCommentModal = (): void => {
     setIsCommentModalOpen(false);
@@ -157,9 +191,9 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
           /> */}
         </div>
       </div>
-      <div className="content-wrapper">
-        <div className="post-content">{post.post_content}</div>
-        <div className="post-content-shadow" />
+      <div className="content-wrapper" style={{height: `${parentHeight}px`}}>
+        <div className="post-content" ref={child1Ref}>{post.post_content}</div>
+        <div className="post-content-shadow" ref={child2Ref} />
       </div>
       <div className="post-actions">
         <div className="action-info">

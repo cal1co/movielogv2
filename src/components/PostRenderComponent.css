@@ -52,6 +52,7 @@
   left:67px;
   width:670px;
   margin:10px;
+  margin-top:0;
 }
   
 .action-info {
@@ -83,13 +84,13 @@
 }
 
 .post-content {
-  font-size:14px;
-  line-height:115%;
-  background:var(--post-background-colour);
   position:relative;
+  font-size:14px;
+  background:var(--post-background-colour);
+  line-height:1.38em;
 }
 .post-content-shadow, .post-content {
-  min-height:55px;;
+  min-height:55px;
   width:600px;
   border:var(--post-border);
   padding:10px;
@@ -101,14 +102,14 @@
   position:relative;
   z-index:-1;
   background:var(--shadow-colour);
-  top:-70px;
+  bottom:calc(100% - 20px);
   left:10px;
+
 }
 
 
 
 .content-wrapper{
-  height:80px;
   width:600px;
   left:67px;
   position:relative;

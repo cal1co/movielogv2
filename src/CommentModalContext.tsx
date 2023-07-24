@@ -1,13 +1,13 @@
 // CommentModalContext.tsx
 import React, { createContext, useState, ReactNode } from 'react';
-import { Post } from './types/PostTypes'
+import { CombinedPostType } from './types/PostTypes'
 
 type CommentModalContextType = {
   isOpen: boolean;
   openModal: (postId: string) => void;
   closeModal: () => void;
-  parentPost: Post | null;
-  updatePost: (post: Post | null) => void;
+  parentPost: CombinedPostType | null;
+  updatePost: (post: CombinedPostType | null) => void;
 };
 
 export const CommentModalContext = createContext<CommentModalContextType>({
@@ -21,7 +21,7 @@ export const CommentModalContext = createContext<CommentModalContextType>({
 export const CommentModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [postId, setPostId] = useState<string>('');
-  const [parentPost, setParentPost] = useState<Post | null>(null);
+  const [parentPost, setParentPost] = useState<CombinedPostType | null>(null);
 
   const openModal = (postId: string) => {
     setPostId(postId);
@@ -32,7 +32,7 @@ export const CommentModalProvider: React.FC<{ children: ReactNode }> = ({ childr
     setIsOpen(false);
   };
 
-  const updatePost = (updatedPost: Post | null) => {
+  const updatePost = (updatedPost: CombinedPostType | null) => {
     setParentPost(updatedPost);
   };
 

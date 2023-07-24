@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import React, { useState, useEffect, useContext } from "react";
 import { AppContext } from './AppContext';
 import axios from 'axios';
-import { Post } from './types/PostTypes'
+import { Post, CombinedPostType } from './types/PostTypes'
 import { CommentModalContext } from './CommentModalContext';
 import CommentModal from "./components/CommentModal";
 
@@ -108,13 +108,19 @@ function App() {
 
 
 
-  const handleComment = async (post: Post, comment: string): Promise<void> => {
+  const handleComment = async (post: CombinedPostType, comment: string): Promise<void> => {
     const headers = {
       Authorization: `Bearer ${globalState.token}`,
     }
+    let path:string
+    if (post.is_comment) {
+      path = `http://localhost:8082/comment/${post.id}/comment`
+    } else {
+      path = `http://localhost:8082/post/${post.id}/comment`
+    }
     await axios
       .post(
-        `http://localhost:8082/post/${post.post_id}/comment`,
+        path,
         {
           comment_content: comment,
         },

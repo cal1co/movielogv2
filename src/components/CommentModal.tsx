@@ -1,13 +1,13 @@
 import "./CommentModal.css";
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { CommentModalContext } from "../CommentModalContext";
-import { Post } from '../types/PostTypes'
+import { Post, CombinedPostType } from '../types/PostTypes'
 
 type QueryProps = {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (post: Post, comment: string) => void;
-  post: Post
+  onSubmit: (post: CombinedPostType, comment: string) => void;
+  post: CombinedPostType
 };
 
 const CommentModal: React.FC<QueryProps> = ({ isOpen, onClose, onSubmit, post }) => {

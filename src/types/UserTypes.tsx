@@ -18,5 +18,6 @@ export type UserData = {
     {
       follower_count: number,
       following_count: number
-    }
+    },
+  bio: string
 }

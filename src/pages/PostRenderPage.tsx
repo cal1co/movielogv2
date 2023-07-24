@@ -53,10 +53,11 @@ function PostRenderPage() {
     axios
       .get(`http://localhost:8082/post/${postId}/comments`, { headers })
       .then((res) => {
+        console.log(res.data)
         setComments(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       });
   };
 

@@ -1,15 +1,16 @@
 .UserPage { border-right: var(--border); }
 .profile {
     border-bottom: var(--border);
-    height:300px;
+    height:fit-content;
     width:768px;
 }
 .profile-img {
     height:128px;
+    border-radius:70px;
 }
 .profile-page-wrapper {
     padding-inline:64px;
-    padding-top:32px;
+    padding-block:32px;
 }
 .data-panel {
     flex-direction:column;
@@ -18,17 +19,22 @@
 .follow-data, .misc-actions, .data-panel, .profile-page-wrapper {
     display:flex;
 }
-.follow-button, .user-settings {
-    margin-left:30px;
+.misc-actions {
+    align-items:center;
+    /* justify-content:center; */
 }
+
 .follow-button:hover, .user-settings {
     cursor:pointer;
 }
 .head-username {
     font-size:20px;
+    height:fit-content;
+    
 }
 .misc-actions {
-    margin-bottom:10px;
+    height:35px;
+    /* margin-bottom:10px; */
 }
 .following-count {
     margin-left:20px;
@@ -42,4 +48,28 @@
 
 .follow-button:hover{
     background:#D9D9D9;
+}
+.user-settings-button {
+    max-height:50px;
+    width:25px;
+    fill:var(--icon-fill)
+    /* fill:green; */
+}
+.user-utils {
+    width:fit-content;
+    margin-left:20px;
+    display:flex;
+    /* align-items */
+}
+
+.user-more-info {
+    margin-top:10px;
+    display:flex;
+    flex-direction:column;
+}
+.user-more-info-display-name {
+    font-size:15px;
+}
+.user-more-info-bio {
+    font-size:14px;
 }
