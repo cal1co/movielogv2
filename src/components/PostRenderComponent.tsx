@@ -40,11 +40,9 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
 
   useLayoutEffect(() => {
     const child1Height = child1Ref.current ? child1Ref.current.getBoundingClientRect().height : 0;
-    const overlapHeight = 10; // Adjust based on the overlap height
+    const overlapHeight = 10; 
 
-    // Set the height of child2 to match the height of child1
     if (child2Ref.current) {
-      console.log(child1Height)
       child2Ref.current.style.height = `${child1Height - 20 - 4}px`;
     }
 

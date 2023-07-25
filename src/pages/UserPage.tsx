@@ -34,13 +34,15 @@ function UserPage() {
       .then((res) => {
         const tempUser: UserData = res.data.user;
         tempUser.username = username;
-        console.log("USER", res.data.user);
+        if (res.data.user.active_account) { // if account exists
         setUser(tempUser);
         setPosts(res.data.posts);
         setIsUser(res.data.same_user);
         setIsFollowing(res.data.following);
         document.title = res.data.user.display_name + ` (@${username})`;
         console.log(res.data);
+          // getUserPosts(res.data.user.id) // need to check if user exists/isactive
+        }
       })
       .catch((err) => {
         console.log(err);

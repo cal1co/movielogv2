@@ -16,7 +16,9 @@ function App() {
   const [currLocation, setCurrLocation] = useState<string>("home");
   const [shouldShowSideBar, setShouldShowSideBar] = useState<boolean>(false);
   const [verifySuccess, setVerifySuccess] = useState<boolean>(false);
-  
+  const [redirected, setRedirected] = useState<boolean>(false);
+
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -70,9 +72,12 @@ function App() {
     const token = localStorage.getItem("token");
     const tokenVal = globalState.token;
     if (!token) {
-      // navigate("/login")
+      if (!redirected) {
+        navigate("/login")
+        setRedirected(true)
+      };
       return
-    }
+    };
     fetchUser(token)
   }
   const updateTokenValue = (token:string, image:string) => {
