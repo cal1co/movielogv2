@@ -1,9 +1,9 @@
 .CreatePost {
     min-height:119px;
     max-height:300px;
-    border-bottom:var(--border);
     display:flex;
     align-items:center;
+    /* opacity:50%; */
 }
 .compose-post {
     height:30px;
@@ -92,4 +92,8 @@
     position:relative;
     left:calc(50%);
     transform:translateX(-50%);
+}
+.disabled-post-button:hover {
+    cursor:not-allowed;
+    pointer-events: none;
 }

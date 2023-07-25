@@ -12,7 +12,10 @@ type OnNewPostFunction = (newPost: any) => void;
 interface CreatePostProps {
   onNewPost: OnNewPostFunction;
 }
-
+const token = localStorage.getItem("token");
+const headers = {
+  Authorization: `Bearer ${token}`,
+};
 
 const createPostComponent = ( {onNewPost}:CreatePostProps ) => {
 
@@ -20,6 +23,8 @@ const createPostComponent = ( {onNewPost}:CreatePostProps ) => {
   const [remainingChars, setRemainingChars] = useState<number>(256);
   const [focused, setFocused] = useState<boolean>(true);
   const [profileImage, setProfileImage] = useState<string>("");
+  const [disabled, setDisabled] = useState<boolean>(false);
+
 
   const { globalState, setGlobalState } = useContext(AppContext);
 
@@ -38,10 +43,10 @@ const createPostComponent = ( {onNewPost}:CreatePostProps ) => {
     }
   };
   const handlePost = async () => {
-    const token = localStorage.getItem("token");
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
+    if (disabled) {
+      return
+    }
+    setDisabled(true)
     await axios
       .post("http://localhost:8082/post", { post_content: text }, { headers })
       .then((res) => {
@@ -50,10 +55,13 @@ const createPostComponent = ( {onNewPost}:CreatePostProps ) => {
       .catch((err) => {
         console.log(err);
       });
+    setText("")
+    setDisabled(false)
   };
 
   return (
-    <div className="CreatePost">
+    <div className="CreatePost" style={{opacity: disabled ? "50%": "100%"}}>
+      
       <div className="compose-wrapper">
         <div className="compose-top-bar">
         <div className="display-image-wrapper">
@@ -69,7 +77,7 @@ const createPostComponent = ( {onNewPost}:CreatePostProps ) => {
             onChange={handleChange}
             placeholder="wazzup?"
             />
-          <div className="submit-post" onClick={handlePost}>
+          <div className={disabled ? "submit-post disabled-post-button" : "submit-post"} onClick={disabled ? undefined : handlePost}>
             Post
           </div>
             </div>
