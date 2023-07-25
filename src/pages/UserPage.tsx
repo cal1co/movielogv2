@@ -35,19 +35,31 @@ function UserPage() {
         const tempUser: UserData = res.data.user;
         tempUser.username = username;
         if (res.data.user.active_account) { // if account exists
-        setUser(tempUser);
-        setPosts(res.data.posts);
-        setIsUser(res.data.same_user);
-        setIsFollowing(res.data.following);
-        document.title = res.data.user.display_name + ` (@${username})`;
-        console.log(res.data);
-          // getUserPosts(res.data.user.id) // need to check if user exists/isactive
+          setUser(tempUser);
+          setIsUser(res.data.same_user);
+          setIsFollowing(res.data.following);
+          document.title = res.data.user.display_name + ` (@${username})`;
+          console.log(res.data);
+          getUserPosts(res.data.user.id) // need to check if user exists/isactive
         }
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const getUserPosts = async (uid: number) => {
+    await axios
+      .get(`http://localhost:8082/posts/user/${uid}`, { headers })
+      .then(res => {
+        console.log("post fetch", res.data)
+        setPosts(res.data);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
 
   const follow = async (uid: number) => {
     await axios
