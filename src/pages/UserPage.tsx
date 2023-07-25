@@ -133,7 +133,7 @@ function UserPage() {
   };
   return (
     <div className="UserPage">
-      <div className="profile">
+      <div className="profile-section">
         {user && (
           <div className="user-display">
             <div className="profile-page-wrapper">

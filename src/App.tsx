@@ -80,11 +80,13 @@ function App() {
     };
     fetchUser(token)
   }
-  const updateTokenValue = (token:string, image:string) => {
+  const updateTokenValue = (token:string, image:string, username:string, displayName:string) => {
     setGlobalState((prevState) => ({
       ...prevState,
       token: token,
-      profile_picture: image
+      profile_picture: image,
+      username: username,
+      display_name:displayName
     }));
   }
 
@@ -95,7 +97,8 @@ function App() {
     await axios
     .get("http://localhost:3000/api/auth/userdata", { headers })
     .then(res => {
-      updateTokenValue(token, res.data.profile_image)
+      console.log("userinfo", res.data)
+      updateTokenValue(token, res.data.profile_image, res.data.username, res.data.display_name)
       setVerifySuccess(true)
     })
     .catch(err => {

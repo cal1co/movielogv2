@@ -2,9 +2,11 @@
     display:flex;
     width:100%;
     margin-bottom:10px;
+    border-radius:30px 17px 17px 30px;
+    transition: background 0.15s ease-in-out;
 }
 .rendered-user-search-result:hover {
-    background:#fbf8f8;
+    background:var(--hover-colour);
     cursor:pointer;
 }
 .profile-image-search {
@@ -12,7 +14,7 @@
     border-radius:50px;
 }
 .username-details {
-    margin-left:10px;
+    margin-left:12px;
     display:flex;
     flex-direction:column;
     /* align-items:center; */

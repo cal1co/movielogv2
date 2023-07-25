@@ -7,7 +7,14 @@ import { ReactComponent as GIF } from "../../icons/gif-regular.svg";
 import { ReactComponent as Emoji } from "../../icons/face-smile-regular.svg";
 import { AppContext } from '../AppContext';
 
-const createPostComponent = () => {
+type OnNewPostFunction = (newPost: any) => void;
+
+interface CreatePostProps {
+  onNewPost: OnNewPostFunction;
+}
+
+
+const createPostComponent = ( {onNewPost}:CreatePostProps ) => {
 
   const [text, setText] = useState<string>("");
   const [remainingChars, setRemainingChars] = useState<number>(256);
@@ -38,7 +45,7 @@ const createPostComponent = () => {
     await axios
       .post("http://localhost:8082/post", { post_content: text }, { headers })
       .then((res) => {
-        console.log(res.data);
+        onNewPost(res.data)
       })
       .catch((err) => {
         console.log(err);

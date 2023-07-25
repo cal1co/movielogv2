@@ -1,15 +1,20 @@
 import './UserFeed.css'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PostRender from '../components/PostRenderComponent';
 import { Post } from '../types/PostTypes';
 import axios from 'axios';
+import { AppContext } from '../AppContext';
 
 type ProfileImageFetch = {
   user_id: number
   profile_image: string
   profile_image_data: string
 }
-function UserFeed() {
+
+interface PostInterface {
+  post: Post | null
+}
+function UserFeed({post}:PostInterface ) {
   const token = localStorage.getItem("token")
   const headers = {
     'Authorization': `Bearer ${token}`,
@@ -19,9 +24,21 @@ function UserFeed() {
   const [feed, setFeed] = useState<Post[] | null>(null)
   const [feedImages, setFeedImages] = useState<string | null>(null)
 
+  const { globalState } = useContext(AppContext)
+
   useEffect(() => {
     setIsMounted(true);
   }, [])
+
+
+  useEffect(() => {
+    if (post && feed) {
+
+      post.username = globalState.username
+      post.display_name = globalState.display_name
+      setFeed((prevFeed) => [post, ...(prevFeed as Post[])])
+    }
+  }, [post])
 
   useEffect(() => {
     if (isMounted) {
