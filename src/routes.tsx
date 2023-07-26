@@ -5,8 +5,6 @@ import SignupPage from "./pages/SignupPage";
 import FeedPage from "./pages/FeedPage";
 import UserPage from "./pages/UserPage";
 import SearchResultsPage from "./pages/SearchResultsPage";
-import UserResultsPage from "./pages/UserResultsPage";
-import EntryDisplayPage from "./pages/EntryDisplayPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { UserLogin } from "./types/UserTypes";
 import { User } from "./types/UserTypes";
@@ -53,9 +51,7 @@ const Routes: React.FC = () => {
       />
       <Route path="/:username" element={<UserPage />} />
       <Route path="/search" element={<SearchResultsPage />} />
-      <Route path="/search/user" element={<UserResultsPage />} />
       <Route path="/:username/post/:postId" element={<PostRenderPage />} />
-      <Route path="/m/entry" element={<EntryDisplayPage />} />
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/test" element={<S3TestPage />} />
       <Route path="/accounts/settings" element={<SettingPage />} />

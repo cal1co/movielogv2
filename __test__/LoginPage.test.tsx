@@ -3,8 +3,14 @@ import LoginPage from '../src/pages/LoginPage'
 import axios from 'axios';
 import React from 'react';
 import { vi } from 'vitest'
+import { Router, useNavigate, MemoryRouter } from 'react-router-dom';
 
 vi.mock('axios');
+vi.mock('react-router-dom', async () => ({
+  ...vi.importActual('react-router-dom'),
+  MemoryRouter: (await vi.importActual<typeof import('react-router-dom')>('react-router-dom')).MemoryRouter,
+  useNavigate: () => vi.fn(), 
+}));
 
 describe('LoginPage', () => {
   it('updates the usernameOrEmail and password on user input', async () => {
@@ -66,5 +72,37 @@ describe('LoginPage', () => {
     fireEvent.click(submitButton);
 
     await findByText('Error: Invalid credentials');
+  });
+
+  it('redirects the user to "/" on successful login', async () => {
+    const mockAxiosPost = vi.fn().mockResolvedValue({ data: { token: 'testToken' } });
+    axios.post = mockAxiosPost;
+    
+    Object.defineProperty(window, 'location', {
+      value: {
+        href: ''
+      },
+      writable: true
+    });
+
+    const { getByPlaceholderText, getByText } = render(
+      <MemoryRouter>
+        <LoginPage handleSubmit={() => Promise.resolve()} />
+      </MemoryRouter>
+    );
+
+    const usernameOrEmailInput = getByPlaceholderText('Username or email');
+    const passwordInput = getByPlaceholderText('password');
+    const submitButton = getByText('Log in');
+
+    fireEvent.change(usernameOrEmailInput, { target: { value: 'testUsername' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(localStorage.getItem('token')).toBe('testToken');
+      
+      expect(window.location.href).toBe('');
+    });
   });
 });

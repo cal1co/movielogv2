@@ -5,6 +5,7 @@ import axios, { AxiosError } from "axios";
 import "./LoginPage.css";
 import { ReactComponent as PasswordEye } from "../../icons/eye-regular.svg";
 import { ReactComponent as PasswordEyeSlashed } from "../../icons/eye-slash-regular.svg";
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage({ handleSubmit }: LoginPageProps) {
 
@@ -15,6 +16,8 @@ function LoginPage({ handleSubmit }: LoginPageProps) {
 
   const [errorMessage, setErrorMessage] = useState<string>("" as string);
   const [passFieldType, setPassFieldType] = useState<"password" | "text">("password")
+
+  const navigate = useNavigate()
 
   const togglePassVisibility = () => {
     if (passFieldType === "password") {
@@ -42,7 +45,7 @@ function LoginPage({ handleSubmit }: LoginPageProps) {
       );
 
       localStorage.setItem("token", response.data.token);
-      window.location.href = "/";
+      navigate("/")
     } catch (error) {
       const err = error as AxiosError
       setErrorMessage("Error: " + err.response?.data?.message);

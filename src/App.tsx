@@ -73,8 +73,10 @@ function App() {
     const tokenVal = globalState.token;
     if (!token) {
       if (!redirected) {
-        navigate("/login")
-        setRedirected(true)
+        if (location.pathname !== "/signup") {
+          navigate("/login")
+          setRedirected(true)
+        }
       };
       return
     };

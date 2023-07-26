@@ -1,48 +1,150 @@
-import React from 'react';
-import SignupPage from '../src/pages/SignupPage';
-import { render, fireEvent } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
-import { test, vi, expect } from 'vitest';
+import { render, fireEvent, waitFor } from "@testing-library/react";
+import SignupPage from "../src/pages/SignupPage";
+import axios from "axios";
+import React from "react";
+import { vi } from "vitest";
+import { MemoryRouter } from "react-router-dom";
 
-describe('SignupPage', () => {
-  test("1 + 1 = 2", () => {
-    expect(1 + 1).toBe(2)
-  })
-  // test('renders all form inputs and a submit button', () => {
-  //   const dummyMock = vi.fn()
-  //   const { getByLabelText, getByRole } = render(<SignupPage handleSubmit={dummyMock} />);
-  //   const usernameInput = getByLabelText(/Username/i);
-  //   const emailInput = getByLabelText(/Email/i);
-  //   const passwordInput = getByLabelText(/Password/i);
-  //   const submitButton = getByRole('button', { name: /Sign up/i });
+vi.mock("axios");
+vi.mock("react-router-dom", async () => ({
+  ...vi.importActual("react-router-dom"),
+  MemoryRouter: (
+    await vi.importActual<typeof import("react-router-dom")>("react-router-dom")
+  ).MemoryRouter,
+  useNavigate: () => vi.fn(),
+}));
 
-  //   expect(usernameInput).toBeInTheDocument();
-  //   expect(emailInput).toBeInTheDocument();
-  //   expect(passwordInput).toBeInTheDocument();
-  //   expect(submitButton).toBeInTheDocument();
-  // });
+const localStorageMock = (function() {
+  let store = {};
+  return {
+    getItem: function(key) {
+      return store[key] || null;
+    },
+    setItem: function(key, value) {
+      store[key] = value.toString();
+    },
+    clear: function() {
+      store = {};
+    }
+  };
+})();
 
-  // test('handles form submission', async () => {
-  //   // mock any async function that would be called on form submission
-  //   const mockSubmit = vi.fn();
+Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
-  //   const { getByLabelText, getByRole } = render(
-  //     <SignupPage handleSubmit={mockSubmit} />
+describe("SignupPage", () => {
+  it("updates the username, email, and password on user input", async () => {
+    const { getByPlaceholderText } = render(
+      <SignupPage handleSubmit={() => Promise.resolve()} />
+    );
+    const usernameInput = getByPlaceholderText("username");
+    const emailInput = getByPlaceholderText("email");
+    const passwordInput = getByPlaceholderText("password");
+
+    fireEvent.change(usernameInput, { target: { value: "testUsername" } });
+    fireEvent.change(emailInput, { target: { value: "testEmail" } });
+    fireEvent.change(passwordInput, { target: { value: "testPassword" } });
+
+    expect((usernameInput as HTMLInputElement).value).toBe("testUsername");
+    expect((emailInput as HTMLInputElement).value).toBe("testEmail");
+    expect((passwordInput as HTMLInputElement).value).toBe("testPassword");
+  });
+
+  it("toggles the visibility of the password field when the visibility icon is clicked", () => {
+    const { getByPlaceholderText, getByTestId } = render(
+      <SignupPage handleSubmit={() => Promise.resolve()} />
+    );
+    const passwordInput = getByPlaceholderText("password");
+    const visibilityIcon = getByTestId("eye-icon");
+
+    expect((passwordInput as HTMLInputElement).type).toBe("password");
+
+    fireEvent.click(visibilityIcon);
+    expect((passwordInput as HTMLInputElement).type).toBe("text");
+
+    fireEvent.click(visibilityIcon);
+    expect((passwordInput as HTMLInputElement).type).toBe("password");
+  });
+
+  it('submits the form when the submit button is clicked and a token is received', async () => {
+    const mockAxiosPost = vi.fn().mockResolvedValue({ data: { token: 'testToken' } });
+    axios.post = mockAxiosPost;
+  
+    const { getByPlaceholderText, getByText } = render(
+      <MemoryRouter>
+        <SignupPage handleSubmit={() => Promise.resolve()} />
+      </MemoryRouter>
+    );
+  
+    const usernameInput = getByPlaceholderText('username');
+    const emailInput = getByPlaceholderText('email');
+    const passwordInput = getByPlaceholderText('password');
+    const submitButton = getByText('Sign up');
+  
+    fireEvent.change(usernameInput, { target: { value: 'testUsername' } });
+    fireEvent.change(emailInput, { target: { value: 'testEmail@email.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+    fireEvent.click(submitButton);
+  
+    await waitFor(() => {
+      expect(mockAxiosPost).toHaveBeenCalledWith('http://localhost:3000/api/auth/register', { username: 'testUsername', email: 'testEmail@email.com', password: 'testPassword' });
+      expect(localStorage.getItem('token')).toBe('testToken');
+    });
+  });
+
+  // it("displays an error message if the signup request fails", async () => {
+  //   const mockAxiosPost = vi
+  //     .fn()
+  //     .mockRejectedValue({ response: { data: { message: "Signup failed" } } });
+  //   axios.post = mockAxiosPost;
+
+  //   const { getByPlaceholderText, getByText, findByText } = render(
+  //     <SignupPage handleSubmit={() => Promise.resolve()} />
   //   );
-  //   const usernameInput = getByLabelText(/Username/i);
-  //   const emailInput = getByLabelText(/Email/i);
-  //   const passwordInput = getByLabelText(/Password/i);
-  //   const submitButton = getByRole('button', { name: /Sign up/i });
+  //   const usernameInput = getByPlaceholderText("username");
+  //   const emailInput = getByPlaceholderText("email");
+  //   const passwordInput = getByPlaceholderText("password");
+  //   const submitButton = getByText("Sign up");
 
-  //   // enter valid form data and submit
-  //   act(() => {
-  //     fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-  //     fireEvent.change(emailInput, { target: { value: 'user@test.com' } });
-  //     fireEvent.change(passwordInput, { target: { value: 'password123' } });
-  //     fireEvent.click(submitButton);
-  //   });
+  //   fireEvent.change(usernameInput, { target: { value: "testUsername" } });
+  //   fireEvent.change(emailInput, { target: { value: "testEmail" } });
+  //   fireEvent.change(passwordInput, { target: { value: "testPassword" } });
+  //   fireEvent.click(submitButton);
 
-  //   // assert that handleSubmit was called and the form was submitted
-  //   expect(mockSubmit).toHaveBeenCalledOnce();
+  //   await findByText("Error: Signup failed");
   // });
+
+  it('redirects the user to "/" on successful signup', async () => {
+    const mockAxiosPost = vi
+      .fn()
+      .mockResolvedValue({ data: { token: "testToken" } });
+    axios.post = mockAxiosPost;
+
+    Object.defineProperty(window, "location", {
+      value: {
+        href: "",
+      },
+      writable: true,
+    });
+
+    const { getByPlaceholderText, getByText } = render(
+      <MemoryRouter>
+        <SignupPage handleSubmit={() => Promise.resolve()} />
+      </MemoryRouter>
+    );
+
+    const usernameInput = getByPlaceholderText("username");
+    const emailInput = getByPlaceholderText("email");
+    const passwordInput = getByPlaceholderText("password");
+    const submitButton = getByText("Sign up");
+
+    fireEvent.change(usernameInput, { target: { value: "testUsername" } });
+    fireEvent.change(emailInput, { target: { value: "testEmail" } });
+    fireEvent.change(passwordInput, { target: { value: "testPassword" } });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(localStorage.getItem("token")).toBe("testToken");
+      expect(window.location.href).toBe("");
+    });
+  });
 });

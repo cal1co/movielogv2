@@ -6,6 +6,7 @@ import axios from "axios";
 import "./LoginPage.css";
 import { ReactComponent as PasswordEye } from "../../icons/eye-regular.svg";
 import { ReactComponent as PasswordEyeSlashed } from "../../icons/eye-slash-regular.svg";
+import { useNavigate } from 'react-router-dom';
 
 function SignupPage({ handleSubmit }: SignupPageProps) {
   const [user, setUser] = useState<User>({
@@ -15,6 +16,8 @@ function SignupPage({ handleSubmit }: SignupPageProps) {
   });
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [passFieldType, setPassFieldType] = useState<"password" | "text">("password")
+
+  const navigate = useNavigate()
 
   const togglePassVisibility = () => {
     if (passFieldType === "password") {
@@ -42,7 +45,7 @@ function SignupPage({ handleSubmit }: SignupPageProps) {
       );
 
       localStorage.setItem("token", response.data.token);
-      window.location.href = "/";
+      navigate("/")
     } catch (error) {
       setErrorMessage("" + error);
     }
@@ -52,7 +55,8 @@ function SignupPage({ handleSubmit }: SignupPageProps) {
     <div className="login-signup">
       <div className="signup-form">
         <div className="form-content">
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleFormSubmit}
+          aria-label="form">
             <div>
               <input
                 // type="text"
@@ -87,7 +91,7 @@ function SignupPage({ handleSubmit }: SignupPageProps) {
                 value={user.password}
                 onChange={handleInputChange}
               />
-              <div className="eye-icon" onClick={togglePassVisibility}>
+              <div className="eye-icon" data-testid="eye-icon" onClick={togglePassVisibility}>
                 {passFieldType === "password" ?
                 <PasswordEye />
                 :
