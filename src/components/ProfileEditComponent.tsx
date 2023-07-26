@@ -1,6 +1,10 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import axios from "axios";
 import "./ProfileEditComponent.css";
+import React, { ChangeEvent, useEffect, useState, useContext } from "react";
+import { AppContext } from '../AppContext';
+
+
+import axios from "axios";
+
 
 const token = localStorage.getItem("token");
 const headers = {
@@ -8,6 +12,7 @@ const headers = {
 };
 
 const ProfileEditComponent = () => {
+  
   const [disabled, setDisabled] = useState<boolean>(true);
   const [username, setUsername] = useState<string>("");
   const [originalUsername, setOriginalUsername] = useState<string>("");
@@ -22,6 +27,9 @@ const ProfileEditComponent = () => {
   const [file, setFile] = useState<File | null>(null);
   const [blob, setBlobData] = useState<Blob | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const { globalState, setGlobalState } = useContext(AppContext)
+
 
   useEffect(() => {
     getUserInfo();
@@ -89,7 +97,10 @@ const ProfileEditComponent = () => {
         { headers }
       )
       .then((res) => {
-        console.log("username", res.data);
+        setGlobalState((prevState) => ({
+          ...prevState,
+          username: username,
+        }));
         setSuccess(true);
         setError(false);
       })
@@ -107,7 +118,6 @@ const ProfileEditComponent = () => {
         { headers }
       )
       .then((res) => {
-        console.log("bio", res.data);
         setSuccess(true);
         setError(false);
       })
@@ -125,7 +135,10 @@ const ProfileEditComponent = () => {
         { headers }
       )
       .then((res) => {
-        console.log("display", res.data);
+        setGlobalState((prevState) => ({
+          ...prevState,
+          username: displayName,
+        }));
         setSuccess(true);
         setError(false);
       })
@@ -152,7 +165,10 @@ const ProfileEditComponent = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
+          setGlobalState((prevState) => ({
+            ...prevState,
+            username: res.data,
+          }));
         })
         .catch((err) => {
           console.log(err);

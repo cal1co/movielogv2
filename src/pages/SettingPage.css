@@ -18,3 +18,7 @@
         display:none;
     }
 }
+
+.setting-page-option:hover {
+    cursor:pointer;
+}

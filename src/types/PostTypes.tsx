@@ -10,6 +10,7 @@ export type Post = {
     display_name:string,
     profile_image:string
     profile_image_data:string
+    media: string[]
 }
 
 export type SearchPost = {

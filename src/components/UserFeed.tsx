@@ -33,7 +33,6 @@ function UserFeed({post}:PostInterface ) {
 
   useEffect(() => {
     if (post && feed) {
-
       post.username = globalState.username
       post.display_name = globalState.display_name
       setFeed((prevFeed) => [post, ...(prevFeed as Post[])])
@@ -57,6 +56,7 @@ function UserFeed({post}:PostInterface ) {
     .then(res => {
       getProfileImages(res.data)
       setFeed(res.data)
+      console.log(res.data)
     })
     .catch(err => {
       console.log(err)

@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./HomePageSettings.css";
+import { AppContext } from '../AppContext';
+
+// Icons
 import { ReactComponent as Yuzu } from "../../icons/lemon-regular.svg";
 import { ReactComponent as Home } from "../../icons/house-chimney-window-regular.svg";
 import { ReactComponent as HomeSelected } from "../../icons/house-chimney-window-solid.svg";
@@ -29,6 +32,8 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
   const [selectedBeforeSearch, setSelectedBeforeSearch] = useState<string>("");
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
   const location = useLocation();
+
+  const { globalState } = useContext(AppContext)
 
   useEffect(() => {
     setSelected(currLocation);
@@ -124,7 +129,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
             <div className="icon-description">direct messages</div>
           </div>
         </div>
-        <div className="profile icon-wrapper">
+        <div className="profile icon-wrapper" onClick={() => navigate(globalState.username)}>
           <div className="setting-option">
             <User className="user-icon icon" />
             <div className="icon-description">profile</div>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import './SettingPage.css'
+import React, { useState, useContext } from 'react';
+
 
 import ProfileEditComponent from '../components/ProfileEditComponent'
 import PasswordChangeComponent from '../components/PasswordChangeComponent'
@@ -10,7 +11,6 @@ const SettingPage: React.FC = () => {
 
     const [selectedOption, setSelectedOption] = useState<"edit" | "pass" | "acc-info">("edit")
     const [closed, setClosed] = useState<boolean>(false);
-
 
     const handleSelectedComponent = () => { 
         switch (selectedOption) {
@@ -30,13 +30,13 @@ const SettingPage: React.FC = () => {
             <div className="page-title">
                 Settings
             </div>
-                <div className="edit-profile" onClick={() => setSelectedOption("edit")}>
+                <div className="edit-profile setting-page-option" onClick={() => setSelectedOption("edit")}>
                     edit profile
                 </div>
-                <div className="pass-change" onClick={() => setSelectedOption("pass")}>
+                <div className="pass-change setting-page-option" onClick={() => setSelectedOption("pass")}>
                     change your password
                 </div>
-                <div className="account-info" onClick={() => setSelectedOption("acc-info")}>
+                <div className="account-info setting-page-option" onClick={() => setSelectedOption("acc-info")}>
                     account information 
                 </div>
             </div>

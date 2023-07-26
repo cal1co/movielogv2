@@ -35,8 +35,8 @@ body.light{
     --post-border:2px solid black;
     --post-background-colour:white;
     --button-hover: 2px solid black;
-    --hover-colour:rgba(0,0,0,0.05)
-
+    --hover-colour:rgba(0,0,0,0.05);
+    --post-media-shadow: #5F5E5E;
 }
 body.dark{
     --background-colour:var(--background-colour-dark);
@@ -49,6 +49,7 @@ body.dark{
     --post-background-colour:rgb(0, 0, 0);
     --button-hover: 2px solid white;
     --hover-colour:rgba(255,255,255,.1);
+    --post-media-shadow: #383838;
 }
 
 
