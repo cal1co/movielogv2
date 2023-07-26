@@ -6,11 +6,14 @@ import { vi } from 'vitest'
 import { Router, useNavigate, MemoryRouter } from 'react-router-dom';
 
 vi.mock('axios');
-vi.mock('react-router-dom', async () => ({
-  ...vi.importActual('react-router-dom'),
-  MemoryRouter: (await vi.importActual<typeof import('react-router-dom')>('react-router-dom')).MemoryRouter,
-  useNavigate: () => vi.fn(), 
-}));
+vi.mock('react-router-dom', async () => {
+  const originalModule = vi.importActual('react-router-dom');
+  return {
+    ...originalModule,
+    MemoryRouter: (await vi.importActual<typeof import('react-router-dom')>('react-router-dom')).MemoryRouter,
+    useNavigate: () => vi.fn(), 
+  }
+});
 
 describe('LoginPage', () => {
   it('updates the usernameOrEmail and password on user input', async () => {

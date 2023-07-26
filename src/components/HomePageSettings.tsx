@@ -90,10 +90,10 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
             <div className="icon-description">home</div>
           </div>
         </div>
-        <div className="search icon-wrapper" onClick={toggleSidebar}>
+        <div className="search icon-wrapper" onClick={toggleSidebar} data-testid="search-icon-wrapper">
           <div className="setting-option">
             {selected === "Search" && sidebarOpen ? (
-              <SearchSelected className="search-icon icon" />
+              <SearchSelected className="search-icon icon"/>
             ) : (
               <Search className="search-icon icon" />
             )}
@@ -143,7 +143,7 @@ const HomePageSettings: React.FC<ChildComponentProps> = ({ currLocation }) => {
           </div>
         </div>
       </div>
-      <div className={`search-wrapper ${sidebarOpen ? "open" : "hidden"}`}>
+      <div className={`search-wrapper ${sidebarOpen ? "open" : "hidden"}`} data-testid="search-wrapper">
         <SearchSidebar />
       </div>
     </div>

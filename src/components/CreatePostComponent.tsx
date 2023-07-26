@@ -198,6 +198,7 @@ const createPostComponent = ({ onNewPost }: CreatePostProps) => {
               accept="image/*, video/*"
               style={{ display: "none" }}
               onChange={handleFileChange}
+              data-testid='image-upload'
             />
 
             <Image

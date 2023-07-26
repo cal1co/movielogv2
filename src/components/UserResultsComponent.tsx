@@ -4,20 +4,18 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "../types/UserTypes";
 
-// http://localhost:5173/search/film?query=spiderman
 
 type QueryProps = {
   query: string;
 };
 
 const UserResultsComponent: React.FC<QueryProps> = ({ query }) => {
-  const [storedQuery, setStoredQuery] = useState<string | null>(null);
-  const [page, setPage] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-  const [userResults, setUserResults] = useState<UserData[] | null>(null);
 
   const navigate = useNavigate();
+  const [storedQuery, setStoredQuery] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [userResults, setUserResults] = useState<UserData[] | null>(null);
+
 
   const token = localStorage.getItem("token");
   const headers = {
@@ -25,14 +23,10 @@ const UserResultsComponent: React.FC<QueryProps> = ({ query }) => {
     "Content-Type": "application/json",
   };
 
+
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-  useEffect(() => {
-    if (isMounted) {
-      fetchUsers(query);
-    }
-  }, [query, isMounted, page]);
+    fetchUsers(query);
+  }, [query]);
 
   const fetchUsers = async (query: string) => {
     setIsLoading(true);
@@ -99,7 +93,6 @@ const UserResultsComponent: React.FC<QueryProps> = ({ query }) => {
 
   return (
     <div className="UserResultsComponent">
-      {/* Search for users related to {query}: */}
       <div className="">{userResults && printUsers(userResults)}</div>
     </div>
   );

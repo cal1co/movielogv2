@@ -70,10 +70,10 @@ function App() {
 
   const checkToken = () => {
     const token = localStorage.getItem("token");
-    const tokenVal = globalState.token;
     if (!token) {
       if (!redirected) {
         if (location.pathname !== "/signup") {
+          console.log("REROUTING")
           navigate("/login")
           setRedirected(true)
         }

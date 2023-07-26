@@ -42,7 +42,6 @@ function UserFeed({post}:PostInterface ) {
   useEffect(() => {
     if (isMounted) {
       if (!token) {
-        console.log("token null. handle this error")
         return
       } 
       getFeed(1)
