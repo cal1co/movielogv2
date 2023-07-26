@@ -34,7 +34,6 @@ const createPostComponent = ({ onNewPost }: CreatePostProps) => {
   const [profileImage, setProfileImage] = useState<string>("");
   const [disabled, setDisabled] = useState<boolean>(false);
   const [imageUploaded, setImageUploaded] = useState<boolean>(false);
-  const [file, setFile] = useState<File[] | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [blobData, setBlobData] = useState<Blob | null>(null);
   const [uploadedImage, setUploadedImage] = useState<string[]>([]);
@@ -76,10 +75,11 @@ const createPostComponent = ({ onNewPost }: CreatePostProps) => {
       });
     }
     setText("");
+    setUploadedFiles([])
+    setUploadedImage([])
     setDisabled(false);
   };
   const uploadMedia = async () => {
-    console.log("FILES", uploadedFiles)
     const formData = new FormData();
     for (let i = 0; i < uploadedFiles.length; i++) {
       formData.append("content", uploadedFiles[i]);

@@ -12,7 +12,6 @@ import { ReactComponent as Save } from "../../icons/bookmark-regular.svg";
 import { ReactComponent as Left } from "../../icons/circle-caret-left-regular.svg";
 import { ReactComponent as Right } from "../../icons/circle-caret-right-regular.svg";
 
-
 import React, { useContext } from "react";
 import { CommentModalContext } from "../CommentModalContext";
 import postAgeHandler from "../utils/postAgeHandler";
@@ -29,7 +28,6 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
   const child2Ref = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const postContent = useRef<HTMLImageElement>(null);
-
 
   const [parentHeight, setParentHeight] = useState(0);
 
@@ -50,14 +48,19 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
   const { openModal, parentPost, updatePost } = useContext(CommentModalContext);
 
   useLayoutEffect(() => {
-    const child1Height = child1Ref.current ? child1Ref.current.getBoundingClientRect().height
+    const child1Height = child1Ref.current
+      ? child1Ref.current.getBoundingClientRect().height
       : 0;
-  
+
     const overlapHeight = 10;
-    let contentRefHeight = contentRef.current ? contentRef.current.getBoundingClientRect().height : 0
-    setContentHeight(contentRefHeight)
-    const currPostHeight = postContent.current ? postContent.current.getBoundingClientRect().height : 0
-    setPostHeight(currPostHeight)
+    let contentRefHeight = contentRef.current
+      ? contentRef.current.getBoundingClientRect().height
+      : 0;
+    setContentHeight(contentRefHeight);
+    const currPostHeight = postContent.current
+      ? postContent.current.getBoundingClientRect().height
+      : 0;
+    setPostHeight(currPostHeight);
     if (child2Ref.current) {
       child2Ref.current.style.height = `${child1Height - 20 - 4}px`;
     }
@@ -216,40 +219,61 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
       </div>
       <div className="content-wrapper" style={{ height: `${parentHeight}px` }}>
         <div className="post-content-wrapper" ref={child1Ref}>
-          <div className={post.post_content ? "post-content" : "post-content empty-post"} ref={contentRef}>
+          <div
+            className={
+              post.post_content ? "post-content" : "post-content empty-post"
+            }
+            ref={contentRef}
+          >
             {post.post_content}
           </div>
-          {uploadedImages[carouselIndex] ?
+          {uploadedImages[carouselIndex] ? (
             <div className="post-media-item">
-              {carouselIndex > 0 ?
-              <Left className="post-carousel-button post-carousel-left" onClick={() => setCarouselIndex(carouselIndex - 1)}/>
-              :
-              ""
-            }
-            <img
-            ref={postContent}
-            src={uploadedImages[carouselIndex]}
-            alt=""
-            // className="post-media-item"
-            />
-            {uploadedImages.length > 1 && carouselIndex < uploadedImages.length - 1 
-              ?
-              <Right className="post-carousel-button post-carousel-right" onClick={() => setCarouselIndex(carouselIndex + 1)}/>
-              :
-              ""
-            }
+              {carouselIndex > 0 ? (
+                <Left
+                  className="post-carousel-button post-carousel-left"
+                  onClick={() => setCarouselIndex(carouselIndex - 1)}
+                />
+              ) : (
+                ""
+              )}
+              <img
+                ref={postContent}
+                src={uploadedImages[carouselIndex]}
+                alt=""
+                // className="post-media-item"
+              />
+              {uploadedImages.length > 1 &&
+              carouselIndex < uploadedImages.length - 1 ? (
+                <Right
+                  className="post-carousel-button post-carousel-right"
+                  onClick={() => setCarouselIndex(carouselIndex + 1)}
+                />
+              ) : (
+                ""
+              )}
             </div>
-            :
+          ) : (
             ""
-          }
+          )}
         </div>
-        <div className="post-content-shadow" ref={child2Ref} style={{height:`${contentHeight}px`}}>
-          <div className="post-content-shadow-text post-shadow" style={{height:`${contentHeight - 20}px`}}></div>
-          {uploadedImages[carouselIndex] ?
-          <div className="post-content-shadow-post post-shadow" style={{height:`${postHeight - 20}px`}}></div>
-          :
-          ""
-          }
+        <div
+          className="post-content-shadow"
+          ref={child2Ref}
+          style={{ height: `${contentHeight}px` }}
+        >
+          <div
+            className="post-content-shadow-text post-shadow"
+            style={{ height: `${contentHeight - 20}px` }}
+          ></div>
+          {uploadedImages[carouselIndex] ? (
+            <div
+              className="post-content-shadow-post post-shadow"
+              style={{ height: `${postHeight - 20}px` }}
+            ></div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       {postMediaLoaded && (

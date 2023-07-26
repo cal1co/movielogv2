@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import { UserLogin } from "../types/UserTypes";
 import { LoginPageProps } from "../types/FormTypes";
 import axios, { AxiosError } from "axios";
@@ -7,10 +7,12 @@ import { ReactComponent as PasswordEye } from "../../icons/eye-regular.svg";
 import { ReactComponent as PasswordEyeSlashed } from "../../icons/eye-slash-regular.svg";
 
 function LoginPage({ handleSubmit }: LoginPageProps) {
+
   const [user, setUser] = useState<UserLogin>({
     usernameOrEmail: "",
     password: "",
   });
+
   const [errorMessage, setErrorMessage] = useState<string>("" as string);
   const [passFieldType, setPassFieldType] = useState<"password" | "text">("password")
 
@@ -43,7 +45,6 @@ function LoginPage({ handleSubmit }: LoginPageProps) {
       window.location.href = "/";
     } catch (error) {
       const err = error as AxiosError
-      console.log(error)
       setErrorMessage("Error: " + err.response?.data?.message);
     }
   };
@@ -86,7 +87,7 @@ function LoginPage({ handleSubmit }: LoginPageProps) {
                 value={user.password}
                 onChange={handleInputChange}
               />
-              <div className="eye-icon" onClick={togglePassVisibility}>
+              <div className="eye-icon" data-testid="eye-icon" onClick={togglePassVisibility}>
                 {passFieldType === "password" ?
                 <PasswordEye />
                 :

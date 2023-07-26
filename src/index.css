@@ -44,7 +44,7 @@ body.dark{
     --icon-fill: var(--icon-fill-colour-dark);
     color: rgb(231, 233, 234);
     --text-colour: var(--colour-dark);
-    --shadow-colour:rgba(255, 255, 255, 0.2);
+    --shadow-colour:#5c5c5c;
     --post-border:2px solid rgb(190, 186, 186);
     --post-background-colour:rgb(0, 0, 0);
     --button-hover: 2px solid white;

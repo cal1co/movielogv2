@@ -1,54 +1,70 @@
+import { render, fireEvent, waitFor } from '@testing-library/react';
+import LoginPage from '../src/pages/LoginPage'
+import axios from 'axios';
 import React from 'react';
-import LoginPage from '../src/pages/LoginPage';
-import { render, fireEvent } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
-import { test, vi, expect } from 'vitest';
+import { vi } from 'vitest'
 
+vi.mock('axios');
 
 describe('LoginPage', () => {
+  it('updates the usernameOrEmail and password on user input', async () => {
+    const { getByPlaceholderText } = render(<LoginPage handleSubmit={() => Promise.resolve()} />);
+    const usernameOrEmailInput = getByPlaceholderText('Username or email');
+    const passwordInput = getByPlaceholderText('password');
 
-  test('renders login form', () => {
-    const dummyMock = vi.fn()
-    const { getByLabelText } = render(<LoginPage handleSubmit={dummyMock}/>);
-    expect(getByLabelText(/Email or Username/i)).toBeInTheDocument();
-    expect(getByLabelText(/Password/i)).toBeInTheDocument();
-  });
-  
-  test('handles form input', () => {
-    const dummyMock = vi.fn()
-    const { getByLabelText } = render(<LoginPage handleSubmit={dummyMock}/>);
-    const emailInput = getByLabelText(/Email or Username/i);
-    const passwordInput = getByLabelText(/Password/i);
-    
-    act(() => {
-      fireEvent.change(emailInput, { target: { value: 'user@test.com' } });
-    });
-    expect(emailInput).toHaveValue('user@test.com');
-    
-    act(() => {
-      fireEvent.change(passwordInput, { target: { value: 'password123' } });
-    });
-    expect(passwordInput).toHaveValue('password123');
-  });
-  
-  test('handles form submission', async () => {
-    // mock any async function that would be called on form submission
-    const mockSubmit = vi.fn();
-    
-    const { getByLabelText, getByRole } = render(<LoginPage handleSubmit={mockSubmit}/>);
-    const emailInput = getByLabelText(/Email or Username/i);
-    const passwordInput = getByLabelText(/Password/i);
-    const submitButton = getByRole('button', { name: /Log in/i });
-    
-    // enter valid form data and submit
-    act(() => {
-      fireEvent.change(emailInput, { target: { value: 'user@test.com' } });
-      fireEvent.change(passwordInput, { target: { value: 'password123' } });
-      fireEvent.click(submitButton);
-    });
-    
-    // assert that handleSubmit was called and the form was submitted
-    expect(mockSubmit.calls.length).toBe(1);
+    fireEvent.change(usernameOrEmailInput, { target: { value: 'testUsername' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+
+    expect((usernameOrEmailInput as HTMLInputElement).value).toBe('testUsername');
+    expect((passwordInput as HTMLInputElement).value).toBe('testPassword');
   });
 
-})
+  it('toggles the visibility of the password field when the visibility icon is clicked', () => {
+    const { getByPlaceholderText, getByTestId } = render(<LoginPage handleSubmit={() => Promise.resolve()} />);
+    const passwordInput = getByPlaceholderText('password');
+    const visibilityIcon = getByTestId('eye-icon');
+
+    expect((passwordInput as HTMLInputElement).type).toBe('password');
+
+    fireEvent.click(visibilityIcon);
+    expect((passwordInput as HTMLInputElement).type).toBe('text');
+
+    fireEvent.click(visibilityIcon);
+    expect((passwordInput as HTMLInputElement).type).toBe('password');
+  });
+
+  it('submits the form when the submit button is clicked and a token is received', async () => {
+    const mockAxiosPost = vi.fn().mockResolvedValue({ data: { token: 'testToken' } });
+    axios.post = mockAxiosPost;
+
+    const { getByPlaceholderText, getByText } = render(<LoginPage handleSubmit={() => Promise.resolve()} />);
+    const usernameOrEmailInput = getByPlaceholderText('Username or email');
+    const passwordInput = getByPlaceholderText('password');
+    const submitButton = getByText('Log in');
+
+    fireEvent.change(usernameOrEmailInput, { target: { value: 'testUsername' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(mockAxiosPost).toHaveBeenCalledWith('http://localhost:3000/api/auth/login', { usernameOrEmail: 'testUsername', password: 'testPassword' });
+      expect(localStorage.getItem('token')).toBe('testToken');
+    });
+  });
+
+  it('displays an error message if the login request fails', async () => {
+    const mockAxiosPost = vi.fn().mockRejectedValue({ response: { data: { message: 'Invalid credentials' } } });
+    axios.post = mockAxiosPost;
+
+    const { getByPlaceholderText, getByText, findByText } = render(<LoginPage handleSubmit={() => Promise.resolve()} />);
+    const usernameOrEmailInput = getByPlaceholderText('Username or email');
+    const passwordInput = getByPlaceholderText('password');
+    const submitButton = getByText('Log in');
+
+    fireEvent.change(usernameOrEmailInput, { target: { value: 'testUsername' } });
+    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+    fireEvent.click(submitButton);
+
+    await findByText('Error: Invalid credentials');
+  });
+});

@@ -24,8 +24,6 @@ const SearchResultsPage: React.FC = () => {
     const defineRenderedComponent = () => {
         if (query) {
             switch (tab) {
-                // case 'films':
-                //     return <MovieResultsComponent query={query} />
                 case 'posts':
                     return <PostSearchResultsComponent query={query} />
                 case 'users':
@@ -40,7 +38,6 @@ const SearchResultsPage: React.FC = () => {
     return (
       <div className="SearchResultsPage">
         <SearchBar />
-        {/* {defineRenderedComponent()} */}
       </div>
     );
   };

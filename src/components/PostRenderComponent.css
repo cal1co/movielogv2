@@ -109,7 +109,7 @@
 .post-content-shadow{
   position:relative;
   z-index:-1;
-  background:var(--shadow-colour);
+  /* background:var(--shadow-colour); */
   /* border:var(--post-border); */
   bottom:calc(100% - 20px);
   left:10px;
@@ -267,6 +267,9 @@
   margin-inline:20px;
   transform: translateY(-50%);
   filter:drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.6));
+}
+.post-carousel-button:hover {
+  cursor:pointer;
 }
 .post-carousel-left {
   right:90%;
