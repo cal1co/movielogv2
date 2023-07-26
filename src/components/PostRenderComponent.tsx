@@ -9,6 +9,10 @@ import { ReactComponent as Comment } from "../../icons/comment-regular.svg";
 import { ReactComponent as Ellipsis } from "../../icons/ellipsis-regular.svg";
 import { ReactComponent as Share } from "../../icons/paper-plane-regular.svg";
 import { ReactComponent as Save } from "../../icons/bookmark-regular.svg";
+import { ReactComponent as Left } from "../../icons/circle-caret-left-regular.svg";
+import { ReactComponent as Right } from "../../icons/circle-caret-right-regular.svg";
+
+
 import React, { useContext } from "react";
 import { CommentModalContext } from "../CommentModalContext";
 import postAgeHandler from "../utils/postAgeHandler";
@@ -60,7 +64,7 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
 
     const newParentHeight = child1Height + overlapHeight;
     setParentHeight(newParentHeight);
-  }, [uploadedImages]);
+  }, [uploadedImages, carouselIndex]);
 
   useEffect(() => {
     if (post.media) {
@@ -216,12 +220,25 @@ const PostRender: React.FC<QueryProps> = ({ post }) => {
             {post.post_content}
           </div>
           {uploadedImages[carouselIndex] ?
+            <div className="post-media-item">
+              {carouselIndex > 0 ?
+              <Left className="post-carousel-button post-carousel-left" onClick={() => setCarouselIndex(carouselIndex - 1)}/>
+              :
+              ""
+            }
             <img
             ref={postContent}
             src={uploadedImages[carouselIndex]}
             alt=""
-            className="post-media-item"
+            // className="post-media-item"
             />
+            {uploadedImages.length > 1 && carouselIndex < uploadedImages.length - 1 
+              ?
+              <Right className="post-carousel-button post-carousel-right" onClick={() => setCarouselIndex(carouselIndex + 1)}/>
+              :
+              ""
+            }
+            </div>
             :
             ""
           }

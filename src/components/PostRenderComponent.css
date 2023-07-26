@@ -242,7 +242,7 @@
 .share-button {
   fill:var(--icon-fill);
 }
-.post-media-item {
+.post-media-item img{
   position:relative;
   object-fit:contain;
   left:50%;
@@ -250,4 +250,27 @@
   width:620px;
   border:var(--post-border);
   border-top:0;
+}
+.post-media-item {
+  position:relative;
+  display:inline-block;
+  /* display:flex; */
+}
+
+.post-carousel-button {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  fill:rgba(255, 255, 255, 0.95);
+  height:30px;
+  width:30px;
+  margin-inline:20px;
+  transform: translateY(-50%);
+  filter:drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.6));
+}
+.post-carousel-left {
+  right:90%;
+}
+.post-carousel-right {
+  left:90%;
 }
