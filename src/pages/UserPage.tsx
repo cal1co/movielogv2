@@ -145,7 +145,7 @@ function UserPage() {
                   <div className="head-username">{user.username}</div>
                   <div className="user-utils">
                     {isUser ? (
-                      <Gear className="user-settings-button" onClick={() => navigate('/accounts/settings')}/>
+                      <Gear className="user-settings-button" data-testid="user-settings-button" onClick={() => navigate('/accounts/settings')}/>
                     ) : (
                       <div className="follow-button">
                         {isFollowing ? (
@@ -176,7 +176,7 @@ function UserPage() {
                   </div>
                 </div>
                 <div className="user-more-info">
-                  <div className="user-more-info-display-name">
+                  <div className="user-more-info-display-name" data-testid="user-more-info-display-name">
                     {user.display_name}
                   </div>
                   <div className="user-more-info-bio">{user.bio}</div>

@@ -30,13 +30,13 @@ const SettingPage: React.FC = () => {
             <div className="page-title">
                 Settings
             </div>
-                <div className="edit-profile setting-page-option" onClick={() => setSelectedOption("edit")}>
+                <div className="edit-profile setting-page-option" data-testid="edit-profile" onClick={() => setSelectedOption("edit")}>
                     edit profile
                 </div>
                 <div className="pass-change setting-page-option" onClick={() => setSelectedOption("pass")}>
                     change your password
                 </div>
-                <div className="account-info setting-page-option" onClick={() => setSelectedOption("acc-info")}>
+                <div className="account-info setting-page-option" data-testid="edit-account-information" onClick={() => setSelectedOption("acc-info")}>
                     account information 
                 </div>
             </div>
