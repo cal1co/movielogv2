@@ -99,7 +99,7 @@ function App() {
     await axios
     .get("http://localhost:3000/api/auth/userdata", { headers })
     .then(res => {
-      console.log("userinfo", res.data)
+      // console.log("userinfo", res.data)
       updateTokenValue(token, res.data.profile_image, res.data.username, res.data.display_name)
       setVerifySuccess(true)
     })

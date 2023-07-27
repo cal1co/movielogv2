@@ -179,7 +179,7 @@ const ProfileEditComponent = () => {
     await axios
       .get("http://localhost:3000/api/auth/userdata", { headers })
       .then((res) => {
-        console.log(res.data);
+        console.log("user data", res.data);
         setUsername(res.data.username);
         setOriginalUsername(res.data.username);
         setBio(res.data.bio);
@@ -209,8 +209,9 @@ const ProfileEditComponent = () => {
         <input type="file" accept="image/*" onChange={handleImageUpload} />
       </div>
       <div className="username">
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="username" data-testid="profile-edit-username">Username:</label>
         <input
+          data-testid="profile-edit-user-input"
           type="text"
           id="username"
           value={username}

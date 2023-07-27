@@ -119,10 +119,8 @@ function UserFeed({post}:PostInterface ) {
   }
   return (
     <div className="UserFeed">
-      {/* <div className="feedname">
-        </div> */}
       <div className="feed">
-      {feed && renderFeed(feed)}
+        {feed && renderFeed(feed)}
       </div>
     </div>
   )

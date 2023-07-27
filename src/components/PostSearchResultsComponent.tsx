@@ -27,7 +27,7 @@ const PostSearchResultsComponent: React.FC<QueryProps> = ({query}) => {
         headers
     })
     .then( res => {
-      console.log(res.data)
+      // console.log(res.data)
       setPostResults(res.data)
     }) 
     .catch( err => {
@@ -38,11 +38,9 @@ const PostSearchResultsComponent: React.FC<QueryProps> = ({query}) => {
   }
 
   const printPosts = (posts: SearchPost[]) => {
-    console.log("called printposts")
       return (
         <React.Fragment>
           {posts.map((post, _) => {
-            console.log("post:", post)
           return(
             <div key={post.id}>
               <div className="post-content-search-result">{post.post_content}</div>

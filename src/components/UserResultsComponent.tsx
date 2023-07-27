@@ -1,7 +1,7 @@
-import "./UserResultsComponent.css";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import "./UserResultsComponent.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { UserData } from "../types/UserTypes";
 
 
@@ -10,8 +10,9 @@ type QueryProps = {
 };
 
 const UserResultsComponent: React.FC<QueryProps> = ({ query }) => {
-
   const navigate = useNavigate();
+
+
   const [storedQuery, setStoredQuery] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [userResults, setUserResults] = useState<UserData[] | null>(null);
@@ -22,7 +23,6 @@ const UserResultsComponent: React.FC<QueryProps> = ({ query }) => {
     Authorization: `Bearer ${token}`,
     "Content-Type": "application/json",
   };
-
 
   useEffect(() => {
     fetchUsers(query);
@@ -36,6 +36,7 @@ const UserResultsComponent: React.FC<QueryProps> = ({ query }) => {
         headers,
       })
       .then((res) => {
+        console.log(res.data.response)
         fetchUserData(res.data.response);
       })
       .catch((err) => {
@@ -46,13 +47,12 @@ const UserResultsComponent: React.FC<QueryProps> = ({ query }) => {
   };
 
   const fetchUserData = async (users: UserData[]) => {
+    
     await axios
       .post(
         `http://localhost:3000/api/auth//s3image/fetch/images`,
         { users: users },
-        {
-          headers,
-        }
+        { headers }
       )
       .then((res) => {
         setUserResults(res.data);
