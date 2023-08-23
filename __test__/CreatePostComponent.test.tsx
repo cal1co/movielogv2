@@ -77,7 +77,7 @@ describe('CreatePostComponent', () => {
         const headers = {
             Authorization: `Bearer ${token}`,
         };
-        expect(mockAxiosPost).toHaveBeenCalledWith('http://localhost:8082/post', { post_content: 'testPost' }, { headers });
+        expect(mockAxiosPost).toHaveBeenCalledWith(`${import.meta.env.VITE_YUZU_POST_HANDLER}/post`, { post_content: 'testPost' }, { headers });
     });
   });
 });

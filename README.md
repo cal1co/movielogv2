@@ -1,14 +1,16 @@
 ## Yuzu
 
-***Yuzu*** is a social media platform that focuses on creating communities around all kinds of things. Users can post, like, comment, share photos, and video. They can also create open and closed groups to build their own communities. The platform has integration with movie and book APIs for users to review and share posts about their favourite stories, authors, directors, actors, and more.
+***Yuzu*** is a text-first social media platform that focuses on creating communities around all kinds of things.  
 
 ## Architecture
 
 The platform is built using several technologies:
 
-* Frontend: TypeScript and React
+* Frontend: TypeScript, React
+* Mobile Client: Swift
 * Post service: Go
-* User service: Node.js + TypeScript
+* Feed service: Go
+* User service: Node.js, TypeScript
 * Data storage: Cassandra, Redis, PostgreSQL
 * Search: Elasticsearch
 * Message Queue: Kafka
@@ -39,10 +41,13 @@ The platform is built using several technologies:
 - Redis is used as a cache to speed up post ranking and data retrieval.
 - PostgreSQL is used for user related storage as complex queries are sometimes required 
 
-### Search
+## Search
 
 - The platform uses Elasticsearch to provide fuzzy search capabilities for posts and users. Elasticsearch provides fast and efficient search operations, even with large amounts of data.
 Deployment
+
+## Caching
+- For fast and reliable time-sensitive data, redis is used to store and serve content at lightning quick speeds. User feeds are stored in Redis in sorted sets in the form of postids and sorted by the date of the posts.
 
 ## Deployment
 
@@ -50,9 +55,10 @@ Deployment
 
 * Frontend container: runs the frontend application
 * Post service container: runs the Go post service
+* Postgresql container: runs the postgres service 
 * Feed service container: runs the Go post service
 * Cassandra container: runs the Cassandra database
-* Redis container: runs the Redis cache
+* Redis containers: runs post interaction counter cache and user feed cache
 * Elasticsearch container: runs the Elasticsearch search engine
 
 ## Conclusion

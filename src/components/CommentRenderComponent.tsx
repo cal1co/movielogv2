@@ -59,7 +59,7 @@ const PostRender: React.FC<QueryProps> = ({ comment }) => {
   const handleComment = async (commentContent: string): Promise<void> => {
     await axios
       .post(
-        `http://localhost:8082/post/${comment.comment_id}/comment`,
+        `${import.meta.env.VITE_YUZU_POST_HANDLER}/post/${comment.comment_id}/comment`,
         {
           comment_content: commentContent,
         },
@@ -75,7 +75,7 @@ const PostRender: React.FC<QueryProps> = ({ comment }) => {
   const handleLike = async (): Promise<void> => {
     await axios
       .post(
-        `http://localhost:8082/post/like/${comment.comment_id}`,
+        `${import.meta.env.VITE_YUZU_POST_HANDLER}/post/like/${comment.comment_id}`,
         {},
         {
           headers,
@@ -92,7 +92,7 @@ const PostRender: React.FC<QueryProps> = ({ comment }) => {
   const handleUnlike = async () => {
     await axios
       .post(
-        `http://localhost:8082/post/unlike/${comment.comment_id}`,
+        `${import.meta.env.VITE_YUZU_POST_HANDLER}/post/unlike/${comment.comment_id}`,
         {},
         {
           headers,

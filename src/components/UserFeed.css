@@ -1,9 +1,19 @@
 .UserFeed {
     width:768px;
 }
-.posts-container {
+.posts-container{
     display:flex;
     flex-direction:column;
     justify-content:center;
     border-top:var(--border);
+}
+
+.post-load-error {
+    position:fixed;
+    display:flex;
+    border-top:var(--border);
+    border-right:var(--border);
+    height:100%;
+    width:768px;
+    justify-content:center;
 }

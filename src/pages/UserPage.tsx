@@ -50,7 +50,7 @@ function UserPage() {
 
   const getUserPosts = async (uid: number) => {
     await axios
-      .get(`http://localhost:8082/posts/user/${uid}`, { headers })
+      .get(`${import.meta.env.VITE_YUZU_POST_HANDLER}/posts/user/${uid}`, { headers })
       .then(res => {
         console.log("post fetch", res.data)
         setPosts(res.data);
@@ -97,7 +97,7 @@ function UserPage() {
   };
   const addPostsToFeed = async (uid: number) => {
     await axios
-      .get(`http://localhost:8081/v1/feed/post/user/follow/${uid}`, { headers })
+      .get(`${import.meta.env.VITE_YUZU_WS_FEED_HANDLER}/v1/feed/post/user/follow/${uid}`, { headers })
       .then((res) => {
         console.log("post feed add", res.data);
       })
@@ -107,7 +107,7 @@ function UserPage() {
   };
   const removePostsFromFeed = async (uid: number) => {
     await axios
-      .get(`http://localhost:8081/v1/feed/post/user/unfollow/${uid}`, {
+      .get(`${import.meta.env.VITE_YUZU_WS_FEED_HANDLER}/v1/feed/post/user/unfollow/${uid}`, {
         headers,
       })
       .then((res) => {

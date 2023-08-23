@@ -51,7 +51,7 @@ function UserFeed({post}:PostInterface ) {
 
 
   const getFeed = (page: number) => {
-    axios.get(`http://localhost:8081/v1/feed/${page}`, {headers})
+    axios.get(`${import.meta.env.VITE_YUZU_FEED_HANDLER}/v1/feed/${page}`, {headers})
     .then(res => {
       getProfileImages(res.data)
       setFeed(res.data)
@@ -68,13 +68,14 @@ function UserFeed({post}:PostInterface ) {
       if (!usersMap[users[i].user_id]) {
         const user_data:ProfileImageFetch ={
           user_id: users[i].user_id,
-          profile_image_data: users[i].profile_image_data,
+          profile_image_data: users[i].profile_image_data === "" ? "profile_default.jpg" : users[i].profile_image_data,
           profile_image: ""
         }
         fetchReq.push(user_data)
       }
     }
-    axios.post(`http://localhost:3000/api/auth/s3image/feed/`, {fetchReq})
+    console.log(fetchReq)
+    axios.post(`http://localhost:3000/api/auth/s3image/feed/`, { fetchReq })
     .then(res => {
       setFeedImages(res.data)
     })
@@ -83,20 +84,20 @@ function UserFeed({post}:PostInterface ) {
     })
   }
   const establishFeedConnection = () => {
-    const socket = new WebSocket(`ws://localhost:8081/connect/` + token);
-    socket.onopen = () => {
-      console.log('conn open')
-    }
-    socket.onclose = () => {
-      console.log('conn closed')
-    }
-    socket.onmessage = (event) => {
-      console.log('message recieved', event.data)
-    }
+    // const socket = new WebSocket(`ws://localhost:8080/connect/` + token);
+    // socket.onopen = () => {
+    //   console.log('conn open')
+    // }
+    // socket.onclose = () => {
+    //   console.log('conn closed')
+    // }
+    // socket.onmessage = (event) => {
+    //   console.log('message recieved', event.data)
+    // }
 
-    return () => {
-      socket.close();
-    }
+    // return () => {
+    //   socket.close();
+    // }
   }
 
 
@@ -120,7 +121,13 @@ function UserFeed({post}:PostInterface ) {
   return (
     <div className="UserFeed">
       <div className="feed">
-        {feed && renderFeed(feed)}
+        {!feed ? 
+        <div className="post-load-error">
+          Nothing to see here... Try following your friends to see what they're sharing
+        </div>
+        :
+        feed && renderFeed(feed)
+        }
       </div>
     </div>
   )

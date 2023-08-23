@@ -122,9 +122,9 @@ function App() {
     }
     let path:string
     if (post.is_comment) {
-      path = `http://localhost:8082/comment/${post.id}/comment`
+      path = `${import.meta.env.VITE_YUZU_POST_HANDLER}/comment/${post.id}/comment`
     } else {
-      path = `http://localhost:8082/post/${post.id}/comment`
+      path = `${import.meta.env.VITE_YUZU_POST_HANDLER}/post/${post.id}/comment`
     }
     await axios
       .post(

@@ -28,6 +28,7 @@ const headers = {
 };
 
 const createPostComponent = ({ onNewPost }: CreatePostProps) => {
+
   const [text, setText] = useState<string>("");
   const [remainingChars, setRemainingChars] = useState<number>(256);
   const [focused, setFocused] = useState<boolean>(true);
@@ -66,7 +67,7 @@ const createPostComponent = ({ onNewPost }: CreatePostProps) => {
       uploadMedia()
     } else {
       await axios
-      .post("http://localhost:8082/post", { post_content: text }, { headers })
+      .post(`${import.meta.env.VITE_YUZU_POST_HANDLER}/post`, { post_content: text }, { headers })
       .then((res) => {
         onNewPost(res.data);
       })
@@ -74,9 +75,10 @@ const createPostComponent = ({ onNewPost }: CreatePostProps) => {
         console.log(err);
       });
     }
-    setText("");
-    setUploadedFiles([])
-    setUploadedImage([])
+    setText("");;
+    setUploadedFiles([]);
+    setImageUploaded(false);
+    setUploadedImage([]);
     setDisabled(false);
   };
   const uploadMedia = async () => {

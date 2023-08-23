@@ -95,7 +95,7 @@ describe("PostRender", () => {
 
     await waitFor(() => expect(axios.post).toHaveBeenCalledTimes(1));
     expect(axios.post).toHaveBeenCalledWith(
-      `http://localhost:8082/post/like/${post.post_id}`,
+      `${import.meta.env.VITE_YUZU_POST_HANDLER}/post/like/${post.post_id}`,
       {},
       { headers }
     );
