@@ -2,6 +2,10 @@
 
 ***Yuzu*** is a text-first social media platform that focuses on creating communities around all kinds of things.  
 
+## Application Documentation
+Please read further into the documentation to learn more about the complexity of this project. 
+[Documentation](https://agrumi.gitbook.io/yuzu/)
+
 ## Architecture
 
 The platform is built using several technologies:
@@ -34,6 +38,9 @@ The platform is built using several technologies:
 
 - The user service is written in Node. It is responsible for user profile related operations. It interacts with PostgreSQL to store user information and S3 to store user profile images.
 
+
+## [Mobile Frontend](https://github.com/cal1co/yuzu-mobile)
+- The mobile frontend is written in Swift. It is highly performant and includes an understandable and smooth UI. User experience was a priority when developing this portion of the application. 
 
 ## Data Storage
 
