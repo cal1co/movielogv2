@@ -55,6 +55,10 @@ function SignupPage({ handleSubmit }: SignupPageProps) {
     <div className="login-signup">
       <div className="signup-form">
         <div className="form-content">
+          <div className="sign-in-message-content">
+            <div className="sign-in-message">Sign up for Yuzu</div>
+            <div className="sign-in-tag">Create an account, follow your friends and make new ones!</div>
+          </div>
           <form onSubmit={handleFormSubmit}
           aria-label="form">
             <div>

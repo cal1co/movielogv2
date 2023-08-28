@@ -37,7 +37,11 @@
 
 }
 .sign-in-message-content {
+    position:relative;
+    width:80%;
     margin-top:30px;
+    left:50%;
+    transform:translateX(-50%);
 }
 .form-content {
     width:80%;
