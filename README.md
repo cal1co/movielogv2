@@ -43,19 +43,19 @@ The platform is built using several technologies:
 - The mobile frontend is written in Swift. It is highly performant and includes an understandable and smooth UI. User experience was a priority when developing this portion of the application. 
 
 Feed:
-https://github.com/cal1co/yuzu/assets/95969608/0833f94c-fd06-43dd-b7f0-88508f2e3bc5
+https://github.com/cal1co/yuzu/assets/95969608/5ab2681e-16c4-4f77-8014-1ef1d7e6aa55
 
 Search:
-https://github.com/cal1co/yuzu/assets/95969608/b43a3fed-21fa-4fd4-b552-296ec910b687
+https://github.com/cal1co/yuzu/assets/95969608/8a7517b4-e458-4c92-af8d-b640a5fd9ea6
 
 Post:
-https://github.com/cal1co/yuzu/assets/95969608/7670e686-663f-4a9c-9c04-af2862e58f59
+https://github.com/cal1co/yuzu/assets/95969608/a7cf187c-350a-4143-a51e-64c282423dee
 
 Upload:
-https://github.com/cal1co/yuzu/assets/95969608/395e403f-5d0d-4851-b7a4-50e65bbd7257
+https://github.com/cal1co/yuzu/assets/95969608/75c08b55-8125-4a00-a42f-e941f9981100
 
 Profile:
-https://github.com/cal1co/yuzu/assets/95969608/049bc27a-7f61-463e-bcbc-a734e321532c
+https://github.com/cal1co/yuzu/assets/95969608/b7ca898c-c750-4df1-aaad-04329fc915af
 
 
 ## Data Storage
