@@ -43,19 +43,19 @@ The platform is built using several technologies:
 - The mobile frontend is written in Swift. It is highly performant and includes an understandable and smooth UI. User experience was a priority when developing this portion of the application. 
 
 ### Feed:
-![feed demo](https://github.com/cal1co/yuzu/assets/95969608/3b7f4546-0215-4790-8179-0d1089c9b701)
+![feed-out](https://github.com/cal1co/yuzu/assets/95969608/b848e02a-8ee3-43ea-9a2b-2427a076a9e2)
 
 ### Search (some inspiration from the threads animation:
-![search demo](https://github.com/cal1co/yuzu/assets/95969608/0de7d650-e2fe-4ab7-8c5b-6d0a6a6c18b7)
+![search-out](https://github.com/cal1co/yuzu/assets/95969608/cf8962e3-bc6d-4e7c-a559-ba8e4c80eed2)
 
 ### Post:
-![post demo](https://github.com/cal1co/yuzu/assets/95969608/b5165b71-6ca8-4304-bf08-6bd7a841d3dc)
+![post-out](https://github.com/cal1co/yuzu/assets/95969608/617940a1-52f0-453f-b379-0fa22b658a11)
 
 ### Upload:
-![upload demo](https://github.com/cal1co/yuzu/assets/95969608/370194d7-6341-49f3-9e9e-b516fb8281fe)
+![upload-out](https://github.com/cal1co/yuzu/assets/95969608/4216448f-b56e-4e29-bc24-475b414836f3)
 
 ### Profile:
-![profile demo](https://github.com/cal1co/yuzu/assets/95969608/56cf1d63-bdbe-4cbc-8f25-cd750f5c1360)
+![profile-out](https://github.com/cal1co/yuzu/assets/95969608/ed31004b-11c9-42e5-8bc7-cac027b064d2)
 
 
 ## Data Storage
