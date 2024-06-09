@@ -1,4 +1,4 @@
-![search](https://github.com/cal1co/yuzu/assets/95969608/2356d92e-5c84-4453-b8d0-bba4f3fa3b45)## Yuzu
+## Yuzu
 
 ***Yuzu*** is a text-first social media platform that focuses on creating communities around all kinds of things.  
 
