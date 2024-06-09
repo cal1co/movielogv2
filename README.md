@@ -42,6 +42,22 @@ The platform is built using several technologies:
 ## [Mobile Frontend](https://github.com/cal1co/yuzu-mobile)
 - The mobile frontend is written in Swift. It is highly performant and includes an understandable and smooth UI. User experience was a priority when developing this portion of the application. 
 
+Feed:
+https://github.com/cal1co/yuzu/assets/95969608/0833f94c-fd06-43dd-b7f0-88508f2e3bc5
+
+Search:
+https://github.com/cal1co/yuzu/assets/95969608/b43a3fed-21fa-4fd4-b552-296ec910b687
+
+Post:
+https://github.com/cal1co/yuzu/assets/95969608/7670e686-663f-4a9c-9c04-af2862e58f59
+
+Upload:
+https://github.com/cal1co/yuzu/assets/95969608/395e403f-5d0d-4851-b7a4-50e65bbd7257
+
+Profile:
+https://github.com/cal1co/yuzu/assets/95969608/049bc27a-7f61-463e-bcbc-a734e321532c
+
+
 ## Data Storage
 
 - The platform uses Cassandra as its primary database to store post data, including post content, likes, and comments. Cassandra provides high availability, scalability, and fault tolerance, which are important features for a social media platform. 
