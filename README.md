@@ -1,4 +1,4 @@
-## Yuzu
+![search](https://github.com/cal1co/yuzu/assets/95969608/2356d92e-5c84-4453-b8d0-bba4f3fa3b45)## Yuzu
 
 ***Yuzu*** is a text-first social media platform that focuses on creating communities around all kinds of things.  
 
@@ -43,19 +43,19 @@ The platform is built using several technologies:
 - The mobile frontend is written in Swift. It is highly performant and includes an understandable and smooth UI. User experience was a priority when developing this portion of the application. 
 
 Feed:
-https://github.com/cal1co/yuzu/assets/95969608/5ab2681e-16c4-4f77-8014-1ef1d7e6aa55
+![feed](https://github.com/cal1co/yuzu/assets/95969608/3b7f4546-0215-4790-8179-0d1089c9b701)
 
 Search:
-https://github.com/cal1co/yuzu/assets/95969608/8a7517b4-e458-4c92-af8d-b640a5fd9ea6
+![search](https://github.com/cal1co/yuzu/assets/95969608/0de7d650-e2fe-4ab7-8c5b-6d0a6a6c18b7)
 
 Post:
-https://github.com/cal1co/yuzu/assets/95969608/a7cf187c-350a-4143-a51e-64c282423dee
+![post](https://github.com/cal1co/yuzu/assets/95969608/b5165b71-6ca8-4304-bf08-6bd7a841d3dc)
 
 Upload:
-https://github.com/cal1co/yuzu/assets/95969608/75c08b55-8125-4a00-a42f-e941f9981100
+![upload](https://github.com/cal1co/yuzu/assets/95969608/370194d7-6341-49f3-9e9e-b516fb8281fe)
 
 Profile:
-https://github.com/cal1co/yuzu/assets/95969608/b7ca898c-c750-4df1-aaad-04329fc915af
+![profile](https://github.com/cal1co/yuzu/assets/95969608/56cf1d63-bdbe-4cbc-8f25-cd750f5c1360)
 
 
 ## Data Storage
