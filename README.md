@@ -45,7 +45,7 @@ The platform is built using several technologies:
 ### Feed:
 ![feed-out](https://github.com/cal1co/yuzu/assets/95969608/b848e02a-8ee3-43ea-9a2b-2427a076a9e2)
 
-### Search (some inspiration from the threads animation:
+### Search (some inspiration from the threads animation):
 ![search-out](https://github.com/cal1co/yuzu/assets/95969608/cf8962e3-bc6d-4e7c-a559-ba8e4c80eed2)
 
 ### Post:
