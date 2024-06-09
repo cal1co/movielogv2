@@ -42,20 +42,20 @@ The platform is built using several technologies:
 ## [Mobile Frontend](https://github.com/cal1co/yuzu-mobile)
 - The mobile frontend is written in Swift. It is highly performant and includes an understandable and smooth UI. User experience was a priority when developing this portion of the application. 
 
-Feed:
-![feed](https://github.com/cal1co/yuzu/assets/95969608/3b7f4546-0215-4790-8179-0d1089c9b701)
+### Feed:
+![feed demo](https://github.com/cal1co/yuzu/assets/95969608/3b7f4546-0215-4790-8179-0d1089c9b701)
 
-Search:
-![search](https://github.com/cal1co/yuzu/assets/95969608/0de7d650-e2fe-4ab7-8c5b-6d0a6a6c18b7)
+### Search (some inspiration from the threads animation:
+![search demo](https://github.com/cal1co/yuzu/assets/95969608/0de7d650-e2fe-4ab7-8c5b-6d0a6a6c18b7)
 
-Post:
-![post](https://github.com/cal1co/yuzu/assets/95969608/b5165b71-6ca8-4304-bf08-6bd7a841d3dc)
+### Post:
+![post demo](https://github.com/cal1co/yuzu/assets/95969608/b5165b71-6ca8-4304-bf08-6bd7a841d3dc)
 
-Upload:
-![upload](https://github.com/cal1co/yuzu/assets/95969608/370194d7-6341-49f3-9e9e-b516fb8281fe)
+### Upload:
+![upload demo](https://github.com/cal1co/yuzu/assets/95969608/370194d7-6341-49f3-9e9e-b516fb8281fe)
 
-Profile:
-![profile](https://github.com/cal1co/yuzu/assets/95969608/56cf1d63-bdbe-4cbc-8f25-cd750f5c1360)
+### Profile:
+![profile demo](https://github.com/cal1co/yuzu/assets/95969608/56cf1d63-bdbe-4cbc-8f25-cd750f5c1360)
 
 
 ## Data Storage
